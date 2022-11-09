@@ -10,4 +10,4 @@ Inslall cli and run commands:
 4. npx react-native run-anndroid
 
 
-Or install app from Android apk (not working at this moment://)
+Or install app from Android apk (If "Bike service app.apk" not working please use debug version)
