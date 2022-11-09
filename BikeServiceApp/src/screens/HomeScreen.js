@@ -4,6 +4,9 @@ import LoginScreen from '../screens/LoginScreen';
 import UsersTasksScreen from '../screens/UsersTasksScreen';
 
 class HomeScreen extends Component {
+  constructor(props){
+    super(props);
+  }
 
   state = {
           loginPage: false,
@@ -27,8 +30,8 @@ class HomeScreen extends Component {
           }} 
           title="ForUsser"
         />
-        {this.state.loginPage === true ? <LoginScreen/> : ""}
-        {this.state.userTask === true ? <UsersTasksScreen/> : ""}
+        {this.state.loginPage === true ? <LoginScreen navigate = {this.props.navigate}/> : ""}
+        {this.state.userTask === true ? <UsersTasksScreen navigate = {this.props.navigate}/> : ""}
       </View>
     );
   }
@@ -36,5 +39,7 @@ class HomeScreen extends Component {
 
 
 export default HomeScreen;
+
+
 
 
