@@ -35,11 +35,10 @@ class User extends React.Component {
 }
 
 const Stack  = createStackNavigator();
-
 function Container() {
   return (
       <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home" screenOptions={{ gestureEnabled: true} } >
+          <Stack.Navigator initialRouteName="Home" screenOptions={{ gestureEnabled: true, headerLeft: null} } >
               <Stack.Screen
                 name="Main"
                 component={Home}
