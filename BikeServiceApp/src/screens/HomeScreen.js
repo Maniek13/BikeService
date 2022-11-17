@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, BackHandler} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -19,7 +19,17 @@ class HomeScreen extends Component {
   componentDidMount(){
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.chekIsLoged();
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     });
+  }
+  
+  handleBackButton(){
+    BackHandler.exitApp()
+    return true;
+  } 
+  
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   async chekIsLoged(){
@@ -39,12 +49,17 @@ class HomeScreen extends Component {
       <View style={styles.conteiner}>
         <UsersTasks/>
         {this.state.loged === false ?
-
-          <TouchableOpacity style={styles.searchButton} onPress={() => this.props.navigation.navigate('Login')}>
+          <TouchableOpacity style={styles.searchButton} onPress={() => {
+            BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+            this.props.navigation.navigate('Login');
+          }}>
             <Text style={styles.buttonText}>LogIn</Text>
           </TouchableOpacity>
           :
-          <TouchableOpacity style={styles.searchButton} onPress={() => this.props.navigation.navigate('ControllPanel')}>
+          <TouchableOpacity style={styles.searchButton} onPress={() => {
+            BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+            this.props.navigation.navigate('ControllPanel');
+          }}>
             <Text style={styles.buttonText}>Admin</Text>
           </TouchableOpacity>
         }
