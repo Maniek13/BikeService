@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button,} from 'react-native';
+import { View, Text, Button, StyleSheet} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -19,7 +19,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <View >
-        <Text>Login</Text>
+        <Text style={styles.text}>Login</Text>
         <Button 
           onPress={this.logIn.bind(this)}
           title="Zaloguj"
@@ -31,4 +31,14 @@ class LoginScreen extends Component {
 
 export default LoginScreen;
 
+
+const styles = StyleSheet.create({
+  text : {
+    color: '#000000',
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom: 10
+  }
+});
 

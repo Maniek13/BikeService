@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, Button, BackHandler} from 'react-native';
+import {View, Text, Button, BackHandler, StyleSheet} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -33,11 +33,21 @@ class ControllPanelScreen extends Component {
           onPress={this.logOut.bind(this)}
           title="Wyloguj"
         />
-        <Text>tasks</Text>
+        <Text style={styles.text}>tasks</Text>
       </View>
     );
   }
 }
 
 export default ControllPanelScreen;
+
+const styles = StyleSheet.create({
+  text : {
+    color: '#000000',
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 10
+  }
+});
+
 

@@ -33,11 +33,15 @@ class Login extends React.Component {
     );
   }
 }
-
+const MyTheme = {
+  colors: {
+    background:'#F8F6EA'
+  },
+};
 const Stack  = createStackNavigator();
 function Container() {
   return (
-      <NavigationContainer>
+      <NavigationContainer theme={MyTheme}>
           <Stack.Navigator initialRouteName="Home" screenOptions={{ gestureEnabled: true, headerLeft: null} } >
               <Stack.Screen
                 name="Main"
