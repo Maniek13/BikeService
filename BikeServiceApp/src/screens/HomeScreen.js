@@ -6,12 +6,14 @@ import UsersTasksScreen from '../screens/UsersTasksScreen';
 class HomeScreen extends Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      loginPage: false,
+      userTask: true
+    };
   }
 
-  state = {
-          loginPage: false,
-          userTask: false
-      };
+  
   
   render() {
     return (
@@ -23,15 +25,11 @@ class HomeScreen extends Component {
           }}
           title="Log in"
         />
-        <Button 
-          onPress={() => {
-            this.setState({ userTask: true });
-            this.setState({ loginPage: false });
-          }} 
-          title="ForUsser"
-        />
-        {this.state.loginPage === true ? <LoginScreen navigate = {this.props.navigate}/> : ""}
-        {this.state.userTask === true ? <UsersTasksScreen navigate = {this.props.navigate}/> : ""}
+        
+        
+        {this.state.loginPage === true ? <LoginScreen  navigate = {this.props.navigate}/> : ""}
+
+        <UsersTasksScreen/>
       </View>
     );
   }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, Button} from 'react-native';
 import PropTypes from 'prop-types';
 
-import UsersTasksScreen from './src/screens/UsersTasksScreen';
 import AdministrationListOfTasks from './src/screens/AdministrationListOfTasks';
 import HomeScreen from './src/screens/HomeScreen';
 
@@ -26,13 +25,7 @@ class Admin extends React.Component {
   }
 }
 
-class User extends React.Component {
-  render() {
-    return (
-      <UsersTasksScreen  navigate = {this.props.navigation.navigate}/>
-    );
-  }
-}
+
 
 const Stack  = createStackNavigator();
 function Container() {
@@ -52,10 +45,6 @@ function Container() {
               <Stack.Screen
                 name="Admin"
                 component={Admin}      
-              />
-              <Stack.Screen
-                name="User"
-                component={User}        
               />
           </Stack.Navigator>
       </NavigationContainer>

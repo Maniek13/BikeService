@@ -8,7 +8,7 @@ class LoginScreen extends Component {
 
   render() {
     return (
-      <View>
+      <View >
         <Text>Login</Text>
         <Button 
           onPress={() => this.props.navigate('Admin') }
@@ -20,3 +20,5 @@ class LoginScreen extends Component {
 }
 
 export default LoginScreen;
+
+
