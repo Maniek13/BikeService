@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { View, Text, Button} from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -13,7 +13,7 @@ class Home extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
       return (
-        <HomeScreen navigate = {this.props.navigation.navigate}/>
+        <HomeScreen navigation = {this.props.navigation}/>
       )
   }
 }
@@ -33,8 +33,6 @@ class Login extends React.Component {
     );
   }
 }
-
-
 
 const Stack  = createStackNavigator();
 function Container() {
