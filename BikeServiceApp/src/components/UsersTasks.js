@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {Text, TextInput, Button, View} from 'react-native';
-import Task from '../objects/Task'
-import UserTask from '../screens/UserTask';
 
-class UsersTasksScreen extends Component {
+import Task from '../objects/Task'
+import UserTask from '../components/UserTask';
+
+class UsersTasks extends Component {
   constructor(props){
     super(props);
 
@@ -45,4 +46,4 @@ class UsersTasksScreen extends Component {
   }
 }
 
-export default UsersTasksScreen;
+export default UsersTasks;

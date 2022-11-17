@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button,} from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import User from '../objects/User'
@@ -12,7 +13,7 @@ class LoginScreen extends Component {
   async logIn(){
     await AsyncStorage.setItem('@BikeServiceUser', '1')
     User.user.Id = 1;
-    this.props.navigate('Admin');
+    this.props.navigate('ControllPanel');
   }
 
   render() {

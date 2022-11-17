@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {View, Text, Button } from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import LoginScreen from '../screens/LoginScreen';
-import UsersTasksScreen from '../screens/UsersTasksScreen';
+import UsersTasks from '../components/UsersTasks';
 import User from '../objects/User'
 
 class HomeScreen extends Component {
@@ -42,11 +44,11 @@ class HomeScreen extends Component {
           /> 
           :
           <Button
-            onPress={() => this.props.navigation.navigate('Admin') }
+            onPress={() => this.props.navigation.navigate('ControllPanel') }
             title="Panel administracyjny"
           />
         }
-        <UsersTasksScreen/>
+        <UsersTasks/>
       </View>
     );
   }

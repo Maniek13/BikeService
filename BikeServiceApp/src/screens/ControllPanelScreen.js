@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {View, Text, Button, BackHandler} from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import User from '../objects/User'
 
-class AdministrationListOfTasks extends Component {
+class ControllPanelScreen extends Component {
   constructor(props){
     super(props);
     this.handleBackButton = this.handleBackButton.bind(this);
@@ -27,7 +29,7 @@ class AdministrationListOfTasks extends Component {
   render() {
     return (
       <View>
-          <Button 
+        <Button 
           onPress={this.logOut.bind(this)}
           title="Wyloguj"
         />
@@ -37,5 +39,5 @@ class AdministrationListOfTasks extends Component {
   }
 }
 
-export default AdministrationListOfTasks;
+export default ControllPanelScreen;
 

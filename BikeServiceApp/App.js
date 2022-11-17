@@ -2,7 +2,7 @@ import React, { Component, useEffect } from 'react';
 import { View, Text, Button} from 'react-native';
 import PropTypes from 'prop-types';
 
-import AdministrationListOfTasks from './src/screens/AdministrationListOfTasks';
+import ControllPanelScreen from './src/screens/ControllPanelScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
 
@@ -18,10 +18,10 @@ class Home extends React.Component {
   }
 }
 
-class Admin extends React.Component {
+class ControllPanel extends React.Component {
   render() {
     return (
-        <AdministrationListOfTasks navigate = {this.props.navigation.navigate}/>
+        <ControllPanelScreen navigate = {this.props.navigation.navigate}/>
     );
   }
 }
@@ -43,19 +43,31 @@ function Container() {
                 name="Main"
                 component={Home}
                 options={{ 
-                  title: 'Welcome to bike service app',
+                  title: 'Serwis rowerowy',
                   headerStyle: { backgroundColor: '#f4511e' },
                   headerTintColor: '#fff',
                   headerTitleAlign: 'center'                
                 }}
               />
               <Stack.Screen
-                name="Admin"
-                component={Admin}      
+                name="ControllPanel"
+                component={ControllPanel}   
+                options={{ 
+                  title: 'Panel administracyjny',
+                  headerStyle: { backgroundColor: '#f4511e' },
+                  headerTintColor: '#fff',
+                  headerTitleAlign: 'center'                
+                }}   
               />
                 <Stack.Screen
                 name="Login"
-                component={Login}      
+                component={Login}  
+                options={{ 
+                  title: 'Logowanie',
+                  headerStyle: { backgroundColor: '#f4511e' },
+                  headerTintColor: '#fff',
+                  headerTitleAlign: 'center'                
+                }}    
               />
           </Stack.Navigator>
       </NavigationContainer>
