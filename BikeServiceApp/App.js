@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import AdministrationListOfTasks from './src/screens/AdministrationListOfTasks';
 import HomeScreen from './src/screens/HomeScreen';
+import LoginScreen from './src/screens/LoginScreen';
 
 import { NavigationContainer } from '@react-navigation/native'; 
 import {createStackNavigator} from '@react-navigation/stack';
@@ -21,6 +22,14 @@ class Admin extends React.Component {
   render() {
     return (
         <AdministrationListOfTasks navigate = {this.props.navigation.navigate}/>
+    );
+  }
+}
+
+class Login extends React.Component {
+  render() {
+    return (
+        <LoginScreen navigate = {this.props.navigation.navigate}/>
     );
   }
 }
@@ -45,6 +54,10 @@ function Container() {
               <Stack.Screen
                 name="Admin"
                 component={Admin}      
+              />
+                <Stack.Screen
+                name="Login"
+                component={Login}      
               />
           </Stack.Navigator>
       </NavigationContainer>
