@@ -53,7 +53,7 @@ class ControllPanelScreen extends Component {
     this.props.navigation.navigate('EditTask')
   }
 
-  addTask(item){
+  addTask(){
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     this.props.navigation.navigate('AddTask')
   }

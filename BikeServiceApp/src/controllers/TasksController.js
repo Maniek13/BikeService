@@ -1,3 +1,5 @@
+import Task from '../objects/Task'
+
 class TasksController{
     static tasksList = [];
 
@@ -55,12 +57,25 @@ class TasksController{
 
     static addTask(){
         var nrOfTasks = this.objectLength(this.tasksList) + 1;
+
+        
         this.tasksList.push({
                 Id: nrOfTasks,
-                Header: 'Nowe ' + nrOfTasks,
-                Description: 'Opis ' + nrOfTasks,
+                Header: '',
+                Description: '',
                 State: 1
         })
+
+        return true;
+    }
+
+    static updateTask(){
+        let index = this.tasksList.findIndex((obj => obj.Id == Task.task.Id));
+
+        
+        this.tasksList[index].Header = Task.task.Header;
+        this.tasksList[index].Description = Task.task.Description;
+
         return true;
     }
 
