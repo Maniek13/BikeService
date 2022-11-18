@@ -7,9 +7,27 @@ class EditTaskScreen extends Component {
   constructor(props){
     super(props);
 
+    this.handleBackButton.bind(this)
+
     this.state = {
-      task: Task.task
+      task: {}
     };
+  }
+
+  componentDidMount(){
+    this.focusListener = this.props.navigation.addListener('focus', () => {
+      this.setState({ task: Task.task});
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    });
+  }
+  
+  handleBackButton(){
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    this.props.navigation.navigate('ControllPanel');
+    return true;
+  } 
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   render() {
