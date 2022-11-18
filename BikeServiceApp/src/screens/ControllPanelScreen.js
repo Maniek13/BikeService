@@ -18,8 +18,10 @@ class ControllPanelScreen extends Component {
   }
   
   componentDidMount (){
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    this.setState({ taskList: TasksController.getTasks()});
+    this.focusListener = this.props.navigation.addListener('focus', () => {
+      this.setState({ taskList: TasksController.getTasks()});
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    });
   }
 
   componentWillUnmount() {
@@ -27,20 +29,21 @@ class ControllPanelScreen extends Component {
   }
 
   handleBackButton(){
-    this.props.navigate('Main');
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    this.props.navigation.push('Main');
     return true;
   } 
 
   async logOut(){
     await AsyncStorage.removeItem('@BikeServiceUser');
-
     User.user.Id = 0;
-    this.props.navigate('Main');
+    this.props.navigation.push('Main');
   }
 
-  editTask(){
+  editTask(item){
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-    this.props.navigate('EditTask');
+    Task.task = item;
+    this.props.navigation.push('EditTask')
   }
   
   render() {
@@ -54,9 +57,9 @@ class ControllPanelScreen extends Component {
         <FlatList
           data={this.state.taskList}
           renderItem={({item}) => 
-            <TouchableOpacity style={styles.list} onPress={this.editTask.bind(this)}>
-              <Text style={styles.textList, {marginLeft: 10}}>{item.Header}</Text>
-              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10}}>{String(Task.statusList.find(x => x.Id === item.State).State)}</Text>
+            <TouchableOpacity style={styles.listItem} onPress={this.editTask.bind(this, item)}>
+              <Text style={styles.textList, {marginLeft: 10, color: 'black'}}>{item.Header}</Text>
+              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Id === item.State).State)}</Text>
             </TouchableOpacity>
           }
         />
@@ -80,16 +83,16 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   textList : {
-    color: 'black',
     height: 20
   },
-  list : {
+  listItem : {
     borderWidth: 1,
     marginBottom: 5,
     marginLeft: 10,
     marginRight: 10,
     flexDirection:'row', 
-    flexWrap:'wrap'
+    flexWrap:'wrap',
+    backgroundColor: 'white'
   },
   buttonText : {
     color: 'white',

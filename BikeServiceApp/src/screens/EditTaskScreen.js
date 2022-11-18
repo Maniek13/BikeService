@@ -1,14 +1,22 @@
-import React, { Component } from 'react';
-import { View, StyleSheet} from 'react-native';
+import React, {Component} from 'react';
+import {View, StyleSheet, Text, BackHandler} from 'react-native';
+
+import Task from '../objects/Task'
 
 class EditTaskScreen extends Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      task: Task.task
+    };
   }
+
 
   render() {
     return (
       <View >
+        <Text>{this.state.task.Header}</Text>
       </View>
     );
   }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Text, TextInput, Button, View, StyleSheet, TouchableOpacity} from 'react-native';
 
-import Task from '../objects/Task'
 import UserTask from '../components/UserTask';
 import TasksController from '../controllers/TasksController';
 
@@ -12,7 +11,7 @@ class UsersTasks extends Component {
     this.state = {
       taskNumber: 0,
       showTask: false,
-      task: Task.task
+      task: {}
     };
   }
   
@@ -65,7 +64,8 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     marginBottom: 20,
     width: 200,
-    padding: 2
+    padding: 2,
+    backgroundColor: 'white'
   },
   searchButton: {
     alignItems: 'center',

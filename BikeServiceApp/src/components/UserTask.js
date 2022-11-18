@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
+import Task from '../objects/Task'
+
 class UserTask extends Component {
     constructor(props){
         super(props)
@@ -8,10 +10,10 @@ class UserTask extends Component {
 
   render() {
     return (
-        <View>
-            <Text style={styles.text} name='title'>{this.props.task.Header}</Text>
+        <View style={styles.conteiner}>
+            <Text style={{color: '#000000', fontSize: 23, textAlign: 'center'}} name='title'>{this.props.task.Header}</Text>
             <Text style={styles.text} name='description'>{this.props.task.Description}</Text>
-            <Text style={styles.text} name='state'>{this.props.task.State}</Text>
+            <Text style={styles.text} name='state'>{String(Task.statusList.find(x => x.Id === this.props.task.State).State)}</Text>
         </View>
     );
   }
@@ -24,5 +26,16 @@ const styles = StyleSheet.create({
     color: '#000000',
     textAlign: 'center',
     marginTop: 10
+    
+  },
+  conteiner:{
+    borderWidth: 1,
+    borderRadius: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: 250,
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: 'white'
   }
 });

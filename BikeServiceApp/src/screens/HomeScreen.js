@@ -51,14 +51,14 @@ class HomeScreen extends Component {
         {this.state.loged === false ?
           <TouchableOpacity style={styles.searchButton} onPress={() => {
             BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-            this.props.navigation.navigate('Login');
+            this.props.navigation.push('Login');
           }}>
             <Text style={styles.buttonText}>LogIn</Text>
           </TouchableOpacity>
           :
           <TouchableOpacity style={styles.searchButton} onPress={() => {
             BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-            this.props.navigation.navigate('ControllPanel');
+            this.props.navigation.push('ControllPanel');
           }}>
             <Text style={styles.buttonText}>Admin</Text>
           </TouchableOpacity>

@@ -22,7 +22,7 @@ class Home extends React.Component {
 class ControllPanel extends React.Component {
   render() {
     return (
-        <ControllPanelScreen navigate = {this.props.navigation.navigate}/>
+        <ControllPanelScreen navigation = {this.props.navigation}/>
     );
   }
 }
@@ -30,7 +30,7 @@ class ControllPanel extends React.Component {
 class Login extends React.Component {
   render() {
     return (
-        <LoginScreen navigate = {this.props.navigation.navigate}/>
+        <LoginScreen navigation = {this.props.navigation}/>
     );
   }
 }
@@ -38,7 +38,7 @@ class Login extends React.Component {
 class EditTask extends React.Component {
   render() {
     return (
-        <EditTaskScreen navigate = {this.props.navigation.navigate}/>
+        <EditTaskScreen navigation = {this.props.navigation}/>
     );
   }
 }

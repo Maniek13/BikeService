@@ -4,7 +4,7 @@ class TasksController{
             Id: 1,
             Header: 'Tytuł',
             Description: 'Opis',
-            State: '0'
+            State: 1
         };
 
         return task; 
