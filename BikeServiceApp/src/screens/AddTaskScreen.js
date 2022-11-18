@@ -15,10 +15,10 @@ class AddTaskScreen extends Component {
   }
 
   addTask(){
-    
     Task.task.Header = this.state.header;
     Task.task.Description = this.state.description;
-  
+    
+
     var status = TasksController.addTask();
     
     if(status === true){

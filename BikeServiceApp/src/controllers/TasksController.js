@@ -71,7 +71,6 @@ class TasksController{
 
     static updateTask(){
         let index = this.tasksList.findIndex((obj => obj.Id == Task.task.Id));
-
         
         this.tasksList[index].Header = Task.task.Header;
         this.tasksList[index].Description = Task.task.Description;
