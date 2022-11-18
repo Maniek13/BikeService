@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Button} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, BackHandler} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -17,6 +17,22 @@ class LoginScreen extends Component {
       login: ''
     };
   }
+
+  componentDidMount (){
+    this.focusListener = this.props.navigation.addListener('focus', () => {
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+    });
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton(){
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    this.props.navigation.push('Main');
+    return true;
+  } 
 
   async logIn(){
     var id = UserController.checkIsUser();

@@ -3,6 +3,7 @@ import {View, Text, Button, BackHandler, StyleSheet, FlatList, TouchableOpacity}
 import TasksController from '../controllers/TasksController';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CommonActions } from '@react-navigation/native';
 
 import User from '../objects/User'
 import Task from '../objects/Task'
@@ -20,7 +21,7 @@ class ControllPanelScreen extends Component {
   componentDidMount (){
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.setState({ taskList: TasksController.getTasks()});
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
     });
   }
 
@@ -37,6 +38,8 @@ class ControllPanelScreen extends Component {
   async logOut(){
     await AsyncStorage.removeItem('@BikeServiceUser');
     User.user.Id = 0;
+    User.user.Name = '';
+    User.user.Password = '';
     this.props.navigation.push('Main');
   }
 

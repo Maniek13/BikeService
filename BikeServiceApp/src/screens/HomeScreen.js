@@ -19,7 +19,7 @@ class HomeScreen extends Component {
   componentDidMount(){
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.chekIsLoged();
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
     });
   }
   

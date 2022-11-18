@@ -1,5 +1,4 @@
 import React, { Component, useEffect } from 'react';
-import { View, Text, Button} from 'react-native';
 import PropTypes from 'prop-types';
 
 import ControllPanelScreen from './src/screens/ControllPanelScreen';
@@ -53,7 +52,7 @@ const Stack  = createStackNavigator();
 function Container() {
   return (
       <NavigationContainer theme={MyTheme}>
-          <Stack.Navigator initialRouteName="Home" screenOptions={{ gestureEnabled: true, headerLeft: null} } >
+          <Stack.Navigator initialRouteName="Home" screenOptions={{ gestureEnabled: true, headerLeft: null, unmountOnBlur: true} } >
               <Stack.Screen
                 name="Main"
                 component={Home}
@@ -78,7 +77,7 @@ function Container() {
                 name="EditTask"
                 component={EditTask}  
                 options={{ 
-                  title: 'Edycja zadania',
+                  title: 'Zlecenie',
                   headerStyle: { backgroundColor: '#f4511e' },
                   headerTintColor: '#fff',
                   headerTitleAlign: 'center'                
@@ -88,7 +87,7 @@ function Container() {
                 name="Login"
                 component={Login}  
                 options={{ 
-                  title: 'Logowanie',
+                  title: 'Serwis rowerowy',
                   headerStyle: { backgroundColor: '#f4511e' },
                   headerTintColor: '#fff',
                   headerTitleAlign: 'center'                

@@ -12,11 +12,10 @@ class EditTaskScreen extends Component {
     };
   }
 
-
   render() {
     return (
       <View >
-        <Text>{this.state.task.Header}</Text>
+        <Text style={styles.text}>{this.state.task.Header}</Text>
       </View>
     );
   }
