@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {View, Text, Button, BackHandler, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CommonActions } from '@react-navigation/native';
 
 import TasksController from '../controllers/TasksController';
 import User from '../objects/User'
@@ -43,6 +42,8 @@ class ControllPanelScreen extends Component {
     User.user.Name = '';
     User.user.Password = '';
     TasksController.tasksList = [];
+
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     this.props.navigation.push('Main');
   }
 
