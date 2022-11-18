@@ -3,6 +3,7 @@ import {Text, TextInput, Button, View, StyleSheet, TouchableOpacity} from 'react
 
 import Task from '../objects/Task'
 import UserTask from '../components/UserTask';
+import TasksController from '../controllers/TasksController';
 
 class UsersTasks extends Component {
   constructor(props){
@@ -17,14 +18,14 @@ class UsersTasks extends Component {
   
   search(){
     this.setState({ showTask: false });
+    var task = TasksController.getTask();
     this.setState({
-      task:{
-        Id: 1,
-        Header: 'Tytuł',
-        Description: 'Opis',
-        State: '0'
-    }});
-    this.setState({ showTask: true });
+      task: task
+    });
+
+    if(task.Id !== 0){
+      this.setState({ showTask: true });
+    }
   }
 
   render() {
@@ -74,7 +75,8 @@ const styles = StyleSheet.create({
     width: 100,
     padding: 5,
     backgroundColor: '#249ef0',
-    borderRadius: 5
+    borderRadius: 5,
+    zIndex: 100
   },
   buttonText : {
     color: 'white',
