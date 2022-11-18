@@ -5,10 +5,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import User from '../objects/User'
 import UserController from '../controllers/UserController';
+import TasksController from '../controllers/TasksController';
 
 class LoginScreen extends Component {
   constructor(props){
     super(props);
+    this.handleBackButton = this.handleBackButton.bind(this);
 
     this.state = {
       taskNumber: 0,
@@ -20,7 +22,7 @@ class LoginScreen extends Component {
 
   componentDidMount (){
     this.focusListener = this.props.navigation.addListener('focus', () => {
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     });
   }
 

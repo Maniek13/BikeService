@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, StyleSheet, BackHandler} from 'react-nativ
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import TasksController from '../controllers/TasksController'
 import LoginScreen from '../screens/LoginScreen';
 import UsersTasks from '../components/UsersTasks';
 import User from '../objects/User';
@@ -10,6 +11,7 @@ import User from '../objects/User';
 class HomeScreen extends Component {
   constructor(props){
     super(props);
+    this.handleBackButton = this.handleBackButton.bind(this);
 
     this.state = {
       loged: false
@@ -19,7 +21,7 @@ class HomeScreen extends Component {
   componentDidMount(){
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.chekIsLoged();
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     });
   }
   
@@ -58,7 +60,7 @@ class HomeScreen extends Component {
           :
           <TouchableOpacity style={styles.searchButton} onPress={() => {
             BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-            this.props.navigation.push('ControllPanel');
+            this.props.navigation.navigate('ControllPanel');
           }}>
             <Text style={styles.buttonText}>Admin</Text>
           </TouchableOpacity>

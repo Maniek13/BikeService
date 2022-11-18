@@ -1,4 +1,6 @@
 class TasksController{
+    static tasksList = [];
+
     static getTask(){
         var task = {
             Id: 1,
@@ -11,7 +13,7 @@ class TasksController{
     }
 
     static getTasks(){
-        var tasks = [
+        let tasks = [
             {
                 Id: 1,
                 Header: 'Tytuł',
@@ -43,9 +45,34 @@ class TasksController{
                 State: 4
             }
         ];
-       
         return tasks; 
     }
+
+    static setTasks(){
+        this.tasksList = this.getTasks();
+        return true;
+    }
+
+    static addTask(){
+        var nrOfTasks = this.objectLength(this.tasksList) + 1;
+        this.tasksList.push({
+                Id: nrOfTasks,
+                Header: 'Nowe ' + nrOfTasks,
+                Description: 'Opis ' + nrOfTasks,
+                State: 1
+        })
+        return true;
+    }
+
+    static objectLength( object ) {
+        var length = 0;
+        for( var key in object ) {
+            if( object.hasOwnProperty(key) ) {
+                ++length;
+            }
+        }
+        return length;
+    };
 }
 
 export default TasksController;

@@ -5,6 +5,7 @@ import ControllPanelScreen from './src/screens/ControllPanelScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import EditTaskScreen from './src/screens/EditTaskScreen';
+import AddTaskScreen from './src/screens/AddTaskScreen';
 
 import { NavigationContainer } from '@react-navigation/native'; 
 import {createStackNavigator} from '@react-navigation/stack';
@@ -38,6 +39,14 @@ class EditTask extends React.Component {
   render() {
     return (
         <EditTaskScreen navigation = {this.props.navigation}/>
+    );
+  }
+}
+
+class AddTask extends React.Component {
+  render() {
+    return (
+        <AddTaskScreen navigation = {this.props.navigation}/>
     );
   }
 }
@@ -88,6 +97,16 @@ function Container() {
                 component={Login}  
                 options={{ 
                   title: 'Serwis rowerowy',
+                  headerStyle: { backgroundColor: '#f4511e' },
+                  headerTintColor: '#fff',
+                  headerTitleAlign: 'center'                
+                }}    
+              />
+               <Stack.Screen
+                name="AddTask"
+                component={AddTask}  
+                options={{ 
+                  title: 'Nowe zlecenie',
                   headerStyle: { backgroundColor: '#f4511e' },
                   headerTintColor: '#fff',
                   headerTitleAlign: 'center'                

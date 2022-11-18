@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {View, Text, Button, BackHandler, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
-import TasksController from '../controllers/TasksController';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CommonActions } from '@react-navigation/native';
 
+import TasksController from '../controllers/TasksController';
 import User from '../objects/User'
 import Task from '../objects/Task'
 
@@ -12,16 +12,18 @@ class ControllPanelScreen extends Component {
   constructor(props){
     super(props);
     this.handleBackButton = this.handleBackButton.bind(this);
+    
+    TasksController.setTasks()
 
     this.state = {
-      taskList: []
+      refreshed: 0
     };
   }
   
   componentDidMount (){
     this.focusListener = this.props.navigation.addListener('focus', () => {
-      this.setState({ taskList: TasksController.getTasks()});
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+      this.setState({ refreshed: this.state.refreshed + 1});
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     });
   }
 
@@ -40,6 +42,7 @@ class ControllPanelScreen extends Component {
     User.user.Id = 0;
     User.user.Name = '';
     User.user.Password = '';
+    TasksController.tasksList = [];
     this.props.navigation.push('Main');
   }
 
@@ -47,6 +50,11 @@ class ControllPanelScreen extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     Task.task = item;
     this.props.navigation.push('EditTask')
+  }
+
+  addTask(item){
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    this.props.navigation.push('AddTask')
   }
   
   render() {
@@ -58,16 +66,18 @@ class ControllPanelScreen extends Component {
         />
         <Text style={styles.text}>Zadania</Text>
         <FlatList
-          data={this.state.taskList}
+          data={TasksController.tasksList}
+          extraData={this.state.refreshed}
           renderItem={({item}) => 
             <TouchableOpacity style={styles.listItem} onPress={this.editTask.bind(this, item)}>
               <Text style={styles.textList, {marginLeft: 10, color: 'black'}}>{item.Header}</Text>
               <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Id === item.State).State)}</Text>
             </TouchableOpacity>
           }
+          
         />
 
-        <TouchableOpacity style={styles.searchButton}>
+        <TouchableOpacity style={styles.searchButton} onPress={this.addTask.bind(this)}>
             <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
