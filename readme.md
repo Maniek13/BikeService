@@ -19,5 +19,5 @@ Update task
 <img src="![Screenshot_2022-11-19-20-32-26-45_5cc4c8b1bdb1789f65822cf5af52b4a1](https://user-images.githubusercontent.com/47826375/202868317-c3a039ec-f84e-4fa4-8ee1-7e56547d57a0.jpg)" width="100">
 
 Add task 
-<img src="![Screenshot_2022-11-19-20-32-30-95_5cc4c8b1bdb1789f65822cf5af52b4a1](https://user-images.githubusercontent.com/47826375/202868319-eddc329d-5636-4c34-ac08-d0946f8c7ee7.jpg)" width="100">
+<img src="https://user-images.githubusercontent.com/47826375/202868319-eddc329d-5636-4c34-ac08-d0946f8c7ee7.jpg" width="100">
 
