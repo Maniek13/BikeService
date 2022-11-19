@@ -43,8 +43,7 @@ class ControllPanelScreen extends Component {
     User.user.Password = '';
     TasksController.tasksList = [];
 
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-    this.props.navigation.push('Main');
+    this.handleBackButton()
   }
 
   editTask(item){
@@ -72,7 +71,7 @@ class ControllPanelScreen extends Component {
           renderItem={({item}) => 
             <TouchableOpacity style={styles.listItem} onPress={this.editTask.bind(this, item)}>
               <Text style={styles.textList, {marginLeft: 10, color: 'black'}}>{item.Header}</Text>
-              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Id === item.State).State)}</Text>
+              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.State).Label)}</Text>
             </TouchableOpacity>
           }
           

@@ -15,17 +15,14 @@ class AddTaskScreen extends Component {
   }
 
   addTask(){
-
-    var task = {
+    let task = {
       Id: 0,
       Header: this.state.header,
       Description: this.state.description,
       State: 1,
-    }
-
+    };
     Task.task = task;
-
-    var status = TasksController.addTask();
+    let status = TasksController.addTask();
     
     if(status === true){
       this.props.navigation.navigate('ControllPanel');
@@ -48,14 +45,14 @@ class AddTaskScreen extends Component {
           style={styles.header}
           placeholder="tytuł" 
           placeholderTextColor="gray" 
-          onChangeText={text => this.setState({header: text})}
+          onChangeText={newText => this.setState({header: newText})}
         />
         <TextInput 
           multiline={true}
           style={styles.description}
           placeholder="opis" 
           placeholderTextColor="gray" 
-          onChangeText={text => this.setState({description: text})}
+          onChangeText={newText => this.setState({description: newText})}
         />
          <TouchableOpacity style={styles.searchButton} onPress={this.addTask.bind(this)}>
             <Text style={styles.buttonText}>Dodaj</Text>

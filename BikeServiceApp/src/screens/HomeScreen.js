@@ -35,7 +35,7 @@ class HomeScreen extends Component {
   }
 
   async chekIsLoged(){
-    var value = await AsyncStorage.getItem('@BikeServiceUser')
+    let value = await AsyncStorage.getItem('@BikeServiceUser')
 
     if(value !== null){
       this.setState({ loged: true });

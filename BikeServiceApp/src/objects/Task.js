@@ -8,20 +8,20 @@ class Task{
 
     static statusList = [
         {   
-            Id : 1,
-            State: 'Przyjęte'
+            Value : 1,
+            Label: 'Przyjęte'
         },
         {   
-            Id : 2,
-            State: 'W trakcie'
+            Value : 2,
+            Label: 'W trakcie'
         },
         {   
-            Id : 3,
-            State: 'Gotowe'
+            Value : 3,
+            Label: 'Gotowe'
         },
         {   
-            Id : 4,
-            State: 'Odebrane'
+            Value : 4,
+            Label: 'Odebrane'
         }
     ]
 

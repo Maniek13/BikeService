@@ -17,7 +17,7 @@ class UsersTasks extends Component {
   
   search(){
     this.setState({ showTask: false });
-    var task = TasksController.getTask();
+    let task = TasksController.getTask();
     this.setState({
       task: task
     });

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Text, TextInput, TouchableOpacity, BackHandler} from 'react-native';
+import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
+import ModalSelector from 'react-native-modal-selector'
 
 import TasksController from '../controllers/TasksController';
 import Task from '../objects/Task'
@@ -7,52 +8,36 @@ import Task from '../objects/Task'
 class EditTaskScreen extends Component {
   constructor(props){
     super(props);
-
-    this.handleBackButton.bind(this)
-
-
     this.state = {
       id: Task.task.Id,
       header: Task.task.Header,
       description: Task.task.Description,
-      state: Task.task.State
+      state: Task.task.State,
+      selectItemList: []
     };
-
   }
 
   componentDidMount(){
-    this.focusListener = this.props.navigation.addListener('focus', () => {
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    Task.statusList.forEach(element => {
+      let item = {
+        key: element.Value, 
+        label: element.Label
+      };
+      this.setState(prevState => ({
+        selectItemList: [...prevState.selectItemList, item]
+      }))
     });
-  }
-  
-  handleBackButton(){
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-    this.props.navigation.navigate('ControllPanel');
-    return true;
-  } 
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   update(){
     Task.task.Header = this.state.header;
     Task.task.Description = this.state.description;
+    Task.task.State = this.state.state;
 
-    var ok = TasksController.updateTask();
-
+    let ok = TasksController.updateTask();
     if(ok === true){
-      this.handleBackButton();
+      this.props.navigation.navigate('ControllPanel');
     }
-  }
-
-  headerInputTextChange = (newText) => {
-    this.setState({ header: newText })
-  }
-
-  descriptionInputTextChange = (newText) => {
-    this.setState({ description: newText })
   }
 
   render() {
@@ -63,7 +48,7 @@ class EditTaskScreen extends Component {
           style={styles.header}
           placeholder="tytuł" 
           placeholderTextColor="gray" 
-          onChangeText={this.headerInputTextChange}
+          onChangeText={newText => this.setState({header: newText})}
         />
         <TextInput 
           value={this.state.description}
@@ -71,10 +56,19 @@ class EditTaskScreen extends Component {
           style={styles.description}
           placeholder="opis" 
           placeholderTextColor="gray" 
-          onChangeText={this.descriptionInputTextChange}
+          onChangeText={newText => this.setState({description: newText})}
+          
         />
-         <TouchableOpacity style={styles.searchButton} onPress={this.update.bind(this)}>
-            <Text style={styles.buttonText}>Aktualizuj</Text>
+        <ModalSelector
+          style={styles.select}
+          data={this.state.selectItemList}
+          onChange={(option)=>this.setState({state: option.key})}
+          initValue={String(Task.statusList.find(x => x.Value === this.state.state).Label)}
+          selectStyle={{ borderColor: "black" }}
+        />
+
+        <TouchableOpacity style={styles.searchButton} onPress={this.update.bind(this)}>
+          <Text style={styles.buttonText}>Aktualizuj</Text>
         </TouchableOpacity>
       </View>
     );
@@ -121,5 +115,13 @@ const styles = StyleSheet.create({
   },
   buttonText:{
     color: 'white'
+  },
+  select:{
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 10,
+    width: 300,
+    height: 40,
+    backgroundColor: 'white'
   }
 });
