@@ -1,4 +1,4 @@
-In progres  code not working exacly
+In progres 
 
 
 Install app from Android apk 
