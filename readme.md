@@ -7,7 +7,7 @@ Install app from Android apk
 
 Main
 
-<img src="https://user-images.githubusercontent.com/47826375/202868309-54d9a319-cf5e-4820-bb3f-720f82eb5ab3.jpg" width="100">
+<img src="https://user-images.githubusercontent.com/47826375/202868309-54d9a319-cf5e-4820-bb3f-720f82eb5ab3.jpg" width="100"><img src="https://user-images.githubusercontent.com/47826375/202870025-63d24a41-28f3-4d3f-a3b9-3e73ce3912cf.jpg" width="100">
 
 Login 
 
@@ -24,4 +24,3 @@ Update task
 Add task 
 
 <img src="https://user-images.githubusercontent.com/47826375/202868319-eddc329d-5636-4c34-ac08-d0946f8c7ee7.jpg" width="100">
-
