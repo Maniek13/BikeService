@@ -13,7 +13,7 @@ class UserTask extends Component {
         <View style={styles.conteiner}>
             <Text style={{color: '#000000', fontSize: 23, textAlign: 'center'}} name='title'>{this.props.task.Header}</Text>
             <Text style={styles.text} name='description'>{this.props.task.Description}</Text>
-            <Text style={styles.text} name='state'>{String(Task.statusList.find(x => x.Id === this.props.task.State).State)}</Text>
+            <Text style={styles.text} name='state'>{String(Task.statusList.find(x => x.Value === this.props.task.State).Label)}</Text>
         </View>
     );
   }
