@@ -19,8 +19,7 @@ Administration panel
 
 Update task 
 
-<img src="https://user-images.githubusercontent.com/47826375/202868316-79d59045-7ab1-414d-b140-01f6ebfc571f.jpg" width="100">
-<img src="https://user-images.githubusercontent.com/47826375/202868317-c3a039ec-f84e-4fa4-8ee1-7e56547d57a0.jpg" width="100">
+<img src="https://user-images.githubusercontent.com/47826375/202868316-79d59045-7ab1-414d-b140-01f6ebfc571f.jpg" width="100"><img src="https://user-images.githubusercontent.com/47826375/202868317-c3a039ec-f84e-4fa4-8ee1-7e56547d57a0.jpg" width="100">
 
 Add task 
 
