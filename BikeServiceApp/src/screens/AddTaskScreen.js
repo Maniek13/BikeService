@@ -24,7 +24,6 @@ class AddTaskScreen extends Component {
     }
 
     Task.task = task;
-    
 
     var status = TasksController.addTask();
     

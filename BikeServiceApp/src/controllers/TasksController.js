@@ -58,11 +58,11 @@ class TasksController{
     static addTask(){
         var nrOfTasks = this.objectLength(this.tasksList) + 1;
 
-        
+        console.log(Task.task.Header)
         this.tasksList.push({
                 Id: nrOfTasks,
-                Header: '',
-                Description: '',
+                Header: Task.task.Header,
+                Description: Task.task.Description,
                 State: 1
         })
 
