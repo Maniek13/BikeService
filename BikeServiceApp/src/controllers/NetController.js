@@ -18,7 +18,6 @@ class NetController{
                 code: -1,
                 data: 'Wrong method'
             }
-        }
 
         const requestOptions = {};
         const formData = new FormData()
