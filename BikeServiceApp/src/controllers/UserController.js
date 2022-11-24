@@ -16,7 +16,7 @@ class UserController{
         let res = net.getData();
         */
 
-        return res.data;
+        return res;
     }
 }
 

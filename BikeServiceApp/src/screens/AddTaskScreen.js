@@ -22,11 +22,11 @@ class AddTaskScreen extends Component {
       State: 1,
     };
     Task.task = task;
-    
+
     let res = TasksController.addTask();
-    
+
     if(res.code === 200){
-      this.tasksList.push({
+      TasksController.tasksList.push({
         Id: res.data.id,
         Header: Task.task.Header,
         Description: Task.task.Description,

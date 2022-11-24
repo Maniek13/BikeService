@@ -16,7 +16,14 @@ class TasksController{
                 state: 1
             }   
         };
-        
+
+        res = {
+            code: 404,
+            data: {
+                message: 'error test'
+            }   
+        }
+
         /*
         odblokować po dodaniu serwera
         let net = new NetController('GET', 'getTask?id=' + taskNumber);

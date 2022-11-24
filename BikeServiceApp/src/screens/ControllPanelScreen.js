@@ -13,10 +13,11 @@ class ControllPanelScreen extends Component {
     this.handleBackButton = this.handleBackButton.bind(this);
 
     let res = TasksController.getTasks()
+   
     if(res.code === 200){
-      this.tasksList = res.data;
+      TasksController.tasksList = res.data;
     }
-
+    
     this.state = {
       refreshed: 0
     };

@@ -4,7 +4,7 @@ import {Text, View, StyleSheet} from 'react-native';
 
 class Error extends Component {
     constructor(props){
-        super(props)
+        super(props);
     }
 
   render() {
@@ -25,6 +25,17 @@ const styles = StyleSheet.create({
     color: '#000000',
     textAlign: 'center',
     marginTop: 10
+  },
+  button: {
+    alignItems: 'center',
+    marginLeft:'auto',
+    marginRight:'auto',
+    justifyContent: 'center',
+    width: 100,
+    padding: 5,
+    backgroundColor: '#249ef0',
+    borderRadius: 5,
+    zIndex: 100
   },
   conteiner:{
     borderWidth: 1,
