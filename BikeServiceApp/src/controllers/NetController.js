@@ -8,7 +8,7 @@ class NetController{
 
     constructor(method, callingFunctionUrl, parameters){
         this.method = method;
-        this.reqData = reqData;
+        this.parameters = parameters;
         this.url = url + '/' + callingFunctionUrl;
     }
 

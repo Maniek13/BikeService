@@ -16,8 +16,9 @@ class UsersTasks extends Component {
   }
   
   search(){
+    console.log(this.state.taskNumber)
     this.setState({ showTask: false });
-    let task = TasksController.getTask();
+    let task = TasksController.getTask(this.state.taskNumber);
     this.setState({
       task: task
     });
@@ -35,7 +36,7 @@ class UsersTasks extends Component {
           style={styles.textInput}
           placeholder="Numer zlecenia" 
           placeholderTextColor="gray" 
-          onChange={number => this.setState({taskNumber: number})}
+          onChangeText={number => this.setState({taskNumber: number})}
         />
         <TouchableOpacity style={styles.searchButton} onPress={this.search.bind(this)}>
           <Text style={styles.buttonText}>Wyszukaj</Text>

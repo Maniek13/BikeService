@@ -1,15 +1,23 @@
-import Task from '../objects/Task'
+import Task from '../objects/Task';
+import NetController from './TasksController';
 
 class TasksController{
     static tasksList = [];
 
-    static getTask(){
-        var task = {
-            Id: 1,
+    static getTask(taskNumber){
+        let task = {
+            Id: taskNumber,
             Header: 'Tytuł',
             Description: 'Opis',
             State: 1
         };
+
+        console.log(taskNumber)
+
+        /*
+        odblokować po dodaniu serwera
+        let task = new NetController('GET', 'getTask', id);
+        */
         return task; 
     }
 

@@ -37,10 +37,11 @@ class LoginScreen extends Component {
   } 
 
   async logIn(){
-    let id = UserController.checkIsUser();
-    if(id !== 0){
-      await AsyncStorage.setItem('@BikeServiceUser', String(id))
-      User.user.Id = id;
+    let res = UserController.checkIsUser(this.state.login, this.state.password);
+    
+    if(res.code === 200){
+      await AsyncStorage.setItem('@BikeServiceUser', String(res.data.id))
+      User.user.Id = res.data.id;
       User.user.Login = this.state.login;
       User.user.password = this.state.password;
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
