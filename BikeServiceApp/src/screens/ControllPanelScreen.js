@@ -4,26 +4,34 @@ import {View, Text, Button, BackHandler, StyleSheet, FlatList, TouchableOpacity}
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import TasksController from '../controllers/TasksController';
-import User from '../objects/User'
-import Task from '../objects/Task'
+import User from '../objects/User';
+import Task from '../objects/Task';
+import Error from '../components/Error';
 
 class ControllPanelScreen extends Component {
   constructor(props){
     super(props);
     this.handleBackButton = this.handleBackButton.bind(this);
 
-    let res = TasksController.getTasks()
-   
-    if(res.code === 200){
-      TasksController.tasksList = res.data;
-    }
-    
     this.state = {
-      refreshed: 0
+      refreshed: 0,
+      showError: false,
+      error: {}   
     };
   }
   
   componentDidMount (){
+    let res = TasksController.getTasks()
+    if(res.code === 200){
+      TasksController.tasksList = res.data;
+    }
+    else{
+      this.setState({
+        error: res
+      });
+      this.setState({ showError: true });
+    }
+
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.setState({ refreshed: this.state.refreshed + 1});
       BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
@@ -78,12 +86,13 @@ class ControllPanelScreen extends Component {
               <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.State).Label)}</Text>
             </TouchableOpacity>
           }
-          
         />
+        {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
 
         <TouchableOpacity style={styles.searchButton} onPress={this.addTask.bind(this)}>
             <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
+        
       </View>
     );
   }

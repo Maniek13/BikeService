@@ -70,7 +70,6 @@ class TasksController{
                 }
             ]
         };
-
         /*
         odblokować po dodaniu serwera
         let net = new NetController('POST', 'getTasks', User.user);
@@ -117,7 +116,7 @@ class TasksController{
                 state: 1
             }   
         };
-
+        
         /*odblokować po dodaniu serwera
         let parameters ={
             user: User.user,

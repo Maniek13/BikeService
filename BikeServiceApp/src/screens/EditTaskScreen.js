@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
-import ModalSelector from 'react-native-modal-selector'
+import ModalSelector from 'react-native-modal-selector';
 
 import TasksController from '../controllers/TasksController';
-import Task from '../objects/Task'
+import Task from '../objects/Task';
+import Error from '../components/Error';
 
 class EditTaskScreen extends Component {
   constructor(props){
@@ -13,7 +14,9 @@ class EditTaskScreen extends Component {
       header: Task.task.Header,
       description: Task.task.Description,
       state: Task.task.State,
-      selectItemList: []
+      selectItemList: [],
+      showError: false,
+      error: {}   
     };
   }
 
@@ -28,7 +31,6 @@ class EditTaskScreen extends Component {
       }))
     });
   }
-
   update(){
     Task.task.Header = this.state.header;
     Task.task.Description = this.state.description;
@@ -41,6 +43,12 @@ class EditTaskScreen extends Component {
       TasksController.tasksList[index].Header = this.state.header;
       TasksController.tasksList[index].Description = this.state.description;
       this.props.navigation.navigate('ControllPanel');
+    }
+    else{
+      this.setState({
+        error: res
+      });
+      this.setState({ showError: true });
     }
   }
 
@@ -70,10 +78,10 @@ class EditTaskScreen extends Component {
           initValue={String(Task.statusList.find(x => x.Value === this.state.state).Label)}
           selectStyle={{ borderColor: "black" }}
         />
-
         <TouchableOpacity style={styles.searchButton} onPress={this.update.bind(this)}>
           <Text style={styles.buttonText}>Aktualizuj</Text>
         </TouchableOpacity>
+        {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
       </View>
     );
   }

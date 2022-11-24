@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, Alert, TextInput, StyleSheet} from 'react-native';
 
-import TasksController from '../controllers/TasksController'
-import Task from '../objects/Task'
+import TasksController from '../controllers/TasksController';
+import Task from '../objects/Task';
+import Error from '../components/Error';
 
 class AddTaskScreen extends Component {
   constructor(props){
@@ -10,7 +11,9 @@ class AddTaskScreen extends Component {
 
     this.state = {
       header: '',
-      description: ''
+      description: '',
+      showError: false,
+      error: {}    
     };
   }
 
@@ -35,13 +38,10 @@ class AddTaskScreen extends Component {
       this.props.navigation.navigate('ControllPanel');
     }
     else{
-        Alert.alert(
-            "Dodawanie zlecenia",
-            "Błąd" + status,
-            [
-              { text: "OK" }
-            ]
-          );
+      this.setState({
+        error: res
+      });
+      this.setState({ showError: true });
     }
   }
 
@@ -61,9 +61,10 @@ class AddTaskScreen extends Component {
           placeholderTextColor="gray" 
           onChangeText={newText => this.setState({description: newText})}
         />
-         <TouchableOpacity style={styles.searchButton} onPress={this.addTask.bind(this)}>
+        <TouchableOpacity style={styles.searchButton} onPress={this.addTask.bind(this)}>
             <Text style={styles.buttonText}>Dodaj</Text>
         </TouchableOpacity>
+        {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, TextInput, Button, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, TextInput, Button, View, StyleSheet, TouchableOpacity, RefreshControl} from 'react-native';
 
 import UserTask from '../components/UserTask';
 import Error from '../components/Error';
@@ -12,9 +12,9 @@ class UsersTasks extends Component {
     this.state = {
       taskNumber: 0,
       showTask: false,
-      showError: false,
       task: {},
-      error: {}
+      showError: false,
+      error: {}      
     };
   }
   
@@ -23,8 +23,7 @@ class UsersTasks extends Component {
     this.setState({ showError: false });
 
     let res = TasksController.getTask(this.state.taskNumber);
-  
- 
+
     if(res.code === 200){
       this.setState({
         task: res.data
@@ -34,7 +33,7 @@ class UsersTasks extends Component {
     else{
       this.setState({
         error: res
-      });
+      });     
       this.setState({ showError: true });
     }
   }
@@ -52,11 +51,9 @@ class UsersTasks extends Component {
         <TouchableOpacity style={styles.searchButton} onPress={this.search.bind(this)}>
           <Text style={styles.buttonText}>Wyszukaj</Text>
         </TouchableOpacity>
-         {this.state.showTask === true ? <UserTask task = {this.state.task}/> : ''}
-         {this.state.showError === true ? <Error error = {this.state.error}/> : ''}
-         
+        {this.state.showTask === true ? <UserTask task = {this.state.task}/> : ''}
+        {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
       </View>
-       
     );
   }
 }
@@ -76,7 +73,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 20,
+    marginBottom: 10,
     width: 200,
     padding: 2,
     backgroundColor: 'white'

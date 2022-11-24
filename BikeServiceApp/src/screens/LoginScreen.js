@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import User from '../objects/User'
 import UserController from '../controllers/UserController';
+import Error from '../components/Error';
 
 class LoginScreen extends Component {
   constructor(props){
@@ -15,7 +16,9 @@ class LoginScreen extends Component {
       taskNumber: 0,
       showTask: false,
       password: '',
-      login: ''
+      login: '',
+      error: {},
+      showError: false
     };
   }
 
@@ -37,7 +40,7 @@ class LoginScreen extends Component {
 
   async logIn(){
     let res = UserController.checkIsUser(this.state.login, this.state.password);
-    
+
     if(res.code === 200){
       await AsyncStorage.setItem('@BikeServiceUser', String(res.data.id))
       User.user.Id = res.data.id;
@@ -46,11 +49,17 @@ class LoginScreen extends Component {
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
       this.props.navigation.push('ControllPanel');
     }
+    else{
+      this.setState({
+        error: res
+      });
+      this.setState({ showError: true });
+    }
   }
 
   render() {
     return (
-      <View >
+      <View>
         <Text style={styles.text}>Logowanie</Text>
         <TextInput 
           style={styles.textInput}
@@ -65,9 +74,10 @@ class LoginScreen extends Component {
           placeholderTextColor="gray" 
           onChangeText={text => this.setState({password: text})}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={this.logIn.bind(this)}>
+        <TouchableOpacity style={styles.searchButton} onPress={this.logIn.bind(this)} disabled={false}>
           <Text style={styles.buttonText}>Zaloguj</Text>
         </TouchableOpacity>
+        {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
       </View>
     );
   }
