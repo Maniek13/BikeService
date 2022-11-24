@@ -1,6 +1,6 @@
 import Task from '../objects/Task';
 import User from '../objects/User';
-import NetController from './TasksController';
+import NetController from './NetController';
 
 class TasksController{
     static tasksList = [];

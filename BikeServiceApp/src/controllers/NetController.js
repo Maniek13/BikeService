@@ -1,8 +1,8 @@
 class NetController{
-    let url = '';
-    let parameters = {};
-    let method = '';
-    let methods = {'GET', 'POST', 'PUT', 'DELETE'};
+    static url = '';
+    static parameters = {};
+    static method = '';
+    static methods = ['GET', 'POST', 'PUT', 'DELETE'];
 
     constructor(method, callingFunctionUrl, parameters){
         this.method = method;
@@ -10,7 +10,7 @@ class NetController{
         this.url = url + '/' + callingFunctionUrl;
     }
 
-    async function getData() {
+     static async getData() {
         if(!methods.includes(this.method)){
             return {
                 code: -1,
@@ -21,7 +21,7 @@ class NetController{
         const requestOptions = {};
         const formData = new FormData()
 
-        if(this.method = 'GET' || this.method = 'DELETE'){
+        if(this.method === 'GET' || this.method === 'DELETE'){
             requestOptions = {
                 method: this.method,
                 headers: {
@@ -52,16 +52,13 @@ class NetController{
                 data: data
             }))
             .then(res => {
-                else {
-                    return{
-                        code: res.data.status,
-                        data: res.data.message
-                    }
-                }    
+                return{
+                    code: res.data.status,
+                    data: res.data.message
+                }
             }));
         }
         catch(err){
-            Responde
             return {
                 code: 500,
                 data: 'server error'
@@ -70,4 +67,4 @@ class NetController{
     }
 }
 
-export default TasksController;
+export default NetController;
