@@ -1,5 +1,3 @@
-import Task from '../objects/Task'
-
 class NetController{
     let url = '';
     let parameters = {};

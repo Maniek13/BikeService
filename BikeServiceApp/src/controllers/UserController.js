@@ -1,26 +1,20 @@
 import NetController from './TasksController';
 
 class UserController{
+
+    //return id from 
     static checkIsUser(login, password){
-        return {
+        let res = {
             code: 200,
             data: {
-                id: 1,
-                name: login,
-                password: password
+                id: 1
             }
         };
 
-        //odblokowac po dodaniu serwera
-        let user = {
-            Id:0,
-            Name: login,
-            Password: password
-        }
-
+        /*odblokowac po dodaniu serwera
         let net = new NetController('POST', 'checkIsUser', user);
-
         let res = net.getData();
+        */
 
         return res.data;
     }

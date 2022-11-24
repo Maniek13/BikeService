@@ -22,9 +22,16 @@ class AddTaskScreen extends Component {
       State: 1,
     };
     Task.task = task;
-    let status = TasksController.addTask();
     
-    if(status === true){
+    let res = TasksController.addTask();
+    
+    if(res.code === 200){
+      this.tasksList.push({
+        Id: res.data.id,
+        Header: Task.task.Header,
+        Description: Task.task.Description,
+        State: 1
+      })
       this.props.navigation.navigate('ControllPanel');
     }
     else{

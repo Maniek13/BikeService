@@ -3,8 +3,7 @@ import {View, Text, TouchableOpacity, StyleSheet, BackHandler} from 'react-nativ
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import TasksController from '../controllers/TasksController'
-import LoginScreen from '../screens/LoginScreen';
+import TasksController from '../controllers/TasksController';
 import UsersTasks from '../components/UsersTasks';
 import User from '../objects/User';
 

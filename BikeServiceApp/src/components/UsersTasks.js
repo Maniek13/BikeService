@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Text, TextInput, Button, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 import UserTask from '../components/UserTask';
+import Error from '../components/Error';
 import TasksController from '../controllers/TasksController';
 
 class UsersTasks extends Component {
@@ -11,20 +12,30 @@ class UsersTasks extends Component {
     this.state = {
       taskNumber: 0,
       showTask: false,
-      task: {}
+      showError: false,
+      task: {},
+      error: {}
     };
   }
   
   search(){
-    console.log(this.state.taskNumber)
     this.setState({ showTask: false });
-    let task = TasksController.getTask(this.state.taskNumber);
-    this.setState({
-      task: task
-    });
+    this.setState({ showError: false });
 
-    if(task.Id !== 0){
+    let res = TasksController.getTask(this.state.taskNumber);
+  
+ 
+    if(res.code === 200){
+      this.setState({
+        task: res.data
+      });
       this.setState({ showTask: true });
+    }
+    else{
+      this.setState({
+        error: res
+      });
+      this.setState({ showError: true });
     }
   }
 
@@ -41,7 +52,9 @@ class UsersTasks extends Component {
         <TouchableOpacity style={styles.searchButton} onPress={this.search.bind(this)}>
           <Text style={styles.buttonText}>Wyszukaj</Text>
         </TouchableOpacity>
-         {this.state.showTask === true ? <UserTask task = {this.state.task}/> : ""}
+         {this.state.showTask === true ? <UserTask task = {this.state.task}/> : ''}
+         {this.state.showError === true ? <Error error = {this.state.error}/> : ''}
+         
       </View>
        
     );

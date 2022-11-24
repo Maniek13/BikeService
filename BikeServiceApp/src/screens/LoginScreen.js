@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import User from '../objects/User'
 import UserController from '../controllers/UserController';
-import TasksController from '../controllers/TasksController';
 
 class LoginScreen extends Component {
   constructor(props){

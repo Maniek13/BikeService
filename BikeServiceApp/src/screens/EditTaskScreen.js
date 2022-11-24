@@ -34,8 +34,12 @@ class EditTaskScreen extends Component {
     Task.task.Description = this.state.description;
     Task.task.State = this.state.state;
 
-    let ok = TasksController.updateTask();
-    if(ok === true){
+    let res = TasksController.updateTask();
+
+    if(res.code === 200){
+      let index = TasksController.tasksList.findIndex((obj => obj.Id == Task.task.Id));
+      TasksController.tasksList[index].Header = this.state.header;
+      TasksController.tasksList[index].Description = this.state.description;
       this.props.navigation.navigate('ControllPanel');
     }
   }
