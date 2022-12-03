@@ -55,7 +55,7 @@ class LoginScreen extends Component {
     await NetController.logIn(this.state.login, this.state.password);
     
     setTimeout(() => {
-      if(Response.response.code === 200){
+      if(Response.response.code === 1){
         User.user = UserController.checkIsUser(Response.response.data)
 
         AsyncStorage.setItem('@BikeServiceUser', String(User.user.Id))

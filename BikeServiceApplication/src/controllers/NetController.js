@@ -65,10 +65,10 @@ class NetController{
           </soap12:Body>\
         </soap12:Envelope>';
 
-        await NetController.getDataFromSOAP('http://tempuri.org/LogIn', body);
+        await NetController.getDataFromSOAP('http://tempuri.org/LogIn', body, 'LogInResult');
     }
 
-    static async getDataFromSOAP(SOAPAction, body){
+    static async getDataFromSOAP(SOAPAction, body, XMLElement){
         requestOptions = {
             method: 'POST',
             body: body,
@@ -84,13 +84,37 @@ class NetController{
         .then(myBlob => {
             let reader = new FileReader();
             reader.addEventListener("loadend", function() {
-                let res =  {
-                    code: response.status,
-                    data: {
-                        message: reader.result
+
+            let res = serialize(reader.result);
+
+            if(response.status === 200){
+
+                if(resultCode === 1){
+                    res =  {
+                        code:  resultCode,
+                        data: res
                     }
                 }
-                Response.response = res;
+                else{
+                    res =  {
+                        code:  resultCode,
+                        data: {
+                            message: res.message
+                        }
+                    }
+                }
+            }
+            else{
+                res =  {
+                    code:  response.status,
+                    data: {
+                        message: res.message
+                    }
+                }
+            }
+
+            Response.response = res;
+                
             })
             reader.readAsText(myBlob); 
         }))
@@ -102,9 +126,13 @@ class NetController{
                 }
             }  
             Response.response = res;
-        });
+        });  
+    }
 
-        
+    serializeXML(xml){
+
+
+
     }
 
     async getFromServer(adres, requestOptions){
