@@ -4,6 +4,8 @@ In progres
 Install app from Android apk 
 
 
+Server not working exacly. To work need to add to ISS or ect.
+
 
 Main
 

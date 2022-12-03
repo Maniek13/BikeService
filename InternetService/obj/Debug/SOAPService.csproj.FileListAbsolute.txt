@@ -1,0 +1,7 @@
+G:\Programowanie\Serwis rowerowy\SOAPService\bin\SOAPService.dll.config
+G:\Programowanie\Serwis rowerowy\SOAPService\bin\SOAPService.dll
+G:\Programowanie\Serwis rowerowy\SOAPService\bin\SOAPService.pdb
+G:\Programowanie\Serwis rowerowy\SOAPService\obj\Debug\SOAPService.csproj.AssemblyReference.cache
+G:\Programowanie\Serwis rowerowy\SOAPService\obj\Debug\SOAPService.csproj.CoreCompileInputs.cache
+G:\Programowanie\Serwis rowerowy\SOAPService\obj\Debug\SOAPService.dll
+G:\Programowanie\Serwis rowerowy\SOAPService\obj\Debug\SOAPService.pdb
