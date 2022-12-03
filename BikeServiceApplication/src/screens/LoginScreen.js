@@ -14,7 +14,7 @@ class LoginScreen extends Component {
 
     this.state = {
       taskNumber: 0,
-      showTask: false,
+     // showTask: false,
       password: '',
       login: '',
       error: {},
@@ -38,11 +38,14 @@ class LoginScreen extends Component {
     return true;
   } 
 
+ 
+
   async logIn(){
-    let res = UserController.checkIsUser(this.state.login, this.state.password);
+    this.setState({ showError: false });
+    let res = await UserController.checkIsUser(this.state.login, this.state.password);
 
     if(res.code === 200){
-      await AsyncStorage.setItem('@BikeServiceUser', String(res.data.id))
+      AsyncStorage.setItem('@BikeServiceUser', String(res.data.id))
       User.user.Id = res.data.id;
       User.user.Login = this.state.login;
       User.user.password = this.state.password;

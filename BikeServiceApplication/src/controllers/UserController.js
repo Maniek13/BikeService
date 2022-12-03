@@ -3,33 +3,21 @@ import NetController from './NetController';
 class UserController{
 
     //return id from 
-    static checkIsUser(login, password){
-        let res = {
-            code: 200,
-            data: {
-                id: 1
-            }
-        };
+    static async checkIsUser(login, password){
 
         let body = '<?xml version="1.0" encoding="utf-8"?>\
         <soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\
           <soap12:Body>\
-            <LogIn xmlns="http://tempuri.org/">\
-              <password>string</password>\
-              <login>string</login>\
+            <LogIn xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tempuri.org/">\
+            <user>\
+              <Login>'+login+'</Login>\
+              <Password>'+password+'</Password>\
+              </user>\
             </LogIn>\
           </soap12:Body>\
-        </soap12:Envelope>'
-        
-        NetController.getDataFromSOAP('http://tempuri.org/LogIn', body);
+        </soap12:Envelope>';
 
-       
-        /*odblokowac po dodaniu serwera
-        let net = new NetController('POST', 'checkIsUser', user);
-        let res = net.getData();
-        */
-        
-        return res;
+        return await NetController.getDataFromSOAP('http://tempuri.org/LogIn', body);
     }
 }
 

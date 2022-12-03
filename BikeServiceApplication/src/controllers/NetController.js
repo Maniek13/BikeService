@@ -1,4 +1,3 @@
-import axios from 'axios';
 
 class NetController{
     static url = '';
@@ -61,12 +60,29 @@ class NetController{
                 'Content-Type': 'text/xml; charset=utf-8'
               },
         };
-    
      
         await fetch('http://178.235.60.107:7500/BikeWebService.asmx', requestOptions)
-        .then((response) =>  console.log(response))
+        .then(response => response.blob()
+        .then(myBlob => {
+            let reader = new FileReader();
+
+            //zrtobic czyms innym
+            reader.addEventListener("loadend", function() {
+        
+                return{
+                    code: response.status,
+                    data: {
+                        message: reader.result
+                    }
+                }  
+            })
+            reader.readAsText(myBlob); 
+        }))
         .catch((error) => {
-            console.log('er' + error)
+               return {
+                   code: 500,
+                   data: 'server error'
+               }
         });
     }
 
@@ -85,7 +101,6 @@ class NetController{
                }));
            }
            catch(err){
-            console.log(err)
                return {
                    code: 500,
                    data: 'server error'
