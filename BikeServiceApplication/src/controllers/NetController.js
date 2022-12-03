@@ -63,7 +63,7 @@ class NetController{
         };
     
      
-        await fetch('http://178.235.60.107:7500/BikeWebService.asmx', requestOptions)
+        await fetch('http://ip:7500/BikeWebService.asmx', requestOptions)
         .then((response) =>  console.log(response))
         .catch((error) => {
             console.log('er' + error)
