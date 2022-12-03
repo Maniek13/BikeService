@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Response from '../objects/Response';
 import User from '../objects/User';
 import UserController from '../controllers/UserController';
-import NetController from '../controllers/NetController';
 import Error from '../components/Error';
 
 class LoginScreen extends Component {
@@ -44,7 +43,6 @@ class LoginScreen extends Component {
 
   async logIn(){
     this.setState({ showError: false });
-
     Response.response = {
         code: 408,
         data: {
@@ -52,12 +50,11 @@ class LoginScreen extends Component {
         }
     }
 
-    await NetController.logIn(this.state.login, this.state.password);
+    await UserController.checkIsUser(this.state.login, this.state.password);
     
     setTimeout(() => {
       if(Response.response.code === 1){
-        User.user = UserController.checkIsUser(Response.response.data)
-
+        User.user = Response.response.data;
         AsyncStorage.setItem('@BikeServiceUser', String(User.user.Id))
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
         this.props.navigation.push('ControllPanel');

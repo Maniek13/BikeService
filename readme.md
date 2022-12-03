@@ -6,6 +6,14 @@ Install app from Android apk
 
 Server not working exacly. To work need to add to ISS or ect.
 
+If want use source code, must add file Settings.js in src/objects with path to WebService like this:
+______________________________________
+class Settings{
+    static SOAPAdress = 'serwer.asmx'
+}
+
+export default Settings;
+_______________________________________
 
 Main
 

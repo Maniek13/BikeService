@@ -1,4 +1,6 @@
 import Response from '../objects/Response';
+import Settings from '../objects/Settings';
+import { XMLParser } from 'fast-xml-parser';
 
 class NetController{
     static url = '';
@@ -51,23 +53,6 @@ class NetController{
         await this.getFromServer(adres, requestOptions); 
     }
 
-
-    static async logIn(login, password){
-        let body = '<?xml version="1.0" encoding="utf-8"?>\
-        <soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\
-          <soap12:Body>\
-            <LogIn xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tempuri.org/">\
-            <user>\
-              <Login>'+login+'</Login>\
-              <Password>'+password+'</Password>\
-              </user>\
-            </LogIn>\
-          </soap12:Body>\
-        </soap12:Envelope>';
-
-        await NetController.getDataFromSOAP('http://tempuri.org/LogIn', body, 'LogInResult');
-    }
-
     static async getDataFromSOAP(SOAPAction, body, XMLElement){
         requestOptions = {
             method: 'POST',
@@ -79,43 +64,25 @@ class NetController{
               },
         };
 
-        await fetch('http://178.235.60.107:7500/BikeWebService.asmx', requestOptions)
+        await fetch(Settings.SOAPAdress, requestOptions)
         .then(response => response.blob()
         .then(myBlob => {
             let reader = new FileReader();
             reader.addEventListener("loadend", function() {
 
-            let res = serialize(reader.result);
+            if(response.status !== 200){
+                XMLElement = 'error';
+            };
 
-            if(response.status === 200){
+            let res = NetController.serializeXML(reader.result, XMLElement,);
 
-                if(resultCode === 1){
-                    res =  {
-                        code:  resultCode,
-                        data: res
-                    }
-                }
-                else{
-                    res =  {
-                        code:  resultCode,
-                        data: {
-                            message: res.message
-                        }
-                    }
-                }
-            }
-            else{
-                res =  {
-                    code:  response.status,
-                    data: {
-                        message: res.message
-                    }
-                }
-            }
+            if(response.status !== 200){
+                res.code = response.status;
+            };
 
-            Response.response = res;
-                
+            Response.response = res;   
             })
+
             reader.readAsText(myBlob); 
         }))
         .catch((error) => {
@@ -129,11 +96,34 @@ class NetController{
         });  
     }
 
-    serializeXML(xml){
+    static serializeXML(xml, element){
+        let x = xml.indexOf('<resultCode>');
+        let y = xml.indexOf('</resultCode>');
 
+        let response = {
+            code: Number(xml.slice(x+12, y)),
+            data: ''
+        }
 
+        if(element === 'error' || response.code === -1){
+            let x = xml.indexOf('<message>');
+            let y = xml.indexOf('</message>');
+            
+            response.data = {
+                message: xml.slice(x+9, y)
+            }
+        }
+        else{
+            let x = xml.indexOf('<Data>');
+            let y = xml.indexOf('</Data>');
+            let xmlObj = xml.slice(x+6, y)
 
+            const parser = new XMLParser();
+            response.data = parser.parse(xmlObj);
+        }
+        return response;
     }
+    
 
     async getFromServer(adres, requestOptions){
         try{
