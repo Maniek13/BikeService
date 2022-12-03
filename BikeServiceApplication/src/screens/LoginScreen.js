@@ -3,8 +3,10 @@ import { View, Text, TouchableOpacity, StyleSheet, TextInput, BackHandler} from 
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import User from '../objects/User'
+import Response from '../objects/Response';
+import User from '../objects/User';
 import UserController from '../controllers/UserController';
+import NetController from '../controllers/NetController';
 import Error from '../components/Error';
 
 class LoginScreen extends Component {
@@ -42,22 +44,31 @@ class LoginScreen extends Component {
 
   async logIn(){
     this.setState({ showError: false });
-    let res = await UserController.checkIsUser(this.state.login, this.state.password);
 
-    if(res.code === 200){
-      AsyncStorage.setItem('@BikeServiceUser', String(res.data.id))
-      User.user.Id = res.data.id;
-      User.user.Login = this.state.login;
-      User.user.password = this.state.password;
-      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-      this.props.navigation.push('ControllPanel');
+    Response.response = {
+        code: 408,
+        data: {
+          message: 'timeout error'
+        }
     }
-    else{
-      this.setState({
-        error: res
-      });
-      this.setState({ showError: true });
-    }
+
+    await NetController.logIn(this.state.login, this.state.password);
+    
+    setTimeout(() => {
+      if(Response.response.code === 200){
+        User.user = UserController.checkIsUser(Response.response.data)
+
+        AsyncStorage.setItem('@BikeServiceUser', String(User.user.Id))
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+        this.props.navigation.push('ControllPanel');
+      }
+      else{
+        this.setState({
+          error: Response.response
+        });
+        this.setState({ showError: true });
+      }
+    }, 100);
   }
 
   render() {
