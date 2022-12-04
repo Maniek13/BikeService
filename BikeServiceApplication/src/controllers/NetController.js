@@ -3,56 +3,6 @@ import Settings from '../objects/Settings';
 import { XMLParser } from 'fast-xml-parser';
 
 class NetController{
-    static url = '';
-    static parameters = {};
-    static method = '';
-    static methods = ['GET', 'POST', 'PUT', 'DELETE'];
-
-    constructor(method, callingFunctionUrl, parameters){
-        this.method = method;
-        this.parameters = parameters;
-        this.url = this.url + '/' + callingFunctionUrl;
-    }
-
-    async getData() {
-        if(!methods.includes(this.method)){
-            return {
-                code: -1,
-                data: 'Wrong method'
-            }
-        }
-
-        const requestOptions = {};
-        const formData = new FormData()
-
-        if(this.method === 'GET' || this.method === 'DELETE'){
-            requestOptions = {
-                method: this.method,
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-            };
-        }
-        else{
-            for (var el in this.parameters){
-                formData.append(el, this.parameters[i]);
-            }
-
-
-            requestOptions = {
-                method: this.method,
-                body: formData,
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-            };
-        }
-
-        await this.getFromServer(adres, requestOptions); 
-    }
-
     static async getDataFromSOAP(SOAPAction, body, XMLElement){
         requestOptions = {
             method: 'POST',
@@ -69,18 +19,17 @@ class NetController{
         .then(myBlob => {
             let reader = new FileReader();
             reader.addEventListener("loadend", function() {
+                if(response.status !== 200){
+                    XMLElement = 'error';
+                };
 
-            if(response.status !== 200){
-                XMLElement = 'error';
-            };
+                let res = NetController.serializeXML(reader.result, XMLElement,);
 
-            let res = NetController.serializeXML(reader.result, XMLElement,);
+                if(response.status !== 200){
+                    res.code = response.status;
+                };
 
-            if(response.status !== 200){
-                res.code = response.status;
-            };
-
-            Response.response = res;   
+                Response.response = res;   
             })
 
             reader.readAsText(myBlob); 
@@ -123,31 +72,6 @@ class NetController{
         }
         return response;
     }
-    
-
-    async getFromServer(adres, requestOptions){
-        try{
-            await fetch(adres, requestOptions)
-               .then(response => response.json()
-               .then(data => ({
-                   data: data
-               }))
-               .then(res => {
-                   return{
-                       code: res.data.status,
-                       data: res.data.message
-                   }
-               }));
-           }
-           catch(err){
-               return {
-                   code: 500,
-                   data: 'server error'
-               }
-           }
-    }
-
-   
 }
 
 export default NetController;

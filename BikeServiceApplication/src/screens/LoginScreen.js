@@ -39,8 +39,6 @@ class LoginScreen extends Component {
     return true;
   } 
 
- 
-
   async logIn(){
     this.setState({ showError: false });
     Response.response = {
@@ -49,21 +47,23 @@ class LoginScreen extends Component {
           message: 'timeout error'
         }
     }
-
     await UserController.checkIsUser(this.state.login, this.state.password);
     
-    setTimeout(() => {
-      if(Response.response.code === 1){
-        User.user = Response.response.data;
-        AsyncStorage.setItem('@BikeServiceUser', String(User.user.Id))
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-        this.props.navigation.push('ControllPanel');
-      }
-      else{
-        this.setState({
-          error: Response.response
-        });
-        this.setState({ showError: true });
+    var onTime = setInterval(() => {
+      if(Response.response.code !== 0){
+        if(Response.response.code === 1){
+          User.user = Response.response.data;
+          AsyncStorage.setItem('@BikeServiceUser', String(User.user.Id))
+          BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+          this.props.navigation.push('ControllPanel');
+        }
+        else{
+          this.setState({
+            error: Response.response
+          });
+          this.setState({ showError: true });
+        }
+        clearInterval(onTime);
       }
     }, 100);
   }

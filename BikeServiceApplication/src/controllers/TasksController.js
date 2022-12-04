@@ -5,7 +5,6 @@ import NetController from './NetController';
 class TasksController{
     static tasksList = [];
 
-    //return task from net controller
     static getTask(taskNumber){
         let res = {
             code: 200,
@@ -17,23 +16,9 @@ class TasksController{
             }   
         };
 
-        res = {
-            code: 404,
-            data: {
-                message: 'error test'
-            }   
-        }
-
-        /*
-        odblokować po dodaniu serwera
-        let net = new NetController('GET', 'getTask?id=' + taskNumber);
-        let res = net.getData();
-        */
-
         return res;    
     }
 
-    //return list of tasks from net controller
     static getTasks(){
         let res = {
             code: 200,
@@ -70,16 +55,11 @@ class TasksController{
                 }
             ]
         };
-        /*
-        odblokować po dodaniu serwera
-        let net = new NetController('POST', 'getTasks', User.user);
-        let res = net.getData();
-        */
 
         return res; 
     }
 
-    //return id from net controller
+
     static addTask(){
         let nrOfTasks = this.objectLength(this.tasksList) + 1;
 
@@ -93,21 +73,9 @@ class TasksController{
             }   
         };
 
-        
-     
-        /*odblokować po dodaniu serwera
-        let parameters ={
-            user: User.user,
-            task: Task.task
-        }
-        let net = new NetController('POST', 'getTasks', parameters);
-        let res = net.getData();
-        */
-
         return res;
     }
 
-    //return true from net controller
     static updateTask(){
         let res = {
             code: 200,
@@ -118,16 +86,6 @@ class TasksController{
                 state: 1
             }   
         };
-        
-        /*odblokować po dodaniu serwera
-        let parameters ={
-            user: User.user,
-            task: Task.task
-        }
-
-        let net = new NetController('PUT', 'getTasks/?id='+Task.task.Id, parameters);
-        let res = net.getData();
-        */
 
         return res;
     }

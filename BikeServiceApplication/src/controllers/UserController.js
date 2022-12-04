@@ -14,7 +14,7 @@ class UserController{
         </LogIn>\
       </soap12:Body>\
     </soap12:Envelope>';
-
+    
     await NetController.getDataFromSOAP('http://tempuri.org/LogIn', body, 'LogInResult');
   }
 }
