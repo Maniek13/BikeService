@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+	<ConnectionOptions>
+		<ConnectionString>Data Source=RAKIETA\SQLEXPRESS; Initial Catalog=bikeServiceDB; trusted_connection=true;encrypt=false</ConnectionString>
+	</ConnectionOptions>
+</Settings>

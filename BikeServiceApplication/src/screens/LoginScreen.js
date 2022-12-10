@@ -15,7 +15,7 @@ class LoginScreen extends Component {
 
     this.state = {
       taskNumber: 0,
-     // showTask: false,
+      btnLoginDisabled: false,
       password: '',
       login: '',
       error: {},
@@ -41,6 +41,8 @@ class LoginScreen extends Component {
 
   async logIn(){
     this.setState({ showError: false });
+    this.setState({ btnLoginDisabled: true});
+
     await UserController.checkIsUser(this.state.login, this.state.password);
     var onTime = setInterval(() => {
       if(Response.response.code !== 0){
@@ -64,6 +66,7 @@ class LoginScreen extends Component {
           }
         }
 
+        this.setState({ btnLoginDisabled: false});
         clearInterval(onTime);
       }
     }, 100);
@@ -86,7 +89,7 @@ class LoginScreen extends Component {
           placeholderTextColor="gray" 
           onChangeText={text => this.setState({password: text})}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={this.logIn.bind(this)} disabled={false}>
+        <TouchableOpacity style={this.state.btnLoginDisabled ? styles.searchButtonDisabled : styles.searchButtonEnabled } onPress={this.logIn.bind(this)} disabled={this.state.btnLoginDisabled}>
           <Text style={styles.buttonText}>Zaloguj</Text>
         </TouchableOpacity>
         {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
@@ -116,16 +119,27 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: 'white'
   },
-  searchButton: {
+  searchButtonDisabled: {
     alignItems: 'center',
     marginLeft:'auto',
     marginRight:'auto',
     justifyContent: 'center',
     width: 100,
     padding: 5,
-    backgroundColor: '#249ef0',
     borderRadius: 5,
-    zIndex: 100
+    zIndex: 100,
+    backgroundColor: 'grey'
+  },
+  searchButtonEnabled: {
+    alignItems: 'center',
+    marginLeft:'auto',
+    marginRight:'auto',
+    justifyContent: 'center',
+    width: 100,
+    padding: 5,
+    borderRadius: 5,
+    zIndex: 100,
+    backgroundColor: '#249ef0'
   },
   buttonText:{
     color: 'white'

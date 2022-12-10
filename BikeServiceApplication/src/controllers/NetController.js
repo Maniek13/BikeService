@@ -13,7 +13,7 @@ class NetController{
                 'Content-Type': 'text/xml; charset=utf-8'
               },
         };
-
+        console.log(body);
         await fetch(Settings.SOAPAdress, requestOptions)
         .then(response => response.blob()
         .then(myBlob => {
@@ -28,7 +28,7 @@ class NetController{
                 if(response.status !== 200){
                     res.code = response.status;
                 };
-
+                
                 Response.response = res;   
             })
 
@@ -53,7 +53,7 @@ class NetController{
             code: Number(xml.slice(x+12, y)),
             data: ''
         }
-
+        
         if(element === 'error' || response.code === -1){
             let x = xml.indexOf('<message>');
             let y = xml.indexOf('</message>');

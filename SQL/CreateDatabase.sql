@@ -12,7 +12,7 @@ CREATE TABLE app(
 
 CREATE TABLE users(
 	userID int NOT NULL PRIMARY KEY,
-	name nvarchar(max) NOT NULL,
+	login nvarchar(max) NOT NULL,
 	password nvarchar(max) NOT NULL,
 	appID int NOT NULL
 )

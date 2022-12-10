@@ -5,24 +5,96 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>G:\Programowanie\Serwis rowerowy\www\bikeservice.com</_PublishTargetUrl>
-    <History>True|2022-12-10T00:44:39.0792391Z;</History>
+    <History>True|2022-12-10T15:01:46.4650914Z;True|2022-12-10T05:18:52.8472852+01:00;True|2022-12-10T03:57:39.4601931+01:00;False|2022-12-10T03:57:24.1260078+01:00;False|2022-12-10T03:56:55.0931835+01:00;False|2022-12-10T03:56:32.7470589+01:00;True|2022-12-10T03:42:09.3093043+01:00;True|2022-12-10T01:44:39.0792391+01:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="BikeWebService.asmx">
       <publishTime>12/10/2022 01:20:22</publishTime>
     </File>
+    <File Include="bin/Azure.Core.dll">
+      <publishTime>04/04/2022 23:38:50</publishTime>
+    </File>
+    <File Include="bin/Azure.Identity.dll">
+      <publishTime>04/05/2022 22:26:00</publishTime>
+    </File>
     <File Include="bin/BikeWebService.dll">
-      <publishTime>12/10/2022 01:44:26</publishTime>
+      <publishTime>12/10/2022 16:01:46</publishTime>
     </File>
     <File Include="bin/BikeWebService.pdb">
-      <publishTime>12/10/2022 01:44:26</publishTime>
+      <publishTime>12/10/2022 16:01:46</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:52</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>04/15/2020 00:39:20</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>09/05/2018 17:10:50</publishTime>
     </File>
+    <File Include="bin/Microsoft.Data.SqlClient.dll">
+      <publishTime>10/08/2022 01:35:54</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.SqlClient.pdb">
+      <publishTime>10/08/2022 01:31:58</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.SqlClient.SNI.x64.dll">
+      <publishTime>10/04/2022 00:45:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.SqlClient.SNI.x64.pdb">
+      <publishTime>10/04/2022 00:43:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.SqlClient.SNI.x86.dll">
+      <publishTime>10/04/2022 00:45:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.SqlClient.SNI.x86.pdb">
+      <publishTime>10/04/2022 00:43:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Identity.Client.dll">
+      <publishTime>06/22/2022 21:59:36</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Identity.Client.Extensions.Msal.dll">
+      <publishTime>11/19/2021 23:02:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Abstractions.dll">
+      <publishTime>07/01/2022 20:48:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>07/01/2022 20:25:30</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Logging.dll">
+      <publishTime>07/01/2022 20:27:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Protocols.dll">
+      <publishTime>07/01/2022 20:29:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
+      <publishTime>07/01/2022 20:39:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>07/01/2022 20:33:36</publishTime>
+    </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>11/24/2022 03:10:26</publishTime>
+    </File>
+    <File Include="bin/pt-BR/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>08/08/2018 06:38:48</publishTime>
@@ -171,14 +243,77 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>08/08/2018 13:18:16</publishTime>
     </File>
+    <File Include="bin/ru/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
+    </File>
+    <File Include="bin/Settings.xml">
+      <publishTime>12/10/2022 11:10:26</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>02/19/2020 11:05:18</publishTime>
+    </File>
+    <File Include="bin/System.Configuration.ConfigurationManager.dll">
+      <publishTime>10/19/2020 20:48:46</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>09/13/2019 04:41:32</publishTime>
+    </File>
+    <File Include="bin/System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>07/01/2022 20:23:58</publishTime>
+    </File>
+    <File Include="bin/System.Memory.Data.dll">
+      <publishTime>04/08/2021 18:45:54</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>02/19/2020 11:05:18</publishTime>
+    </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>05/28/2022 01:41:34</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 15:29:44</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>02/21/2020 04:58:04</publishTime>
+    </File>
+    <File Include="bin/System.Security.AccessControl.dll">
+      <publishTime>10/19/2020 20:44:38</publishTime>
+    </File>
+    <File Include="bin/System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>11/15/2019 09:41:08</publishTime>
+    </File>
+    <File Include="bin/System.Security.Permissions.dll">
+      <publishTime>10/19/2020 20:52:06</publishTime>
+    </File>
+    <File Include="bin/System.Security.Principal.Windows.dll">
+      <publishTime>10/19/2020 20:46:28</publishTime>
+    </File>
+    <File Include="bin/System.Text.Encodings.Web.dll">
+      <publishTime>02/16/2021 20:13:28</publishTime>
+    </File>
+    <File Include="bin/System.Text.Json.dll">
+      <publishTime>04/15/2020 00:39:40</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>02/19/2020 11:05:18</publishTime>
+    </File>
+    <File Include="bin/System.ValueTuple.dll">
+      <publishTime>05/15/2018 15:29:52</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>05/28/2022 01:41:46</publishTime>
     </File>
+    <File Include="bin/zh-Hans/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/Microsoft.Data.SqlClient.resources.dll">
+      <publishTime>10/08/2022 01:35:38</publishTime>
+    </File>
+    <File Include="Settings.xml">
+      <publishTime>12/10/2022 11:10:26</publishTime>
+    </File>
     <File Include="Web.config">
-      <publishTime>12/10/2022 01:44:26</publishTime>
+      <publishTime>12/10/2022 05:18:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

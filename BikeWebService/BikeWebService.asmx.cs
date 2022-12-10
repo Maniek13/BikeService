@@ -1,62 +1,54 @@
-﻿using BikeWebService.Models;
+﻿using BikeWebService.Controllers;
+using BikeWebService.Models;
 using System;
-using System.Security.Authentication;
-using System.Web;
 using System.Web.Http;
 using System.Web.Services;
-using System.Web.Services.Protocols;
 
 namespace BikeWebService
 {
-    /// <summary>
-    /// Summary description for BikeWebService
-    /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
-    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
     public class BikeWebService : System.Web.Services.WebService
     {
 
         [WebMethod]
         public ResponseModel<User> LogIn(User user)
         {
+            HttpContextResponse context = UserController.ValidateUser(user);
 
             try
             {
-                ResponseModel<User> response = new ResponseModel<User>();
-
-
-                if (user == null)
+                if (!context.StatusCode.Equals(200))
                 {
-                    Context.Response.StatusCode = 204;
-                    Context.Response.Status = "No content";
-                    Context.Response.StatusDescription = "Brak przekazanego objektu";
-                    throw new HttpResponseException(System.Net.HttpStatusCode.NoContent);
-                }
-
-                if (String.IsNullOrEmpty(user.Password) || String.IsNullOrEmpty(user.Login))
-                {
-                    Context.Response.StatusCode = 400;
-                    Context.Response.Status = "Bad request";
-                    Context.Response.StatusDescription = "Hasło i login nie może być puste";
+                    Context.Response.StatusCode = context.StatusCode;
+                    Context.Response.StatusDescription = context.StatusDescription;
                     throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
                 }
+           
+                ResponseModel<User> response = new ResponseModel<User>();
 
-                user.Id = 1;
+                user = UserController.CheckIsUser(user);
+
+                if(user.Id.Equals(0)) 
+                {
+                    context.StatusDescription = "Niepoprawne dane logowania";
+                    Context.Response.StatusDescription = "Niepoprawne dane logowania";
+                    throw new Exception("Niepoprawne dane logowania");
+                }
 
                 response.message = "OK";
                 response.resultCode = 1;
                 response.Data = user;
 
                 return response;
+
             }
             catch (Exception ex)
             {
                 return new ResponseModel<User>()
                 {
-                    message = ex.Message,
+                    message = context.StatusDescription,
                     resultCode = -1,
                     Data = null
                 };
