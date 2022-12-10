@@ -15,15 +15,12 @@ namespace BikeWebService
         [WebMethod]
         public ResponseModel<User> LogIn(User user)
         {
-            HttpContextResponse context = UserController.ValidateUser(user);
-
+            string message = UserController.ValidateUser(user);
             try
             {
-                if (!context.StatusCode.Equals(200))
+                if (!message.Equals("OK"))
                 {
-                    Context.Response.StatusCode = context.StatusCode;
-                    Context.Response.StatusDescription = context.StatusDescription;
-                    throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
+                    throw new Exception(message);
                 }
            
                 ResponseModel<User> response = new ResponseModel<User>();
@@ -32,8 +29,6 @@ namespace BikeWebService
 
                 if(user.Id.Equals(0)) 
                 {
-                    context.StatusDescription = "Niepoprawne dane logowania";
-                    Context.Response.StatusDescription = "Niepoprawne dane logowania";
                     throw new Exception("Niepoprawne dane logowania");
                 }
 
@@ -48,7 +43,7 @@ namespace BikeWebService
             {
                 return new ResponseModel<User>()
                 {
-                    message = context.StatusDescription,
+                    message = ex.Message,
                     resultCode = -1,
                     Data = null
                 };

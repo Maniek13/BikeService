@@ -1,11 +1,17 @@
 In progres 
 
 
-Install app from AppToLook.apk (preview version) 
+Install app from BikeService.apk (preview version) 
 
-Server and app not working exacly
+login data:
+login: test
+password: 12345
 
-For use:
+App don't save data and show exemplary data
+
+_______________________________________
+Run from code:
+
 
 Server:
 Run sql to create database
