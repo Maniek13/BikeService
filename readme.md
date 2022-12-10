@@ -1,4 +1,4 @@
-In progres 
+In progres version 0.5
 
 
 Install app from BikeService.apk (preview version) 
@@ -7,16 +7,19 @@ login data:
 login: test
 password: 12345
 
+Working only if my pc working
+
 App don't save data and show exemplary data
 
-_______________________________________
-Run from code:
+____________________________________________________________________________________
+To use please compile apk with created settings file and configure IIS and DataBase
 
 
 Server:
 Run sql to create database
 Create user in database
-Add web  service to ISS or ect
+Add ConectionString to database on settings.xml file
+Publish web service to ISS or ect
 
 
 Android app:
@@ -29,6 +32,10 @@ class Settings{
 
 export default Settings;
 _______________________________________
+
+Compile apk and run on device or emulator
+
+
 
 Main
 
