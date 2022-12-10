@@ -1,16 +1,25 @@
 In progres 
 
 
-Install app from Android apk 
+Install app from AppToLook.apk (preview version) 
+
+Server and app not working exacly
+
+For use:
+
+Server:
+Run sql to create database
+Create user in database
+Add web  service to ISS or ect
 
 
-Server not working exacly. To work need to add to ISS or ect.
+Android app:
 
-If want use source code, must add file Settings.js in src/objects with path to WebService like this:
+Add file Settings.js in src/objects with path to WebService like this:
 ______________________________________
 class Settings{
     static SOAPAdress = 'serwer.asmx'
-}
+}z`
 
 export default Settings;
 _______________________________________
