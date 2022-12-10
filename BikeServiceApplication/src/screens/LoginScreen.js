@@ -42,7 +42,6 @@ class LoginScreen extends Component {
   async logIn(){
     this.setState({ showError: false });
     await UserController.checkIsUser(this.state.login, this.state.password);
-
     var onTime = setInterval(() => {
       if(Response.response.code !== 0){
         if(Response.response.code === 1){
@@ -57,7 +56,7 @@ class LoginScreen extends Component {
           });
           this.setState({ showError: true });
         }
-        
+
         Response.response = {
           code: 0,
           data: {
