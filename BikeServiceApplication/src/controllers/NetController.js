@@ -13,7 +13,6 @@ class NetController{
                 'Content-Type': 'text/xml; charset=utf-8'
               },
         };
-        console.log(body);
         await fetch(Settings.SOAPAdress, requestOptions)
         .then(response => response.blob()
         .then(myBlob => {
