@@ -11,7 +11,7 @@ namespace BikeWebServiceTests
         public void ValidateNoUser()
         {
             User user = null;
-            HttpContextResponse HttpContextResponse = UserController.ValidateUser(user);
+            HttpContextResponse HttpContextResponse = UsersController.ValidateUser(user);
 
             Assert.AreEqual(400
                 , HttpContextResponse.StatusCode);
@@ -27,7 +27,7 @@ namespace BikeWebServiceTests
                 Login = "test",
                 Password = null
             };
-            HttpContextResponse HttpContextResponse = UserController.ValidateUser(user);
+            HttpContextResponse HttpContextResponse = UsersController.ValidateUser(user);
 
             Assert.AreEqual(400
                 , HttpContextResponse.StatusCode);
@@ -43,7 +43,7 @@ namespace BikeWebServiceTests
                 Login = null,
                 Password = "test"
             };
-            HttpContextResponse HttpContextResponse = UserController.ValidateUser(user);
+            HttpContextResponse HttpContextResponse = UsersController.ValidateUser(user);
 
             Assert.AreEqual(400
                 , HttpContextResponse.StatusCode);
@@ -60,7 +60,7 @@ namespace BikeWebServiceTests
                 Password = "b"
             };
 
-            user = UserController.CheckIsUser(user);
+            user = UsersController.CheckIsUser(user);
 
             Assert.AreEqual(1
                 , user.Id);

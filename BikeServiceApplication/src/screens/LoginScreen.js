@@ -44,7 +44,7 @@ class LoginScreen extends Component {
     this.setState({ btnLoginDisabled: true});
 
     await UserController.checkIsUser(this.state.login, this.state.password);
-    var onTime = setInterval(() => {
+    let onTime = setInterval(() => {
       if(Response.response.code !== 0){
         if(Response.response.code === 1){
           User.user = Response.response.data;
@@ -66,7 +66,7 @@ class LoginScreen extends Component {
           }
         }
 
-        this.setState({ btnLoginDisabled: false});
+        this.setState({ btnLoginDisabled: false });
         clearInterval(onTime);
       }
     }, 100);

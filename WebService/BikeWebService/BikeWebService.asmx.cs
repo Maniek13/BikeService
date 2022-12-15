@@ -15,7 +15,7 @@ namespace BikeWebService
         [WebMethod]
         public ResponseModel<User> LogIn(User user)
         {
-            string message = UserController.ValidateUser(user);
+            string message = UsersController.ValidateUser(user);
             try
             {
                 if (!message.Equals("OK"))
@@ -25,7 +25,7 @@ namespace BikeWebService
            
                 ResponseModel<User> response = new ResponseModel<User>();
 
-                user = UserController.CheckIsUser(user);
+                user = UsersController.CheckIsUser(user);
 
                 if(user.Id.Equals(0)) 
                 {
@@ -49,5 +49,30 @@ namespace BikeWebService
                 };
             }
         }
-    }
+
+        [WebMethod]
+        public ResponseModel<Task> GetTask(string taskIDKey)
+        {
+            try
+            {
+                Task task = TasksController.FindTask(taskIDKey);
+
+                return new ResponseModel<Task>()
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = task
+                };
+            }
+            catch (Exception ex) 
+            {
+                return new ResponseModel<Task>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
+        } 
 }

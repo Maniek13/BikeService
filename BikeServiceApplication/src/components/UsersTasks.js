@@ -4,6 +4,7 @@ import {Text, TextInput, Button, View, StyleSheet, TouchableOpacity, RefreshCont
 import UserTask from '../components/UserTask';
 import Error from '../components/Error';
 import TasksController from '../controllers/TasksController';
+import Response from '../objects/Response';
 
 class UsersTasks extends Component {
   constructor(props){
@@ -14,28 +15,45 @@ class UsersTasks extends Component {
       showTask: false,
       task: {},
       showError: false,
-      error: {}      
+      error: {},
+      btnSearchDisabled: false 
     };
   }
   
-  search(){
+  async search(){
     this.setState({ showTask: false });
     this.setState({ showError: false });
+    this.setState({ btnSearchDisabled: true });
 
-    let res = TasksController.getTask(this.state.taskNumber);
+    await TasksController.getTask(this.state.taskNumber);
+    let onTime = setInterval(() => {
+      if(Response.response.code !== 0){
+        if(Response.response.code === 1){
 
-    if(res.code === 200){
-      this.setState({
-        task: res.data
-      });
-      this.setState({ showTask: true });
-    }
-    else{
-      this.setState({
-        error: res
-      });     
-      this.setState({ showError: true });
-    }
+          console.log(Response.response.data)
+          this.setState({
+            task: Response.response.data
+          });
+          this.setState({ showTask: true });
+        }
+        else{
+          this.setState({
+            error: Response.response
+          });
+          this.setState({ showError: true });
+        }
+
+        Response.response = {
+          code: 0,
+          data: {
+            message: ''
+          }
+        }
+
+        this.setState({ btnSearchDisabled: false });
+        clearInterval(onTime);
+      }
+    }, 100);
   }
 
   render() {
@@ -48,7 +66,7 @@ class UsersTasks extends Component {
           placeholderTextColor="gray" 
           onChangeText={number => this.setState({taskNumber: number})}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={this.search.bind(this)}>
+        <TouchableOpacity style={this.state.btnSearchDisabled ? styles.searchButtonDisabled : styles.searchButton } onPress={this.search.bind(this)} disabled={this.state.btnLoginDisabled}>
           <Text style={styles.buttonText}>Wyszukaj</Text>
         </TouchableOpacity>
         {this.state.showTask === true ? <UserTask task = {this.state.task}/> : ''}
@@ -86,6 +104,17 @@ const styles = StyleSheet.create({
     width: 100,
     padding: 5,
     backgroundColor: '#249ef0',
+    borderRadius: 5,
+    zIndex: 100
+  },
+  searchButtonDisabled: {
+    alignItems: 'center',
+    marginLeft:'auto',
+    marginRight:'auto',
+    justifyContent: 'center',
+    width: 100,
+    padding: 5,
+    backgroundColor: 'grey',
     borderRadius: 5,
     zIndex: 100
   },

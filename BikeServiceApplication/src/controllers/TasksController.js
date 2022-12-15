@@ -5,18 +5,17 @@ import NetController from './NetController';
 class TasksController{
     static tasksList = [];
 
-    static getTask(taskNumber){
-        let res = {
-            code: 200,
-            data: {
-                id: taskNumber,
-                header: 'Tytuł',
-                description: 'Opis',
-                state: 1
-            }   
-        };
-
-        return res;    
+    static async getTask(taskNumber){
+        let body = '<?xml version="1.0" encoding="utf-8"?>\
+            <soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\
+            <soap12:Body>\
+                <GetTask xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tempuri.org/">\
+                <taskIDKey>'+taskNumber+'</taskIDKey>\
+                </GetTask>\
+            </soap12:Body>\
+            </soap12:Envelope>';
+    
+        await NetController.getDataFromSOAP('http://tempuri.org/GetTask ', body, 'GetTaskResult');
     }
 
     static getTasks(){

@@ -218,10 +218,13 @@
     <Compile Include="Classes\Crypto.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Controllers\DbController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Interfaces\ITask.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Models\HttpContextResponse.cs" />
     <Compile Include="Models\ResponseModel.cs" />
+    <Compile Include="Models\Task.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

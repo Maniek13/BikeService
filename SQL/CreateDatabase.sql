@@ -7,7 +7,7 @@ GO
 CREATE TABLE app(
 	appID int NOT NULL PRIMARY KEY,
 	name nvarchar(max) NOT NULL,
-	appKey nvarchar(max) NOT NULL
+	appKey nvarchar(10) NOT NULL
 )
 
 CREATE TABLE users(
@@ -19,6 +19,7 @@ CREATE TABLE users(
 
 CREATE TABLE tasks(
 	taskID int NOT NULL PRIMARY KEY,
+	taskIDKey nvarchar(MAX) NOT NULL,
 	appID int NOT NULL,
 	header nvarchar(max) NOT NULL,
 	description nvarchar(max) NOT NULL,

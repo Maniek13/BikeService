@@ -21,7 +21,6 @@ class NetController{
                 if(response.status !== 200){
                     XMLElement = 'error';
                 };
-
                 let res = NetController.serializeXML(reader.result, XMLElement,);
 
                 if(response.status !== 200){
