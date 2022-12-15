@@ -29,8 +29,6 @@ class UsersTasks extends Component {
     let onTime = setInterval(() => {
       if(Response.response.code !== 0){
         if(Response.response.code === 1){
-
-          console.log(Response.response.data)
           this.setState({
             task: Response.response.data
           });
