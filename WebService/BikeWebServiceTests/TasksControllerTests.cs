@@ -1,6 +1,7 @@
 ﻿using BikeWebService.Controllers;
 using BikeWebService.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace BikeWebServiceTests
 {
@@ -31,5 +32,19 @@ namespace BikeWebServiceTests
                );
         }
 
+        [TestMethod]
+        public void GetTasks()
+        {
+            User user = new User()
+            {
+                Login = "test",
+                Password = "12345"
+            };
+
+            List<Order> result = TasksController.GetTasks(user);
+
+            Assert.IsInstanceOfType(result, typeof(List<Order>));
+            Assert.AreEqual(2, result.Count);
+        }
     }  
 }

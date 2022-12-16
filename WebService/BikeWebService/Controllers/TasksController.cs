@@ -37,5 +37,22 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        static public List<Order> GetTasks(User user)
+        {
+            try
+            {
+                user.Password = Crypto.EncryptSha256(user.Password);
+
+                DbController dbController = new DbController();
+
+                return dbController.GetTasks(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
     }
 }
