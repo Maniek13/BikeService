@@ -209,7 +209,8 @@
     <Compile Include="SettingsTests.cs" />
     <Compile Include="DbControllerTests.cs" />
     <Compile Include="CryptoTests.cs" />
-    <Compile Include="UserControllerTests.cs" />
+    <Compile Include="TasksControllerTests.cs" />
+    <Compile Include="UsersControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -28,13 +28,6 @@ namespace BikeWebService.Controllers
 
             try
             {
-                string pathToXml = AppDomain.CurrentDomain.BaseDirectory;
-                XmlDocument doc = new XmlDocument();
-                pathToXml = Path.Combine(pathToXml, "Settings.xml");
-                doc.Load(pathToXml);
-                XmlNodeList nList = doc.SelectNodes("/Settings/ConnectionOptions/ConnectionString");
-
-
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -71,7 +64,7 @@ namespace BikeWebService.Controllers
             return id;
         }
 
-        public Task GetTask(string taskKey)
+        public Order GetTask(string taskKey)
         {
             try
             {
@@ -114,9 +107,9 @@ namespace BikeWebService.Controllers
             
         }
 
-        public List<Task> GetTasks(User user)
+        public List<Order> GetTasks(User user)
         {
-            List<Task> tasks = new List<Task>();
+            List<Order> tasks = new List<Order>();
 
             try
             {
@@ -165,7 +158,7 @@ namespace BikeWebService.Controllers
             return tasks;
         }
 
-        private Task ConvertToTask(Object[] obj)
+        private Order ConvertToTask(Object[] obj)
         {
             
             if (obj == null || obj.Length == 0) 
@@ -173,7 +166,7 @@ namespace BikeWebService.Controllers
                 return null;
             }
 
-            return new Task()
+            return new  Order()
             {
                 taskID = Convert.ToInt32(obj[0].ToString()),
                 appID = Convert.ToInt32(obj[1].ToString()),
@@ -182,7 +175,6 @@ namespace BikeWebService.Controllers
                 state = Convert.ToInt32(obj[4].ToString()),
                 taskIDKey = obj[5].ToString()
             };
-
         }
     }
 }

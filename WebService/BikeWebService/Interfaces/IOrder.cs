@@ -1,6 +1,6 @@
 ﻿namespace BikeWebService.Interfaces
 {
-    public interface ITask
+    public interface IOrder
     {
         int taskID { get; set; }
         int appID { get; set; }

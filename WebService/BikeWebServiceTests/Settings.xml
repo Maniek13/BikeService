@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Settings>
 	<ConnectionOptions>
-		<ConnectionString>Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="G:\Programowanie\Serwis rowerowy\BikeWebServiceTests\TestDataBase.mdf"; trusted_connection=true;encrypt=false</ConnectionString>
+		<ConnectionString>Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="G:\Programowanie\Serwis rowerowy\WebService\BikeWebServiceTests\TestDataBase.mdf"; trusted_connection=true;encrypt=false</ConnectionString>
 	</ConnectionOptions>
 </Settings>

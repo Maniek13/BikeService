@@ -9,7 +9,7 @@ namespace BikeWebServiceTests
         [TestMethod]
         public void GetConectionString()
         {
-            Assert.AreEqual("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"G:\\Programowanie\\Serwis rowerowy\\BikeWebServiceTests\\TestDataBase.mdf\"; trusted_connection=true;encrypt=false", BikeWebService.Classes.Settings.GetConnectionString());
+            Assert.AreEqual("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"G:\\Programowanie\\Serwis rowerowy\\WebService\\BikeWebServiceTests\\TestDataBase.mdf\"; trusted_connection=true;encrypt=false", BikeWebService.Classes.Settings.GetConnectionString());
         }
     }
 }

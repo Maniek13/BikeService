@@ -1,6 +1,9 @@
 ﻿using BikeWebService.Controllers;
+using BikeWebService.Interfaces;
 using BikeWebService.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BikeWebServiceTests
 {
@@ -12,12 +15,12 @@ namespace BikeWebServiceTests
         {
             User user = new User()
             {
-                Login = "a",
-                Password = "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d"
+                Login = "test",
+                Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5"
             };
 
             DbController db = new DbController();
-            Assert.AreNotEqual(db.CheckIsUser(user), 0);
+            Assert.AreNotEqual(0, db.CheckIsUser(user));
         }
 
         [TestMethod]
@@ -30,7 +33,47 @@ namespace BikeWebServiceTests
             };
 
             DbController db = new DbController();
-            Assert.AreEqual(db.CheckIsUser(user), 0);
+            Assert.AreEqual(0, db.CheckIsUser(user));
+        }
+        [TestMethod]
+        public void GetTask()
+        {
+            DbController db = new DbController();
+            Order order = db.GetTask("11BS112345");
+
+
+            Assert.IsInstanceOfType(order,
+                typeof(Order)
+                );
+            Assert.AreEqual(1, order.taskID
+               );
+            Assert.AreEqual(1, order.appID
+               );
+            Assert.AreEqual("a", order.header
+               );
+            Assert.AreEqual("b", order.description
+               );
+            Assert.AreEqual(1, order.state
+               );
+            Assert.AreEqual("11BS112345", order.taskIDKey
+               );
+        }
+
+
+        [TestMethod]
+        public void GetTasks()
+        {
+            User user = new User()
+            {
+                Login = "test",
+                Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5"
+            };
+
+            DbController db = new DbController();
+            List<Order> result = db.GetTasks(user);
+
+            Assert.IsInstanceOfType(result, typeof(List<Order>));
+            Assert.AreEqual(2, result.Count);
         }
     }
 }

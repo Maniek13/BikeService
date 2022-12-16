@@ -5,18 +5,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BikeWebServiceTests
 {
     [TestClass]
-    public class UserControllerTests
+    public class UsersControllerTests
     {
         [TestMethod]
         public void ValidateNoUser()
         {
             User user = null;
-            HttpContextResponse HttpContextResponse = UsersController.ValidateUser(user);
 
-            Assert.AreEqual(400
-                , HttpContextResponse.StatusCode);
             Assert.AreEqual("Brak przekazanego objektu"
-                , HttpContextResponse.StatusDescription);
+                , UsersController.ValidateUser(user));
         }
 
         [TestMethod]
@@ -27,12 +24,9 @@ namespace BikeWebServiceTests
                 Login = "test",
                 Password = null
             };
-            HttpContextResponse HttpContextResponse = UsersController.ValidateUser(user);
 
-            Assert.AreEqual(400
-                , HttpContextResponse.StatusCode);
             Assert.AreEqual("Pole hasło nie może być puste"
-                , HttpContextResponse.StatusDescription);
+                , UsersController.ValidateUser(user));
         }
 
         [TestMethod]
@@ -43,12 +37,22 @@ namespace BikeWebServiceTests
                 Login = null,
                 Password = "test"
             };
-            HttpContextResponse HttpContextResponse = UsersController.ValidateUser(user);
 
-            Assert.AreEqual(400
-                , HttpContextResponse.StatusCode);
             Assert.AreEqual("Pole login nie może być puste"
-                , HttpContextResponse.StatusDescription);
+                , UsersController.ValidateUser(user));
+        }
+
+        [TestMethod]
+        public void ValidateUser()
+        {
+            User user = new User()
+            {
+                Login = "test",
+                Password = "test"
+            };
+
+            Assert.AreEqual("OK"
+                , UsersController.ValidateUser(user));
         }
 
         [TestMethod]
@@ -56,8 +60,8 @@ namespace BikeWebServiceTests
         {
             User user = new User()
             {
-                Login = "a",
-                Password = "b"
+                Login = "test",
+                Password = "12345"
             };
 
             user = UsersController.CheckIsUser(user);

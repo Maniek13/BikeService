@@ -2,7 +2,7 @@
 
 namespace BikeWebService.Models
 {
-    public class Task : ITask
+    public class Order : IOrder
     {
         public int taskID { get; set; } = 0;
         public int appID { get; set; } = 0;

@@ -9,7 +9,7 @@ namespace BikeWebService.Controllers
 {
     public class TasksController
     {
-        static public Task FindTask(string taskIDKey)
+        static public Order FindTask(string taskIDKey)
         {
             if (String.IsNullOrEmpty(taskIDKey))
             {
@@ -19,14 +19,14 @@ namespace BikeWebService.Controllers
             try
             {
                 DbController dbController = new DbController();
-                Task task = dbController.GetTask(taskIDKey);
+                Order task = dbController.GetTask(taskIDKey);
 
                 if (task == null)
                 {
                     throw new Exception("Niepoprawny identyfikator zlecenia");
                 }
 
-                if(task.state == 0)
+                if (task.state == 0)
                 {
                     throw new Exception("Zlecenie nie zostało dodane");
                 }

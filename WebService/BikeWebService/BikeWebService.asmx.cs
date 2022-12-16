@@ -51,13 +51,13 @@ namespace BikeWebService
         }
 
         [WebMethod]
-        public ResponseModel<Task> GetTask(string taskIDKey)
+        public ResponseModel<Order> GetTask(string taskIDKey)
         {
             try
             {
-                Task task = TasksController.FindTask(taskIDKey);
+                Order task = TasksController.FindTask(taskIDKey);
 
-                return new ResponseModel<Task>()
+                return new ResponseModel<Order>()
                 {
                     message = "OK",
                     resultCode = 1,
@@ -66,7 +66,7 @@ namespace BikeWebService
             }
             catch (Exception ex) 
             {
-                return new ResponseModel<Task>()
+                return new ResponseModel<Order>()
                 {
                     message = ex.Message,
                     resultCode = -1,

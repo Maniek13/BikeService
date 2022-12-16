@@ -19,11 +19,11 @@ CREATE TABLE users(
 
 CREATE TABLE tasks(
 	taskID int NOT NULL PRIMARY KEY,
-	taskIDKey nvarchar(MAX) NOT NULL,
 	appID int NOT NULL,
 	header nvarchar(max) NOT NULL,
 	description nvarchar(max) NOT NULL,
-	state int NOT NULL
+	state int NOT NULL,
+	taskIDKey nvarchar(MAX) NOT NULL,
 )
 
 GO
