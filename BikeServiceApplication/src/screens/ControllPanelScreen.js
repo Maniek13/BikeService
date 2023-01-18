@@ -49,7 +49,11 @@ class ControllPanelScreen extends Component {
   } 
 
   async logOut(){
-    await AsyncStorage.removeItem('@BikeServiceUser');
+    await AsyncStorage.removeItem('@BikeServiceUserId');
+    await AsyncStorage.removeItem('@BikeServiceUserLogin');
+    await AsyncStorage.removeItem('@BikeServiceUserPassword');
+    await AsyncStorage.removeItem('@BikeServiceUserAppId');
+
     User.user.Id = 0;
     User.user.Name = '';
     User.user.Password = '';

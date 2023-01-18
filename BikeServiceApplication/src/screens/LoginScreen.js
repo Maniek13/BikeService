@@ -48,7 +48,12 @@ class LoginScreen extends Component {
       if(Response.response.code !== 0){
         if(Response.response.code === 1){
           User.user = Response.response.data;
-          AsyncStorage.setItem('@BikeServiceUser', String(User.user.Id))
+
+          AsyncStorage.setItem('@BikeServiceUserId', String(User.user.Id))
+          AsyncStorage.setItem('@BikeServiceUserLogin', String(User.user.Name))
+          AsyncStorage.setItem('@BikeServiceUserPassword', String(User.user.Password))
+          AsyncStorage.setItem('@BikeServiceUserAppId', String(User.user.AppId))
+
           BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
           this.props.navigation.push('ControllPanel');
         }

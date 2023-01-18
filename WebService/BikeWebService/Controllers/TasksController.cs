@@ -2,13 +2,35 @@
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BikeWebService.Controllers
 {
     public class TasksController
     {
+        static private string ValidateTask(Order task)
+        {
+            if (Object.Equals(task, null))
+            {
+                throw new Exception("Brak przekazanego objektu");
+            }
+            else if (String.IsNullOrEmpty(task.description))
+            {
+                throw new Exception("Pole opis nie może być puste");
+            }
+            else if (String.IsNullOrEmpty(task.header))
+            {
+                throw new Exception("Pole tytuł nie może być puste");
+            }
+            else if (String.IsNullOrEmpty(task.appID.ToString()))
+            {
+                throw new Exception("Prosze podać id aplikacji");
+            }
+            else
+            {
+                return "OK";
+            }
+        }
+
         static public Order FindTask(string taskIDKey)
         {
             if (String.IsNullOrEmpty(taskIDKey))
@@ -53,6 +75,32 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
 
+        }
+
+        static public Order AddTask(User user, Order order)
+        {
+            
+            try
+            {
+                order.appID = user.AppId;
+                order.state = 1;
+
+                ValidateTask(order);
+
+                DbController dbController = new DbController();
+                order = dbController.AddOrder(order);
+
+                if(order.taskID == 0)
+                {
+                    throw new Exception("Błąd zapisu zlecenia w bazie danych");
+                }
+                
+                return order;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

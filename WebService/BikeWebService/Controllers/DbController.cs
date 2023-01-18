@@ -1,10 +1,12 @@
 ﻿using BikeWebService.Classes;
+using BikeWebService.Interfaces;
 using BikeWebService.Models;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml;
 namespace BikeWebService.Controllers
 {
@@ -18,13 +20,14 @@ namespace BikeWebService.Controllers
             _connectionString = Settings.GetConnectionString();
         }
 
-        public int CheckIsUser(User user)
+        public User CheckIsUser(User user)
         {
 
             string query = @"  
-                SELECT userID FROM users 
+                SELECT userID, appID FROM users 
                 WHERE login = @login AND password = @password;";
             int id = 0;
+            int appId = 0;
 
             try
             {
@@ -52,6 +55,7 @@ namespace BikeWebService.Controllers
                             if (reader.Read())
                             {
                                 int.TryParse(reader["userID"].ToString(), out id);
+                                int.TryParse(reader["appID"].ToString(), out appId);
                             }
                         }
                     }
@@ -61,7 +65,10 @@ namespace BikeWebService.Controllers
             {
                 throw new Exception(ex.Message);
             }
-            return id;
+
+            user.Id = id;
+            user.AppId= appId;
+            return user;
         }
 
         public Order GetTask(string taskKey)
@@ -158,9 +165,173 @@ namespace BikeWebService.Controllers
             return tasks;
         }
 
-        private Order ConvertToTask(Object[] obj)
+        public Order AddOrder(Order order)
         {
             
+            try
+            {
+                string query = @"
+                    INSERT INTO tasks 
+                        (appID, header, description, state, taskIDKey)
+                    OUTPUT Inserted.taskID
+                    VALUES
+                        (@appId, @header, @description, 1, 0)";
+                int taskId = 0;
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@appId",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = order.appID
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@header",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = order.header
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@description",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = order.description
+                        });
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int.TryParse(reader["taskID"].ToString(), out taskId);
+                            }
+                        }
+                    }
+                }
+
+                order.taskID = taskId;
+                order.taskIDKey = GenerateOrderKey(order.appID, taskId);
+
+                SetOrderKey(order.taskIDKey, taskId);
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return order;
+        }
+        private void SetOrderKey(string orderKey, int id)
+        {
+            try
+            {
+                string query = @"
+                UPDATE tasks SET
+                    taskIDKey = @taskIDKey
+                WHERE 
+                    taskID = @taskID";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@taskIDKey",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = orderKey
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@taskID",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = id
+                        });
+
+                        connection.Open(); command.ExecuteReader();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+       
+        }
+        private string GenerateOrderKey(int appId, int taskId)
+        {
+            try
+            {
+                string appKey = GetAppKey(appId);
+
+                if (String.IsNullOrEmpty(appKey))
+                {
+                    return "";
+                }
+
+                Random random = new Random();
+
+                int number = random.Next(1, 1000000);
+
+                string orderKey =  $"{taskId.ToString()}{appKey.ToString()}{number.ToString()}";
+                return orderKey;
+            }
+            catch(Exception ex )
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        private string GetAppKey(int appId)
+        {
+            string appKey = "";
+
+            try
+            {
+                string query = @"
+                    SELECT appkey FROM app 
+                    WHERE appID = @appID";
+
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@appID",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = appId
+                        });
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                appKey = reader["appkey"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return appKey;
+        }
+        private Order ConvertToTask(Object[] obj)
+        {
             if (obj == null || obj.Length == 0) 
             {
                 return null;

@@ -8,18 +8,17 @@ namespace BikeWebService.Controllers
     {
         static public string ValidateUser(User user)
         {
-
             if (Object.Equals(user, null))
             {
-                return "Brak przekazanego objektu";
+                throw new Exception("Brak przekazanego objektu");
             }
             else if (String.IsNullOrEmpty(user.Login))
             {
-                return "Pole login nie może być puste";
+                throw new Exception("Pole login nie może być puste");
             }
             else if (String.IsNullOrEmpty(user.Password) )
             {
-                return "Pole hasło nie może być puste";
+                throw new Exception("Pole hasło nie może być puste");
             }
             else
             {
@@ -34,7 +33,13 @@ namespace BikeWebService.Controllers
                 user.Password = Crypto.EncryptSha256(user.Password);
 
                 DbController dbController = new DbController();
-                user.Id = dbController.CheckIsUser(user);
+                user = dbController.CheckIsUser(user);
+
+                if (user.Id.Equals(0))
+                {
+                    throw new Exception("Niepoprawne dane logowania");
+                }
+
                 return user;
             }
             catch(Exception ex)
