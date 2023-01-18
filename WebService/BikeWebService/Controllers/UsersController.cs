@@ -48,5 +48,27 @@ namespace BikeWebService.Controllers
             }  
         }
 
+        static public User AddUser(User user)
+        {
+            try
+            {
+                user.Password = Crypto.EncryptSha256(user.Password);
+
+                DbController dbController = new DbController();
+                user = dbController.AddUser(user);
+
+                if (user.Id.Equals(0))
+                {
+                    throw new Exception("Niepoprawne dane");
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

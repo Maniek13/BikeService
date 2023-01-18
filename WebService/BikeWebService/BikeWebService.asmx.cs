@@ -38,6 +38,32 @@ namespace BikeWebService
                 };
             }
         }
+        [WebMethod]
+        public ResponseModel<User> Register(User user)
+        {
+            try
+            {
+                UsersController.ValidateUser(user);
+
+                ResponseModel<User> response = new ResponseModel<User>();
+
+                response.message = "OK";
+                response.resultCode = 1;
+                response.Data = UsersController.AddUser(user);
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<User>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
 
         [WebMethod]
         public ResponseModel<Order> GetTask(string taskIDKey)
