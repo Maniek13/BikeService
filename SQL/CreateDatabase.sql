@@ -22,8 +22,26 @@ CREATE TABLE tasks(
 	appID int NOT NULL,
 	header nvarchar(max) NOT NULL,
 	description nvarchar(max) NOT NULL,
-	state int NOT NULL,
-	taskIDKey nvarchar(MAX) NOT NULL,
+	state int  DEFAULT 0,
+	taskIDKey nvarchar(MAX) 
 )
 
 GO
+
+CREATE TRIGGER add_task
+ON tasks
+FOR INSERT
+AS
+	DECLARE @IsActualeSet NVARCHAR(MAX) =  ISNULL(0, (SELECT taskIDKey FROM inserted))
+	
+	IF @IsActualeSet = 0
+	BEGIN
+		DECLARE @taskID int = (SELECT taskID FROM inserted)
+		DECLARE @appID int = (SELECT appID FROM inserted)
+		DECLARE @appKey NVARCHAR(MAX) = (SELECT appKey FROM app WHERE appID = @appID)
+		DECLARE @nr int = (SELECT ABS(CHECKSUM(NEWID()) % (1000000 - 1 + 1)) + 1)
+	
+		UPDATE tasks
+		SET taskIDKey = CAST(@taskID as nvarchar) + @appKey + CAST(@nr as nvarchar)
+		WHERE taskID = @taskID
+	END

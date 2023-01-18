@@ -19,10 +19,8 @@ namespace BikeWebService.Controllers
             
             _connectionString = Settings.GetConnectionString();
         }
-
         public User CheckIsUser(User user)
         {
-
             string query = @"  
                 SELECT userID, appID FROM users 
                 WHERE login = @login AND password = @password;";
@@ -70,7 +68,6 @@ namespace BikeWebService.Controllers
             user.AppId= appId;
             return user;
         }
-
         public User AddUser(User user)
         {
             try
@@ -127,7 +124,6 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
-
         public Order GetTask(string taskKey)
         {
             try
@@ -170,7 +166,6 @@ namespace BikeWebService.Controllers
             }
             
         }
-
         public List<Order> GetTasks(User user)
         {
             List<Order> tasks = new List<Order>();
@@ -221,18 +216,21 @@ namespace BikeWebService.Controllers
 
             return tasks;
         }
-
         public Order AddOrder(Order order)
         {
             
             try
             {
                 string query = @"
+                    DECLARE @table table([taskID] INT, [taskIDKey] NVARCHAR(MAX))
+
                     INSERT INTO tasks 
-                        (appID, header, description, state, taskIDKey)
-                    OUTPUT Inserted.taskID
+                        (appID, header, description, state)
+                    OUTPUT Inserted.taskID, Inserted.taskIDKey INTO @table
                     VALUES
-                        (@appId, @header, @description, 1, 0)";
+                        (@appId, @header, @description, 1)
+                    
+                    SELECT taskID, taskIDKey FROM @table";
                 int taskId = 0;
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -272,9 +270,10 @@ namespace BikeWebService.Controllers
                 }
 
                 order.taskID = taskId;
-                order.taskIDKey = GenerateOrderKey(order.appID, taskId);
+                order.taskIDKey = GetOrderKey(taskId);
 
-                SetOrderKey(order.taskIDKey, taskId);
+                //order.taskIDKey = GenerateOrderKey(order.appID, taskId);
+                //SetOrderKey(order.taskIDKey, taskId);
 
             }
             catch(Exception ex)
@@ -335,6 +334,48 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+        private string GetOrderKey(int id)
+        {
+
+            string taskIdKey = "";
+
+            try
+            {
+                string query = @"
+                    SELECT taskIDKey FROM tasks 
+                    WHERE taskID = @taskID";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@taskID",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = id
+                        });
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                taskIdKey = reader["taskIDKey"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return taskIdKey;
+        }
         private void SetOrderKey(string orderKey, int id)
         {
             try
@@ -388,7 +429,7 @@ namespace BikeWebService.Controllers
 
                 int number = random.Next(1, 1000000);
 
-                string orderKey =  $"{taskId}{appKey}{number)}";
+                string orderKey =  $"{taskId}{appKey}{number}";
                 return orderKey;
             }
             catch(Exception ex )
