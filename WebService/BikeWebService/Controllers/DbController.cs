@@ -227,6 +227,57 @@ namespace BikeWebService.Controllers
 
             return order;
         }
+        public int EditOrder(Order order)
+        {
+            try
+            {
+                string query = @"
+                    UPDATE tasks 
+                    SET header = @header, description = @description, state = @state
+                    WHERE taskID = @taskID";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@header",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = order.header
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@description",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = order.description
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@state",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = order.state
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@taskID",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = order.taskID
+                        });
+
+                        connection.Open();
+                        command.ExecuteReader();
+                    }
+                }
+
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         private void SetOrderKey(string orderKey, int id)
         {
             try

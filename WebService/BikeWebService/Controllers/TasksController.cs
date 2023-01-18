@@ -21,6 +21,10 @@ namespace BikeWebService.Controllers
             {
                 throw new Exception("Pole tytuł nie może być puste");
             }
+            else if (String.IsNullOrEmpty(task.state.ToString()))
+            {
+                throw new Exception("Pole status nie może być puste");
+            }
             else if (String.IsNullOrEmpty(task.appID.ToString()))
             {
                 throw new Exception("Prosze podać id aplikacji");
@@ -77,12 +81,12 @@ namespace BikeWebService.Controllers
 
         }
 
-        static public Order AddTask(User user, Order order)
+        static public Order AddTask(int appId, Order order)
         {
             
             try
             {
-                order.appID = user.AppId;
+                order.appID = appId;
                 order.state = 1;
 
                 ValidateTask(order);
@@ -95,6 +99,27 @@ namespace BikeWebService.Controllers
                     throw new Exception("Błąd zapisu zlecenia w bazie danych");
                 }
                 
+                return order;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        static public Order EditTask(Order order)
+        {
+            try
+            {
+                ValidateTask(order);
+
+                DbController dbController = new DbController();
+
+                if (dbController.EditOrder(order) == 0)
+                {
+                    throw new Exception("Błąd edycji zlecenia");
+                }
+
                 return order;
             }
             catch (Exception ex)

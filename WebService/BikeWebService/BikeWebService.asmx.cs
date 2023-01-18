@@ -2,9 +2,6 @@
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System.Web.Http;
-using System.Web.Http.Results;
 using System.Web.Services;
 
 namespace BikeWebService
@@ -100,10 +97,37 @@ namespace BikeWebService
             try
             {
                 UsersController.ValidateUser(user);
-                user = UsersController.CheckIsUser(user);
+                UsersController.CheckIsUser(user);
 
-                order = TasksController.AddTask(user, order);
+                order = TasksController.AddTask(user.AppId, order);
 
+                return new ResponseModel<Order>()
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = order
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<Order>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
+
+        [WebMethod]
+        public ResponseModel<Order> EditOrder(User user, Order order)
+        {
+            try
+            {
+                UsersController.ValidateUser(user);
+                UsersController.CheckIsUser(user);
+
+                order = TasksController.EditTask(order);
 
                 return new ResponseModel<Order>()
                 {
