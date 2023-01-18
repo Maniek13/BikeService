@@ -12,7 +12,7 @@ namespace BikeWebService.Controllers
 {
     public class DbController
     {
-        private string _connectionString;
+        private readonly string _connectionString;
 
         public DbController() 
         {
@@ -388,7 +388,7 @@ namespace BikeWebService.Controllers
 
                 int number = random.Next(1, 1000000);
 
-                string orderKey =  $"{taskId.ToString()}{appKey.ToString()}{number.ToString()}";
+                string orderKey =  $"{taskId}{appKey}{number)}";
                 return orderKey;
             }
             catch(Exception ex )
