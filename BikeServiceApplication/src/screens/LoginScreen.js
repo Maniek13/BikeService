@@ -43,17 +43,28 @@ class LoginScreen extends Component {
     this.setState({ showError: false });
     this.setState({ btnLoginDisabled: true});
 
+    Response.response = {
+      code: 0,
+      data: {
+        message: ''
+      }
+    }
+
     await UserController.checkIsUser(this.state.login, this.state.password);
     let onTime = setInterval(() => {
       if(Response.response.code !== 0){
         if(Response.response.code === 1){
-          User.user = Response.response.data;
+          
+          User.user.Id = Response.response.data.Id
+          User.user.AppId = Response.response.data.AppId
+          User.user.Name = this.state.login;
+          User.user.Password = this.state.password;
 
           AsyncStorage.setItem('@BikeServiceUserId', String(User.user.Id))
           AsyncStorage.setItem('@BikeServiceUserLogin', String(User.user.Name))
-          AsyncStorage.setItem('@BikeServiceUserPassword', String(User.user.Password))
+          AsyncStorage.setItem('@BikeServiceUserPassword', String(this.state.password))
           AsyncStorage.setItem('@BikeServiceUserAppId', String(User.user.AppId))
-
+     
           BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
           this.props.navigation.push('ControllPanel');
         }
@@ -63,14 +74,7 @@ class LoginScreen extends Component {
           });
           this.setState({ showError: true });
         }
-
-        Response.response = {
-          code: 0,
-          data: {
-            message: ''
-          }
-        }
-
+        
         this.setState({ btnLoginDisabled: false });
         clearInterval(onTime);
       }

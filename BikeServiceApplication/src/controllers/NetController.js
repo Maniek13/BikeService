@@ -13,6 +13,7 @@ class NetController{
                 'Content-Type': 'text/xml; charset=utf-8'
               },
         };
+
         await fetch(Settings.SOAPAdress, requestOptions)
         .then(response => response.blob()
         .then(myBlob => {
@@ -21,7 +22,7 @@ class NetController{
                 if(response.status !== 200){
                     XMLElement = 'error';
                 };
-                let res = NetController.serializeXML(reader.result, XMLElement,);
+                let res = NetController.serializeXML(reader.result, XMLElement);
 
                 if(response.status !== 200){
                     res.code = response.status;

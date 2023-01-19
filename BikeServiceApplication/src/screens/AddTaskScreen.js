@@ -19,10 +19,10 @@ class AddTaskScreen extends Component {
 
   addTask(){
     let task = {
-      Id: 0,
-      Header: this.state.header,
-      Description: this.state.description,
-      State: 1,
+      taskID: 0,
+      header: this.state.header,
+      description: this.state.description,
+      state: 1,
     };
     Task.task = task;
 
@@ -30,10 +30,10 @@ class AddTaskScreen extends Component {
 
     if(res.code === 200){
       TasksController.tasksList.push({
-        Id: res.data.id,
-        Header: Task.task.Header,
-        Description: Task.task.Description,
-        State: 1
+        taskID: res.data.taskID,
+        header: Task.task.header,
+        description: Task.task.description,
+        state: 1
       })
       this.props.navigation.navigate('ControllPanel');
     }

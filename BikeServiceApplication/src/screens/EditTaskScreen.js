@@ -10,10 +10,10 @@ class EditTaskScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
-      id: Task.task.Id,
-      header: Task.task.Header,
-      description: Task.task.Description,
-      state: Task.task.State,
+      id: Task.task.taskID,
+      header: Task.task.header,
+      description: Task.task.description,
+      state: Task.task.state,
       selectItemList: [],
       showError: false,
       error: {}   
@@ -32,16 +32,16 @@ class EditTaskScreen extends Component {
     });
   }
   update(){
-    Task.task.Header = this.state.header;
-    Task.task.Description = this.state.description;
-    Task.task.State = this.state.state;
+    Task.task.header = this.state.header;
+    Task.task.description = this.state.description;
+    Task.task.state = this.state.state;
 
     let res = TasksController.updateTask();
 
     if(res.code === 200){
-      let index = TasksController.tasksList.findIndex((obj => obj.Id == Task.task.Id));
-      TasksController.tasksList[index].Header = this.state.header;
-      TasksController.tasksList[index].Description = this.state.description;
+      let index = TasksController.tasksList.findIndex((obj => obj.taskID == Task.task.taskID));
+      TasksController.tasksList[index].header = this.state.header;
+      TasksController.tasksList[index].description = this.state.description;
       this.props.navigation.navigate('ControllPanel');
     }
     else{

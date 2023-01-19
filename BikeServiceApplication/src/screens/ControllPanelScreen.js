@@ -7,12 +7,13 @@ import TasksController from '../controllers/TasksController';
 import User from '../objects/User';
 import Task from '../objects/Task';
 import Error from '../components/Error';
+import Response from '../objects/Response';
 
 class ControllPanelScreen extends Component {
   constructor(props){
     super(props);
     this.handleBackButton = this.handleBackButton.bind(this);
-
+    
     this.state = {
       refreshed: 0,
       showError: false,
@@ -20,17 +21,33 @@ class ControllPanelScreen extends Component {
     };
   }
   
-  componentDidMount (){
-    let res = TasksController.getTasks()
-    if(res.code === 200){
-      TasksController.tasksList = res.data;
+  async componentDidMount (){
+    Response.response = {
+      code: 0,
+      data: {
+        message: ''
+      }
     }
-    else{
-      this.setState({
-        error: res
-      });
-      this.setState({ showError: true });
-    }
+    
+    await TasksController.getTasks();
+    this.setState({ showError: false });
+
+    let onTime = setInterval(() => {
+      if(Response.response.code !== 0){
+        if(Response.response.code === 1){
+          TasksController.tasksList = Response.response.data.Order;
+          this.setState({ refreshed: this.state.refreshed + 1 });
+        }
+        else{
+          this.setState({
+            error: Response.response
+          });
+          this.setState({ showError: true });
+        }
+        
+        clearInterval(onTime);
+      }
+    }, 100);
 
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.setState({ refreshed: this.state.refreshed + 1});
@@ -86,8 +103,8 @@ class ControllPanelScreen extends Component {
           extraData={this.state.refreshed}
           renderItem={({item}) => 
             <TouchableOpacity style={styles.listItem} onPress={this.editTask.bind(this, item)}>
-              <Text style={styles.textList, {marginLeft: 10, color: 'black'}}>{item.Header}</Text>
-              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.State).Label)}</Text>
+              <Text style={styles.textList, {marginLeft: 10, color: 'black'}}>{item.header}</Text>
+              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.state).Label)}</Text>
             </TouchableOpacity>
           }
         />

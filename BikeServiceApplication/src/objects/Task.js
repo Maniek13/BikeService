@@ -1,12 +1,18 @@
 class Task{
     static task = {
-        Id: 0,
-        Header: "",
-        Description: "",
-        State: 0
+        taskID: 0,
+        header: "",
+        description: "",
+        state: 0,
+        taskIDKey: "",
+        appID: 0
     }
 
     static statusList = [
+        {   
+            Value : 0,
+            Label: 'Brak danych'
+        },
         {   
             Value : 1,
             Label: 'Przyjęte'
