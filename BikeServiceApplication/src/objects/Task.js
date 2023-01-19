@@ -1,11 +1,11 @@
 class Task{
     static task = {
-        taskID: 0,
-        header: "",
-        description: "",
-        state: 0,
-        taskIDKey: "",
-        appID: 0
+        TaskId: 0,
+        Header: "",
+        Description: "",
+        State: 0,
+        TaskIdKey: "",
+        AppId: 0
     }
 
     static statusList = [

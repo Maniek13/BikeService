@@ -4,6 +4,7 @@ import {View, Text, TouchableOpacity, Alert, TextInput, StyleSheet} from 'react-
 import TasksController from '../controllers/TasksController';
 import Task from '../objects/Task';
 import Error from '../components/Error';
+import Response from '../objects/Response';
 
 class AddTaskScreen extends Component {
   constructor(props){
@@ -17,32 +18,38 @@ class AddTaskScreen extends Component {
     };
   }
 
-  addTask(){
+  async addTask(){
     let task = {
-      taskID: 0,
-      header: this.state.header,
-      description: this.state.description,
-      state: 1,
+      TaskId: 0,
+      Header: this.state.header,
+      Description: this.state.description,
+      State: 1,
     };
     Task.task = task;
-
-    let res = TasksController.addTask();
-
-    if(res.code === 200){
-      TasksController.tasksList.push({
-        taskID: res.data.taskID,
-        header: Task.task.header,
-        description: Task.task.description,
-        state: 1
-      })
-      this.props.navigation.navigate('ControllPanel');
+    
+    Response.response = {
+      code: 0,
+      data: {
+        message: ''
+      }
     }
-    else{
-      this.setState({
-        error: res
-      });
-      this.setState({ showError: true });
-    }
+    
+    await TasksController.addTask();
+    let onTime = setInterval(() => {
+      if(Response.response.code !== 0){
+        if(Response.response.code === 1){
+          TasksController.tasksList.push(Response.response.data)
+          this.props.navigation.navigate('ControllPanel');
+        }
+        else{
+          this.setState({
+            error: Response.response
+          });
+          this.setState({ showError: true });
+        }
+        clearInterval(onTime);
+      }
+    }, 100);
   }
 
   render() {

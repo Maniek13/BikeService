@@ -11,9 +11,9 @@ class UserTask extends Component {
   render() {
     return (
         <View style={styles.conteiner}>
-            <Text style={{color: '#000000', fontSize: 23, textAlign: 'center'}} name='title'>{this.props.task.header}</Text>
-            <Text style={styles.text} name='description'>{this.props.task.description}</Text>
-            <Text style={styles.text} name='state'>{String(Task.statusList.find(x => x.Value === this.props.task.state).Label)}</Text>
+            <Text style={{color: '#000000', fontSize: 23, textAlign: 'center'}} name='title'>{this.props.task.Header}</Text>
+            <Text style={styles.text} name='description'>{this.props.task.Description}</Text>
+            <Text style={styles.text} name='state'>{String(Task.statusList.find(x => x.Value === this.props.task.State).Label)}</Text>
         </View>
     );
   }

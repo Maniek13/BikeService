@@ -19,11 +19,12 @@ namespace BikeWebService
             {
                 UsersController.ValidateUser(user);
 
-                ResponseModel<User> response = new ResponseModel<User>();
-
-                response.message = "OK";
-                response.resultCode = 1;
-                response.Data = UsersController.CheckIsUser(user);
+                ResponseModel<User> response = new ResponseModel<User>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = UsersController.CheckIsUser(user)
+                };
 
                 return response;
 
@@ -45,11 +46,12 @@ namespace BikeWebService
             {
                 UsersController.ValidateUser(user);
 
-                ResponseModel<User> response = new ResponseModel<User>();
-
-                response.message = "OK";
-                response.resultCode = 1;
-                response.Data = UsersController.AddUser(user);
+                ResponseModel<User> response = new ResponseModel<User>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = UsersController.AddUser(user)
+                };
 
                 return response;
 
@@ -122,10 +124,15 @@ namespace BikeWebService
         {
             try
             {
-                UsersController.ValidateUser(user);
-                UsersController.CheckIsUser(user);
+                if(order.AppId == 0)
+                {
+                    UsersController.ValidateUser(user);
+                    UsersController.CheckIsUser(user);
+                    order.AppId = user.AppId;
+                }
+                
 
-                order = TasksController.AddTask(user.AppId, order);
+                order = TasksController.AddTask(order.AppId, order);
 
                 return new ResponseModel<Order>()
                 {

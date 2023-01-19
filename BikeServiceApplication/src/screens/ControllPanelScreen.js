@@ -103,8 +103,8 @@ class ControllPanelScreen extends Component {
           extraData={this.state.refreshed}
           renderItem={({item}) => 
             <TouchableOpacity style={styles.listItem} onPress={this.editTask.bind(this, item)}>
-              <Text style={styles.textList, {marginLeft: 10, color: 'black'}}>{item.header}</Text>
-              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.state).Label)}</Text>
+              <Text style={styles.textList, {marginLeft: 10, color: 'black'}}>{item.Header}</Text>
+              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.State).Label)}</Text>
             </TouchableOpacity>
           }
         />

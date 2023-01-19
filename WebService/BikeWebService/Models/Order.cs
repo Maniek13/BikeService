@@ -5,12 +5,12 @@ namespace BikeWebService.Models
 {
     public class Order : IOrder
     {
-        public int taskID { get; set; } = 0;
-        public int appID { get; set; } = 0;
-        public string header { get; set; } = "";
-        public string description { get; set; } = "";
-        public int state { get; set; } = 0;
-        public string taskIDKey { get; set; } = "";
+        public int TaskId { get; set; } = 0;
+        public int AppId { get; set; } = 0;
+        public string Header { get; set; } = "";
+        public string Description { get; set; } = "";
+        public int State { get; set; } = 0;
+        public string TaskIdKey { get; set; } = "";
 
         public override bool Equals(Object obj)
         {
@@ -21,7 +21,7 @@ namespace BikeWebService.Models
             else
             {
                 Order p = (Order)obj;
-                return (taskID == p.taskID);
+                return (TaskId == p.TaskId);
             }
         }
     }

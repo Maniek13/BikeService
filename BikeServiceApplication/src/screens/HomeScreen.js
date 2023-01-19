@@ -42,7 +42,6 @@ class HomeScreen extends Component {
       User.user.Password = await AsyncStorage.getItem('@BikeServiceUserPassword')
       User.user.AppId = await AsyncStorage.getItem('@BikeServiceUserAppId')
 
-
       User.user.Id = value;
     }
     else{

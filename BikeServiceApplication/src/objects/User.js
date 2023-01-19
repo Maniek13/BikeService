@@ -1,7 +1,7 @@
 class User{
     static user = {
         Id:0,
-        Name:"",
+        Login:"",
         Password:"",
         AppId:""
     }

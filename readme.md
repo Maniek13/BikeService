@@ -1,16 +1,16 @@
-In progres version 0.7
+In progres version 0.8
 
 
 Install app from BikeService.apk (preview version) 
 
-login data:
+login data
 login: test
 password: 12345
 
 Search tasks(In database are two order numbers: 11BS112345 and 21BS112345)
 
 
-Working only login/searching/showing data from server (if my pc is on)
+Working only login/searching/showing and adding tasks (if my pc is on)
 
 
 

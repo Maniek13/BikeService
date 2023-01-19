@@ -2,11 +2,11 @@
 {
     public interface IOrder
     {
-        int taskID { get; set; }
-        int appID { get; set; }
-        string header { get; set; } 
-        string description { get; set; }
-        int state { get; set; }
-        string taskIDKey { get; set; }
+        int TaskId { get; set; }
+        int AppId { get; set; }
+        string Header { get; set; } 
+        string Description { get; set; }
+        int State { get; set; }
+        string TaskIdKey { get; set; }
     }
 }

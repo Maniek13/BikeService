@@ -242,19 +242,19 @@ namespace BikeWebService.Controllers
                         {
                             ParameterName = "@appId",
                             SqlDbType = System.Data.SqlDbType.Int,
-                            Value = order.appID
+                            Value = order.AppId
                         });
                         command.Parameters.Add(new SqlParameter()
                         {
                             ParameterName = "@header",
                             SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = order.header
+                            Value = order.Header
                         });
                         command.Parameters.Add(new SqlParameter()
                         {
                             ParameterName = "@description",
                             SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = order.description
+                            Value = order.Description
                         });
 
                         connection.Open();
@@ -269,8 +269,8 @@ namespace BikeWebService.Controllers
                     }
                 }
 
-                order.taskID = taskId;
-                order.taskIDKey = GetOrderKey(taskId);
+                order.TaskId = taskId;
+                order.TaskIdKey = GetOrderKey(taskId);
 
                 //order.taskIDKey = GenerateOrderKey(order.appID, taskId);
                 //SetOrderKey(order.taskIDKey, taskId);
@@ -301,25 +301,25 @@ namespace BikeWebService.Controllers
                         {
                             ParameterName = "@header",
                             SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = order.header
+                            Value = order.Header
                         });
                         command.Parameters.Add(new SqlParameter()
                         {
                             ParameterName = "@description",
                             SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = order.description
+                            Value = order.Description
                         });
                         command.Parameters.Add(new SqlParameter()
                         {
                             ParameterName = "@state",
                             SqlDbType = System.Data.SqlDbType.Int,
-                            Value = order.state
+                            Value = order.State
                         });
                         command.Parameters.Add(new SqlParameter()
                         {
                             ParameterName = "@taskID",
                             SqlDbType = System.Data.SqlDbType.Int,
-                            Value = order.taskID
+                            Value = order.TaskId
                         });
 
                         connection.Open();
@@ -488,12 +488,12 @@ namespace BikeWebService.Controllers
 
             return new  Order()
             {
-                taskID = Convert.ToInt32(obj[0].ToString()),
-                appID = Convert.ToInt32(obj[1].ToString()),
-                header = obj[2].ToString(),
-                description = obj[3].ToString(),
-                state = Convert.ToInt32(obj[4].ToString()),
-                taskIDKey = obj[5].ToString()
+                TaskId = Convert.ToInt32(obj[0].ToString()),
+                AppId = Convert.ToInt32(obj[1].ToString()),
+                Header = obj[2].ToString(),
+                Description = obj[3].ToString(),
+                State = Convert.ToInt32(obj[4].ToString()),
+                TaskIdKey = obj[5].ToString()
             };
         }
     }

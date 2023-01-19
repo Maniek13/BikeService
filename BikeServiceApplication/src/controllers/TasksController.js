@@ -25,7 +25,7 @@ class TasksController{
                 <GetTasks xmlns="http://tempuri.org/">\
                     <user>\
                         <Id>'+User.user.Id+'</Id>\
-                        <Login>'+User.user.Name+'</Login>\
+                        <Login>'+User.user.Login+'</Login>\
                         <Password>'+User.user.Password+'</Password>\
                     </user>\
                 </GetTasks>\
@@ -36,30 +36,39 @@ class TasksController{
     }
 
 
-    static addTask(){
-        let nrOfTasks = this.objectLength(this.tasksList) + 1;
+    static async addTask(){
+        let body = '<?xml version="1.0" encoding="utf-8"?>\
+            <soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\
+            <soap12:Body>\
+                <AddOrder xmlns="http://tempuri.org/">\
+                    <user>\
+                        <Id>'+User.user.Id+'</Id>\
+                        <AppId>'+User.user.AppId+'</AppId>\
+                        <Login>'+User.user.Login+'</Login>\
+                        <Password>'+User.user.Password+'</Password>\
+                    </user>\
+                    <order>\
+                        <TaskID>0</TaskID>\
+                        <AppID>'+User.user.AppId+'</AppID>\
+                        <Header>'+Task.task.Header+'</Header>\
+                        <Description>'+Task.task.Description+'</Description>\
+                        <State>'+Task.task.State+'</State>\
+                    </order>\
+                </AddOrder>\
+            </soap12:Body>\
+            </soap12:Envelope>';
 
-        let res = {
-            code: 200,
-            data: {
-                id: nrOfTasks,
-                header: Task.task.Header,
-                description: Task.task.Description,
-                state: 1
-            }   
-        };
-
-        return res;
+        await NetController.getDataFromSOAP('http://tempuri.org/AddOrder ', body, 'AddOrderResult');
     }
 
     static updateTask(){
         let res = {
             code: 200,
             data: {
-                id: Task.task.Id,
-                header: Task.task.Header,
-                description: Task.task.Description,
-                state: 1
+                Id: Task.task.Id,
+                Header: Task.task.Header,
+                Description: Task.task.Description,
+                State: 1
             }   
         };
 

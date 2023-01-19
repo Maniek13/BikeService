@@ -28,7 +28,7 @@ class NetController{
                     res.code = response.status;
                 };
                 
-                Response.response = res;   
+                Response.response = res;  
             })
 
             reader.readAsText(myBlob); 

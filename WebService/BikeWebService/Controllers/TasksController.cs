@@ -13,19 +13,19 @@ namespace BikeWebService.Controllers
             {
                 throw new Exception("Brak przekazanego objektu");
             }
-            else if (String.IsNullOrEmpty(task.description))
+            else if (String.IsNullOrEmpty(task.Description))
             {
                 throw new Exception("Pole opis nie może być puste");
             }
-            else if (String.IsNullOrEmpty(task.header))
+            else if (String.IsNullOrEmpty(task.Header))
             {
                 throw new Exception("Pole tytuł nie może być puste");
             }
-            else if (String.IsNullOrEmpty(task.state.ToString()))
+            else if (String.IsNullOrEmpty(task.State.ToString()))
             {
                 throw new Exception("Pole status nie może być puste");
             }
-            else if (String.IsNullOrEmpty(task.appID.ToString()))
+            else if (String.IsNullOrEmpty(task.AppId.ToString()))
             {
                 throw new Exception("Prosze podać id aplikacji");
             }
@@ -52,7 +52,7 @@ namespace BikeWebService.Controllers
                     throw new Exception("Niepoprawny identyfikator zlecenia");
                 }
 
-                if (task.state == 0)
+                if (task.State == 0)
                 {
                     throw new Exception("Zlecenie nie zostało dodane");
                 }
@@ -86,15 +86,20 @@ namespace BikeWebService.Controllers
             
             try
             {
-                order.appID = appId;
-                order.state = 1;
+                order.AppId = appId;
+
+                if(order.State != 0)
+                {
+                    order.State = 1;
+                }
+                
 
                 ValidateTask(order);
 
                 DbController dbController = new DbController();
                 order = dbController.AddOrder(order);
 
-                if(order.taskID == 0)
+                if(order.TaskId == 0)
                 {
                     throw new Exception("Błąd zapisu zlecenia w bazie danych");
                 }
