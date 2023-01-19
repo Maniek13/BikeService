@@ -14,11 +14,14 @@ class AddTaskScreen extends Component {
       header: '',
       description: '',
       showError: false,
+      btnLoginDisabled: false,
       error: {}    
     };
   }
 
   async addTask(){
+    this.setState({ showError: false });
+    this.setState({ btnLoginDisabled: true});
     let task = {
       TaskId: 0,
       Header: this.state.header,
@@ -46,6 +49,7 @@ class AddTaskScreen extends Component {
             error: Response.response
           });
           this.setState({ showError: true });
+          this.setState({ btnLoginDisabled: false});
         }
         clearInterval(onTime);
       }
@@ -68,7 +72,7 @@ class AddTaskScreen extends Component {
           placeholderTextColor="gray" 
           onChangeText={newText => this.setState({description: newText})}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={this.addTask.bind(this)}>
+        <TouchableOpacity style={this.state.btnLoginDisabled ? styles.searchButtonDisabled : styles.searchButtonEnabled } onPress={this.addTask.bind(this)} disabled={this.state.btnLoginDisabled}>
             <Text style={styles.buttonText}>Dodaj</Text>
         </TouchableOpacity>
         {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
@@ -104,7 +108,19 @@ const styles = StyleSheet.create({
     height: 'auto',
     textAlignVertical: "top"
   },
-  searchButton: {
+  searchButtonDisabled: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginLeft:'auto',
+    marginRight:'auto',
+    justifyContent: 'center',
+    width: 100,
+    padding: 5,
+    backgroundColor: 'grey',
+    borderRadius: 5,
+    zIndex: 100
+  },
+  searchButtonEnabled: {
     alignItems: 'center',
     marginTop: 10,
     marginLeft:'auto',
