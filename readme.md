@@ -1,4 +1,4 @@
-In progres version 0.6
+In progres version 0.7
 
 
 Install app from BikeService.apk (preview version) 
@@ -10,10 +10,11 @@ password: 12345
 Search tasks(In database are two order numbers: 11BS112345 and 21BS112345)
 
 
-Working only if my pc working
+Working only login/searching/showing data from server (if my pc is on)
 
 
-App don't save data and show exemplary data
+
+App don't save data and show exemplary data from server
 
 ____________________________________________________________________________________
 To use please compile apk with created settings file and configure IIS and DataBase
