@@ -9,6 +9,8 @@ import Task from '../objects/Task';
 import Error from '../components/Error';
 import Response from '../objects/Response';
 
+import mainStyle from '../styles/MainStyle';
+
 class ControllPanelScreen extends Component {
   constructor(props){
     super(props);
@@ -92,13 +94,13 @@ class ControllPanelScreen extends Component {
   
   render() {
     return (
-      <View style={styles.conteiner}>
+      <View style={mainStyle.conteiner}>
         <Button 
           onPress={this.logOut.bind(this)}
           title="Wyloguj"
         />
-        <Text style={styles.text}>Zadania</Text>
-        <FlatList
+        <Text style={mainStyle.text}>Zadania</Text>
+        <FlatList style={styles.flatList}
           data={TasksController.tasksList}
           extraData={this.state.refreshed}
           renderItem={({item}) => 
@@ -110,7 +112,7 @@ class ControllPanelScreen extends Component {
         />
         {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
 
-        <TouchableOpacity style={styles.searchButton} onPress={this.addTask.bind(this)}>
+        <TouchableOpacity style={mainStyle.circleBtn} onPress={this.addTask.bind(this)}>
             <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
         
@@ -122,12 +124,8 @@ class ControllPanelScreen extends Component {
 export default ControllPanelScreen;
 
 const styles = StyleSheet.create({
-  text : {
-    color: '#000000',
-    textAlign: 'center',
-    fontSize: 20,
-    marginTop: 10,
-    marginBottom: 10
+  flatList : {
+    marginTop: 10
   },
   textList : {
     height: 20
@@ -146,23 +144,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold'
-  },
-  searchButton: {
-    alignSelf: 'flex-end',
-    position: 'absolute',
-    justifyContent: 'center',
-    backgroundColor: '#249ef0',
-    bottom: 10,
-    right: 10,
-    width: 60,
-    height: 60,
-    padding: 5,
-    borderRadius: 30,
-    zIndex: 100
-  },
-  conteiner:{
-    flexDirection: 'column',
-    flex: 1
   }
 });
 

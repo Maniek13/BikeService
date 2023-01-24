@@ -8,6 +8,8 @@ import User from '../objects/User';
 import UserController from '../controllers/UserController';
 import Error from '../components/Error';
 
+import mainStyle from '../styles/MainStyle';
+
 class LoginScreen extends Component {
   constructor(props){
     super(props);
@@ -84,7 +86,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.text}>Logowanie</Text>
+        <Text style={mainStyle.text}>Logowanie</Text>
         <TextInput 
           style={styles.textInput}
           placeholder="login" 
@@ -98,8 +100,8 @@ class LoginScreen extends Component {
           placeholderTextColor="gray" 
           onChangeText={text => this.setState({password: text})}
         />
-        <TouchableOpacity style={this.state.btnLoginDisabled ? styles.searchButtonDisabled : styles.searchButtonEnabled } onPress={this.logIn.bind(this)} disabled={this.state.btnLoginDisabled}>
-          <Text style={styles.buttonText}>Zaloguj</Text>
+        <TouchableOpacity style={this.state.btnLoginDisabled ? mainStyle.buttonDisabled : mainStyle.buttonEnabled } onPress={this.logIn.bind(this)} disabled={this.state.btnLoginDisabled}>
+          <Text style={mainStyle.buttonText}>Zaloguj</Text>
         </TouchableOpacity>
         {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
       </View>
@@ -110,48 +112,16 @@ class LoginScreen extends Component {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  text : {
-    color: '#000000',
-    textAlign: 'center',
-    fontSize: 20,
-    marginTop: 10,
-    marginBottom: 10
-  },
   textInput :{
     color: '#000000',
     borderWidth: 1,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 10,
+    marginTop: 10,
     width: 200,
     height: 30,
     padding: 5,
     backgroundColor: 'white'
-  },
-  searchButtonDisabled: {
-    alignItems: 'center',
-    marginLeft:'auto',
-    marginRight:'auto',
-    justifyContent: 'center',
-    width: 100,
-    padding: 5,
-    borderRadius: 5,
-    zIndex: 100,
-    backgroundColor: 'grey'
-  },
-  searchButtonEnabled: {
-    alignItems: 'center',
-    marginLeft:'auto',
-    marginRight:'auto',
-    justifyContent: 'center',
-    width: 100,
-    padding: 5,
-    borderRadius: 5,
-    zIndex: 100,
-    backgroundColor: '#249ef0'
-  },
-  buttonText:{
-    color: 'white'
   }
 });
 

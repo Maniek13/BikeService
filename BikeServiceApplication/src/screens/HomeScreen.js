@@ -6,6 +6,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import UsersTasks from '../components/UsersTasks';
 import User from '../objects/User';
 
+import mainStyle from '../styles/MainStyle';
+
 class HomeScreen extends Component {
   constructor(props){
     super(props);
@@ -48,24 +50,25 @@ class HomeScreen extends Component {
       this.setState({ loged: false });
     }
   }
-  
   render() {
     return (
-      <View style={styles.conteiner}>
+      <View style={mainStyle.conteiner}>
         <UsersTasks/>
         {this.state.loged === false ?
-          <TouchableOpacity style={styles.searchButton} onPress={() => {
+          <TouchableOpacity 
+            style={mainStyle.circleBtn} onPress={() => {
             BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
             this.props.navigation.push('Login');
           }}>
-            <Text style={styles.buttonText}>LogIn</Text>
+            <Text style={mainStyle.buttonText}>LogIn</Text>
           </TouchableOpacity>
           :
-          <TouchableOpacity style={styles.searchButton} onPress={() => {
+          <TouchableOpacity          
+            style={mainStyle.circleBtn} onPress={() => {
             BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
             this.props.navigation.navigate('ControllPanel');
           }}>
-            <Text style={styles.buttonText}>Admin</Text>
+            <Text style={mainStyle.buttonText}>Admin</Text>
           </TouchableOpacity>
         }
       </View>
@@ -74,30 +77,5 @@ class HomeScreen extends Component {
 }
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  searchButton: {
-    alignSelf: 'flex-end',
-    position: 'absolute',
-    justifyContent: 'center',
-    backgroundColor: '#249ef0',
-    bottom: 10,
-    right: 10,
-    width: 60,
-    height: 60,
-    padding: 5,
-    borderRadius: 60 / 2
-  },
-  buttonText : {
-    color: 'white',
-    textAlign: 'center'
-  },
-  conteiner:{
-    flexDirection: 'column',
-    flex: 1
-  }
-});
-
-
 
 

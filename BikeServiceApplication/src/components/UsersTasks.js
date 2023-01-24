@@ -6,6 +6,8 @@ import Error from '../components/Error';
 import TasksController from '../controllers/TasksController';
 import Response from '../objects/Response';
 
+import mainStyle from '../styles/MainStyle';
+
 class UsersTasks extends Component {
   constructor(props){
     super(props);
@@ -57,15 +59,15 @@ class UsersTasks extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.text}>Wyszukiwarka zleceń</Text>
+        <Text style={mainStyle.text}>Wyszukiwarka zleceń</Text>
         <TextInput 
           style={styles.textInput}
           placeholder="Numer zlecenia" 
           placeholderTextColor="gray" 
           onChangeText={number => this.setState({taskNumber: number})}
         />
-        <TouchableOpacity style={this.state.btnSearchDisabled ? styles.searchButtonDisabled : styles.searchButton } onPress={this.search.bind(this)} disabled={this.state.btnLoginDisabled}>
-          <Text style={styles.buttonText}>Wyszukaj</Text>
+        <TouchableOpacity style={this.state.btnSearchDisabled ? mainStyle.buttonDisabled : mainStyle.buttonEnabled } onPress={this.search.bind(this)} disabled={this.state.btnLoginDisabled}>
+          <Text style={mainStyle.buttonText}>Wyszukaj</Text>
         </TouchableOpacity>
         {this.state.showTask === true ? <UserTask task = {this.state.task}/> : ''}
         {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
@@ -77,47 +79,14 @@ class UsersTasks extends Component {
 export default UsersTasks;
 
 const styles = StyleSheet.create({
-  text : {
-    color: '#000000',
-    textAlign: 'center',
-    fontSize: 20,
-    marginTop: 10
-  },
   textInput :{
     color: '#000000',
     borderWidth: 1,
     marginTop: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 10,
     width: 200,
     padding: 2,
     backgroundColor: 'white'
-  },
-  searchButton: {
-    alignItems: 'center',
-    marginLeft:'auto',
-    marginRight:'auto',
-    justifyContent: 'center',
-    width: 100,
-    padding: 5,
-    backgroundColor: '#249ef0',
-    borderRadius: 5,
-    zIndex: 100
-  },
-  searchButtonDisabled: {
-    alignItems: 'center',
-    marginLeft:'auto',
-    marginRight:'auto',
-    justifyContent: 'center',
-    width: 100,
-    padding: 5,
-    backgroundColor: 'grey',
-    borderRadius: 5,
-    zIndex: 100
-  },
-  buttonText : {
-    color: 'white',
-    textAlign: 'center'
-  },
+  }
 });
