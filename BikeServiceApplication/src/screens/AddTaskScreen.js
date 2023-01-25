@@ -21,9 +21,25 @@ class AddTaskScreen extends Component {
     };
   }
 
+  onEndLoading(statment){
+    if(statment === "if"){
+      TasksController.tasksList.push(Response.response.data);
+      this.props.navigation.navigate('ControllPanel');
+    }
+
+    if(statment === "else"){
+      this.setState({
+        error: Response.response
+      });
+      this.setState({ showError: true });
+      this.setState({ btnLoginDisabled: false});
+    }
+  }
+
   async addTask(){
     this.setState({ showError: false });
     this.setState({ btnLoginDisabled: true});
+
     let task = {
       TaskId: 0,
       Header: this.state.header,
@@ -40,22 +56,7 @@ class AddTaskScreen extends Component {
     }
     
     await TasksController.addTask();
-    let onTime = setInterval(() => {
-      if(Response.response.code !== 0){
-        if(Response.response.code === 1){
-          TasksController.tasksList.push(Response.response.data)
-          this.props.navigation.navigate('ControllPanel');
-        }
-        else{
-          this.setState({
-            error: Response.response
-          });
-          this.setState({ showError: true });
-          this.setState({ btnLoginDisabled: false});
-        }
-        clearInterval(onTime);
-      }
-    }, 100);
+    Response.getDate(this.onEndLoading.bind(this));
   }
 
   render() {

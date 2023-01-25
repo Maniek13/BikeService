@@ -22,7 +22,21 @@ class ControllPanelScreen extends Component {
       error: {}   
     };
   }
-  
+
+  onEndLoading(statment){
+    if(statment === "if"){
+      TasksController.tasksList = Response.response.data.Order;
+      this.setState({ refreshed: this.state.refreshed + 1 });
+    }
+
+    if(statment === "else"){
+      this.setState({
+        error: Response.response
+      });
+      this.setState({ showError: true });
+    }
+  }
+
   async componentDidMount (){
     Response.response = {
       code: 0,
@@ -34,22 +48,7 @@ class ControllPanelScreen extends Component {
     await TasksController.getTasks();
     this.setState({ showError: false });
 
-    let onTime = setInterval(() => {
-      if(Response.response.code !== 0){
-        if(Response.response.code === 1){
-          TasksController.tasksList = Response.response.data.Order;
-          this.setState({ refreshed: this.state.refreshed + 1 });
-        }
-        else{
-          this.setState({
-            error: Response.response
-          });
-          this.setState({ showError: true });
-        }
-        
-        clearInterval(onTime);
-      }
-    }, 100);
+    Response.getDate(this.onEndLoading.bind(this));
 
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.setState({ refreshed: this.state.refreshed + 1});

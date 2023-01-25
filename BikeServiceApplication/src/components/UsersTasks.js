@@ -13,7 +13,7 @@ class UsersTasks extends Component {
     super(props);
 
     this.state = {
-      taskNumber: 0,
+      taskNumber: "",
       showTask: false,
       task: {},
       showError: false,
@@ -21,39 +21,39 @@ class UsersTasks extends Component {
       btnSearchDisabled: false 
     };
   }
+
+  onEndLoading(statment){
+    if(statment === "if"){
+      this.setState({
+        task: Response.response.data
+      });
+      this.setState({ showTask: true });
+      this.setState({ btnSearchDisabled: false });
+    }
+
+    if(statment === "else"){
+      this.setState({
+        error: Response.response
+      });
+      this.setState({ showError: true });
+      this.setState({ btnSearchDisabled: false });
+    }
+  }
   
   async search(){
     this.setState({ showTask: false });
     this.setState({ showError: false });
     this.setState({ btnSearchDisabled: true });
 
-    await TasksController.getTask(this.state.taskNumber);
-    let onTime = setInterval(() => {
-      if(Response.response.code !== 0){
-        if(Response.response.code === 1){
-          this.setState({
-            task: Response.response.data
-          });
-          this.setState({ showTask: true });
-        }
-        else{
-          this.setState({
-            error: Response.response
-          });
-          this.setState({ showError: true });
-        }
-
-        Response.response = {
-          code: 0,
-          data: {
-            message: ''
-          }
-        }
-
-        this.setState({ btnSearchDisabled: false });
-        clearInterval(onTime);
+    Response.response = {
+      code: 0,
+      data: {
+        message: ''
       }
-    }, 100);
+    }
+
+    await TasksController.getTask(this.state.taskNumber);
+    Response.getDate(this.onEndLoading.bind(this));
   }
 
   render() {
