@@ -9,13 +9,15 @@ import Task from '../objects/Task';
 import Error from '../components/Error';
 import Response from '../objects/Response';
 
-import mainStyle from '../styles/MainStyle';
+import Settings from '../objects/Settings';
+
+import MainStyles from '../styles/MainStyles';
+import ControlPanelStyles from '../styles/ControlPanelStyles';
 
 class ControllPanelScreen extends Component {
   constructor(props){
     super(props);
     this.handleBackButton = this.handleBackButton.bind(this);
-    
     this.state = {
       refreshed: 0,
       showError: false,
@@ -99,20 +101,20 @@ class ControllPanelScreen extends Component {
           title="Wyloguj"
         />
         <Text style={mainStyle.text}>Zadania</Text>
-        <FlatList style={styles.flatList}
+        <FlatList style={controlPanelStyle.flatList}
           data={TasksController.tasksList}
           extraData={this.state.refreshed}
           renderItem={({item}) => 
-            <TouchableOpacity style={styles.listItem} onPress={this.editTask.bind(this, item)}>
-              <Text style={styles.textList, {marginLeft: 10, color: 'black'}}>{item.Header}</Text>
-              <Text style={styles.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.State).Label)}</Text>
+            <TouchableOpacity style={controlPanelStyle.listItem} onPress={this.editTask.bind(this, item)}>
+              <Text style={controlPanelStyle.textList, {marginLeft: 10, color: 'black'}}>{item.Header}</Text>
+              <Text style={controlPanelStyle.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.State).Label)}</Text>
             </TouchableOpacity>
           }
         />
         {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
 
         <TouchableOpacity style={mainStyle.circleBtn} onPress={this.addTask.bind(this)}>
-            <Text style={styles.buttonText}>+</Text>
+            <Text style={controlPanelStyle.buttonText}>+</Text>
         </TouchableOpacity>
         
       </View>
@@ -122,28 +124,6 @@ class ControllPanelScreen extends Component {
 
 export default ControllPanelScreen;
 
-const styles = StyleSheet.create({
-  flatList : {
-    marginTop: 10
-  },
-  textList : {
-    height: 20
-  },
-  listItem : {
-    borderWidth: 1,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
-    flexDirection:'row', 
-    flexWrap:'wrap',
-    backgroundColor: 'white'
-  },
-  buttonText : {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold'
-  }
-});
-
+const mainStyle = MainStyles[Settings.SchemaStyle]
+const controlPanelStyle = ControlPanelStyles[Settings.SchemaStyle]
 

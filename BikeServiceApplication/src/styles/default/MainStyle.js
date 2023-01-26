@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const mainStyle = StyleSheet.create({
+const conjectural = StyleSheet.create({
   circleBtn: {
     alignSelf: 'flex-end',
     position: 'absolute',
@@ -89,4 +89,4 @@ const mainStyle = StyleSheet.create({
   },
 });
 
-export default mainStyle;
+export default conjectural;

@@ -8,7 +8,10 @@ import User from '../objects/User';
 import UserController from '../controllers/UserController';
 import Error from '../components/Error';
 
-import mainStyle from '../styles/MainStyle';
+import Settings from '../objects/Settings';
+
+import MainStyles from '../styles/MainStyles';
+import LoginScreenStyles from '../styles/LoginScreenStyles'
 
 class LoginScreen extends Component {
   constructor(props){
@@ -86,13 +89,13 @@ class LoginScreen extends Component {
       <View>
         <Text style={mainStyle.text}>Logowanie</Text>
         <TextInput 
-          style={styles.textInput}
+          style={loginScreenStyle.textInput}
           placeholder="login" 
           placeholderTextColor="gray" 
           onChangeText={text => this.setState({login: text})}
         />
          <TextInput 
-          style={styles.textInput}
+          style={loginScreenStyle.textInput}
           secureTextEntry={true}
           placeholder="hasło" 
           placeholderTextColor="gray" 
@@ -109,17 +112,6 @@ class LoginScreen extends Component {
 
 export default LoginScreen;
 
-const styles = StyleSheet.create({
-  textInput :{
-    color: '#000000',
-    borderWidth: 1,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 10,
-    width: 200,
-    height: 30,
-    padding: 5,
-    backgroundColor: 'white'
-  }
-});
+const mainStyle = MainStyles[Settings.SchemaStyle]
+const loginScreenStyle = LoginScreenStyles[Settings.SchemaStyle]
 

@@ -6,7 +6,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import UsersTasks from '../components/UsersTasks';
 import User from '../objects/User';
 
-import mainStyle from '../styles/MainStyle';
+import Settings from '../objects/Settings'
+
+import MainStyles from '../styles/MainStyles';
 
 class HomeScreen extends Component {
   constructor(props){
@@ -77,5 +79,5 @@ class HomeScreen extends Component {
 }
 
 export default HomeScreen;
-
+const mainStyle = MainStyles[Settings.SchemaStyle]
 

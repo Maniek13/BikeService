@@ -6,12 +6,14 @@ import Error from '../components/Error';
 import TasksController from '../controllers/TasksController';
 import Response from '../objects/Response';
 
-import mainStyle from '../styles/MainStyle';
+import Settings from '../objects/Settings';
+
+import MainStyles from '../styles/MainStyles';
+import UsersTasksStyles from '../styles/UsersTasksStyles';
 
 class UsersTasks extends Component {
   constructor(props){
     super(props);
-
     this.state = {
       taskNumber: "",
       showTask: false,
@@ -61,7 +63,7 @@ class UsersTasks extends Component {
       <View>
         <Text style={mainStyle.text}>Wyszukiwarka zleceń</Text>
         <TextInput 
-          style={styles.textInput}
+          style={userTaskStyle.textInput}
           placeholder="Numer zlecenia" 
           placeholderTextColor="gray" 
           onChangeText={number => this.setState({taskNumber: number})}
@@ -78,15 +80,5 @@ class UsersTasks extends Component {
 
 export default UsersTasks;
 
-const styles = StyleSheet.create({
-  textInput :{
-    color: '#000000',
-    borderWidth: 1,
-    marginTop: 10,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: 200,
-    padding: 2,
-    backgroundColor: 'white'
-  }
-});
+const mainStyle = MainStyles[Settings.SchemaStyle]
+const userTaskStyle = UsersTasksStyles[Settings.SchemaStyle]

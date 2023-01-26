@@ -5,13 +5,13 @@ import TasksController from '../controllers/TasksController';
 import Task from '../objects/Task';
 import Error from '../components/Error';
 import Response from '../objects/Response';
+import Settings from '../objects/Settings';
 
-import mainStyle from '../styles/MainStyle';
+import MainStyles from '../styles/MainStyles';
 
 class AddTaskScreen extends Component {
   constructor(props){
     super(props);
-
     this.state = {
       header: '',
       description: '',
@@ -86,3 +86,5 @@ class AddTaskScreen extends Component {
 }
 
 export default AddTaskScreen;
+
+const mainStyle = MainStyles[Settings.SchemaStyle]

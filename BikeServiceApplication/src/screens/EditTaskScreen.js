@@ -6,7 +6,10 @@ import TasksController from '../controllers/TasksController';
 import Task from '../objects/Task';
 import Error from '../components/Error';
 
-import mainStyle from '../styles/MainStyle';
+import Settings from '../objects/Settings';
+
+import MainStyles from '../styles/MainStyles';
+import EditTaskScreenStyles from '../styles/EditTaskScreenStyles';
 
 class EditTaskScreen extends Component {
   constructor(props){
@@ -74,7 +77,7 @@ class EditTaskScreen extends Component {
           
         />
         <ModalSelector
-          style={styles.select}
+          style={editTaskScreenStyle.select}
           data={this.state.selectItemList}
           onChange={(option)=>this.setState({state: option.key})}
           initValue={String(Task.statusList.find(x => x.Value === this.state.state).Label)}
@@ -91,13 +94,6 @@ class EditTaskScreen extends Component {
 
 export default EditTaskScreen;
 
-const styles = StyleSheet.create({
-  select:{
-    marginTop: 10,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: 300,
-    height: 40,
-    backgroundColor: 'white'
-  }
-});
+const mainStyle = MainStyles[Settings.SchemaStyle]
+const editTaskScreenStyle = EditTaskScreenStyles[Settings.SchemaStyle]
+
