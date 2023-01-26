@@ -1,3 +1,3 @@
 import conjectural from './default/MainStyle';
-const MainStyle = [conjectural];
-export default MainStyle;
+const MainStyles = [conjectural];
+export default MainStyles;

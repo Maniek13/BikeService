@@ -5,7 +5,6 @@ import UserTask from '../components/UserTask';
 import Error from '../components/Error';
 import TasksController from '../controllers/TasksController';
 import Response from '../objects/Response';
-
 import Settings from '../objects/Settings';
 
 import MainStyles from '../styles/MainStyles';

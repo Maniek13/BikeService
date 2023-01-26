@@ -1,3 +1,3 @@
 import conjectural from './default/UsersTasksStyle';
-const UsersTasksStyle = [conjectural];
-export default UsersTasksStyle;
+const UsersTasksStyles = [conjectural];
+export default UsersTasksStyles;

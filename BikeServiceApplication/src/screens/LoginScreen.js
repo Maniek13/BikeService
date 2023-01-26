@@ -7,7 +7,6 @@ import Response from '../objects/Response';
 import User from '../objects/User';
 import UserController from '../controllers/UserController';
 import Error from '../components/Error';
-
 import Settings from '../objects/Settings';
 
 import MainStyles from '../styles/MainStyles';

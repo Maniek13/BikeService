@@ -5,7 +5,6 @@ import ModalSelector from 'react-native-modal-selector';
 import TasksController from '../controllers/TasksController';
 import Task from '../objects/Task';
 import Error from '../components/Error';
-
 import Settings from '../objects/Settings';
 
 import MainStyles from '../styles/MainStyles';

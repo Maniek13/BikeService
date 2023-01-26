@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 import Task from '../objects/Task';
-
 import Settings from '../objects/Settings';
 
 import MainStyles from '../styles/MainStyles';

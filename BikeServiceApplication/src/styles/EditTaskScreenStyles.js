@@ -1,3 +1,3 @@
 import conjectural from './default/EditTaskScreenStyle';
-const EditTaskScreenStyle = [conjectural];
-export default EditTaskScreenStyle;
+const EditTaskScreenStyles = [conjectural];
+export default EditTaskScreenStyles;

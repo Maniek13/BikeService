@@ -5,8 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import UsersTasks from '../components/UsersTasks';
 import User from '../objects/User';
-
-import Settings from '../objects/Settings'
+import Settings from '../objects/Settings';
 
 import MainStyles from '../styles/MainStyles';
 

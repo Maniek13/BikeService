@@ -8,7 +8,6 @@ import User from '../objects/User';
 import Task from '../objects/Task';
 import Error from '../components/Error';
 import Response from '../objects/Response';
-
 import Settings from '../objects/Settings';
 
 import MainStyles from '../styles/MainStyles';
