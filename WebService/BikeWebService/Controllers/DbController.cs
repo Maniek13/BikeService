@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Threading.Tasks;
+using System.Web.Http.Results;
 using System.Xml;
 namespace BikeWebService.Controllers
 {
@@ -127,11 +128,13 @@ namespace BikeWebService.Controllers
         {
             try
             {
+                int result = 0;
                 string query = @"
                     UPDATE users 
                     SET
                         login = @login, 
                         password = @password
+                    OUTPUT INSERTED.userID
                     WHERE
                          userID = @userId";
 
@@ -162,10 +165,14 @@ namespace BikeWebService.Controllers
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            return 1;
+                            if (reader.Read())
+                            {
+                                int.TryParse(reader["userID"].ToString(), out result);
+                            }
                         }
                     }
                 }
+                return result;
             }
             catch (Exception ex)
             {
@@ -335,9 +342,11 @@ namespace BikeWebService.Controllers
         {
             try
             {
+                int result = 0;
                 string query = @"
                     UPDATE tasks 
                     SET header = @header, description = @description, state = @state
+                    OUTPUT INSERTED.taskID
                     WHERE taskID = @taskID";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -371,11 +380,104 @@ namespace BikeWebService.Controllers
                         });
 
                         connection.Open();
-                        command.ExecuteReader();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int.TryParse(reader["taskID"].ToString(), out result);
+                            }
+                        }
                     }
                 }
 
-                return 1;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public int DeleteOrder(int id)
+        {
+            try
+            {
+                int result = 0;
+
+                if(IsOrder(id) == 0){
+                    return result;
+                }
+
+                string query = @"
+                    DELETE FROM tasks
+                    OUTPUT INSERTED.taskID
+                    WHERE taskID = @taskID";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@taskID",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = id
+                        });
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int.TryParse(reader["taskID"].ToString(), out result);
+                            }
+                        }
+                    }
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public int IsOrder(int taskId)
+        {
+            try
+            {
+                int id = 0;
+                string query = @"
+                    SELECT taskID FROM tasks 
+                    WHERE taskID = @taskId;";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@taskId",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = taskId
+                        });
+
+                        connection.Open();
+           
+
+                        using(SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int.TryParse(reader["taskID"].ToString(), out id);
+                            }
+                        }
+                    }
+                }
+
+                return id;
             }
             catch (Exception ex)
             {

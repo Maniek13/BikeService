@@ -132,5 +132,22 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        static public void DeleteTask(int id)
+        {
+            try
+            {
+                DbController dbController = new DbController();
+
+                if (dbController.DeleteOrder(id) == 0)
+                {
+                    throw new Exception("Błąd usuwania zlecenia");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

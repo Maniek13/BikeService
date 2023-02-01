@@ -207,5 +207,33 @@ namespace BikeWebService
                 };
             }
         }
+
+
+        [WebMethod]
+        public ResponseModel<int> DeleteOrder(User user, int orderId)
+        {
+            try
+            {
+                UsersController.ValidateUser(user);
+                UsersController.CheckIsUser(user);
+                TasksController.DeleteTask(orderId);
+
+                return new ResponseModel<int>()
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = orderId
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<int>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = -1
+                };
+            }
+        }
     } 
 }

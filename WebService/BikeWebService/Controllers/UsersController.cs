@@ -78,7 +78,7 @@ namespace BikeWebService.Controllers
 
                 DbController dbController = new DbController();
                
-                if(dbController.EditUser(user.Login, user.Password, user.Id) != 1)
+                if(dbController.EditUser(user.Login, user.Password, user.Id) == 0)
                 {
                     throw new Exception("Błąd edycji");
                 }
