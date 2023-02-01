@@ -6,6 +6,7 @@ import TasksController from '../controllers/TasksController';
 import Task from '../objects/Task';
 import Error from '../components/Error';
 import Settings from '../objects/Settings';
+import Response from '../objects/Response';
 
 import MainStyles from '../styles/MainStyles';
 import EditTaskScreenStyles from '../styles/EditTaskScreenStyles';
@@ -20,7 +21,8 @@ class EditTaskScreen extends Component {
       state: Task.task.State,
       selectItemList: [],
       showError: false,
-      error: {}   
+      btnLoginDisabled: false,
+      error: {}
     };
   }
 
@@ -35,25 +37,46 @@ class EditTaskScreen extends Component {
       }))
     });
   }
-  update(){
-    Task.task.Header = this.state.header;
-    Task.task.Description = this.state.description;
-    Task.task.State = this.state.state;
 
-    let res = TasksController.updateTask();
-
-    if(res.code === 200){
+  onEndLoading(statment){
+    if(statment === "if"){
       let index = TasksController.tasksList.findIndex((obj => obj.TaskId == Task.task.TaskId));
       TasksController.tasksList[index].Header = this.state.header;
       TasksController.tasksList[index].Description = this.state.description;
+      TasksController.tasksList[index].State = this.state.state;
       this.props.navigation.navigate('ControllPanel');
     }
-    else{
+
+    if(statment === "else"){
       this.setState({
-        error: res
+        error: Response.response
       });
       this.setState({ showError: true });
+      this.setState({ btnLoginDisabled: false});
     }
+  }
+
+  async update(){
+    this.setState({ showError: false });
+    this.setState({ btnLoginDisabled: true});
+
+    let task = {
+      TaskId: this.state.id,
+      Header: this.state.header,
+      Description: this.state.description,
+      State: this.state.state,
+    };
+    Task.task = task;
+
+    Response.response = {
+      code: 0,
+      data: {
+        message: ''
+      }
+    }
+    
+    await TasksController.updateTask();
+    Response.getDate(this.onEndLoading.bind(this));
   }
 
   render() {
@@ -82,7 +105,7 @@ class EditTaskScreen extends Component {
           initValue={String(Task.statusList.find(x => x.Value === this.state.state).Label)}
           selectStyle={{ borderColor: "black" }}
         />
-        <TouchableOpacity style={mainStyle.button} onPress={this.update.bind(this)}>
+        <TouchableOpacity style={this.state.btnLoginDisabled ? mainStyle.buttonDisabled : mainStyle.buttonEnabled } onPress={this.update.bind(this)}>
           <Text style={mainStyle.buttonText}>Aktualizuj</Text>
         </TouchableOpacity>
         {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}

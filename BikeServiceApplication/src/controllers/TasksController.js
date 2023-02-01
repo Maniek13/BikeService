@@ -61,18 +61,30 @@ class TasksController{
         await NetController.getDataFromSOAP('http://tempuri.org/AddOrder ', body, 'AddOrderResult');
     }
 
-    static updateTask(){
-        let res = {
-            code: 200,
-            data: {
-                Id: Task.task.Id,
-                Header: Task.task.Header,
-                Description: Task.task.Description,
-                State: 1
-            }   
-        };
+    static async updateTask(){
+        let body = '<?xml version="1.0" encoding="utf-8"?>\
+        <soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\
+        <soap12:Body>\
+            <EditOrder xmlns="http://tempuri.org/">\
+                <user>\
+                    <Id>'+User.user.Id+'</Id>\
+                    <AppId>'+User.user.AppId+'</AppId>\
+                    <Login>'+User.user.Login+'</Login>\
+                    <Password>'+User.user.Password+'</Password>\
+                </user>\
+                <order>\
+                    <TaskId>'+Task.task.TaskId+'</TaskId>\
+                    <AppId>'+User.user.AppId+'</AppId>\
+                    <Header>'+Task.task.Header+'</Header>\
+                    <Description>'+Task.task.Description+'</Description>\
+                    <State>'+Task.task.State+'</State>\
+                    <TaskIdKey>0</TaskIdKey>\
+                </order>\
+            </EditOrder>\
+        </soap12:Body>\
+        </soap12:Envelope>';
 
-        return res;
+        await NetController.getDataFromSOAP('http://tempuri.org/EditOrder ', body, 'EditOrderResult');
     }
 
     static objectLength( object ) {
