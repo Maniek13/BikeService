@@ -7,7 +7,7 @@ namespace BikeWebService.Controllers
 {
     public class TasksController
     {
-        static private string ValidateTask(Order task)
+        static private void ValidateTask(Order task)
         {
             if (Object.Equals(task, null))
             {
@@ -28,10 +28,6 @@ namespace BikeWebService.Controllers
             else if (String.IsNullOrEmpty(task.AppId.ToString()))
             {
                 throw new Exception("Prosze podać id aplikacji");
-            }
-            else
-            {
-                return "OK";
             }
         }
 
