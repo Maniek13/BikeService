@@ -1,12 +1,14 @@
 ﻿using BikeWebService.Classes;
 using BikeWebService.Models;
 using System;
+using System.Web.Http.Results;
+using System.Web.UI.WebControls;
 
 namespace BikeWebService.Controllers
 {
     public class UsersController
     {
-        static public string ValidateUser(User user)
+        static public void ValidateUser(User user)
         {
             if (Object.Equals(user, null))
             {
@@ -19,10 +21,6 @@ namespace BikeWebService.Controllers
             else if (String.IsNullOrEmpty(user.Password) )
             {
                 throw new Exception("Pole hasło nie może być puste");
-            }
-            else
-            {
-                return "OK";
             }
         }
 
@@ -60,6 +58,29 @@ namespace BikeWebService.Controllers
                 if (user.Id.Equals(0))
                 {
                     throw new Exception("Niepoprawne dane");
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        static public User EditUser(User user)
+        {
+
+            try
+            {
+                ValidateUser(user);
+                user.Password = Crypto.EncryptSha256(user.Password);
+
+                DbController dbController = new DbController();
+               
+                if(dbController.EditUser(user.Login, user.Password, user.Id) != 1)
+                {
+                    throw new Exception("Błąd edycji");
                 }
 
                 return user;

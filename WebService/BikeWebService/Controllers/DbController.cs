@@ -123,6 +123,55 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+        public int EditUser(string login, string password, int id)
+        {
+            try
+            {
+                string query = @"
+                    UPDATE users 
+                    SET
+                        login = @login, 
+                        password = @password
+                    WHERE
+                         userID = @userId";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@login",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = login
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@password",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = password
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@userId",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = id
+                        });
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            return 1;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public Order GetTask(string taskKey)
         {
             try

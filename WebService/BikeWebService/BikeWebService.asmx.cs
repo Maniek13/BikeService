@@ -68,6 +68,34 @@ namespace BikeWebService
         }
 
         [WebMethod]
+        public ResponseModel<User> EditUser(User user)
+        {
+            try
+            {
+                UsersController.ValidateUser(user);
+
+                ResponseModel<User> response = new ResponseModel<User>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = UsersController.EditUser(user)
+                };
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<User>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
+
+        [WebMethod]
         public ResponseModel<Order> GetTask(string taskIDKey)
         {
             try
