@@ -16,7 +16,6 @@ namespace BikeWebService.Controllers
 
         public DbController() 
         {
-            
             _connectionString = Settings.GetConnectionString();
         }
         public User CheckIsUser(User user)
