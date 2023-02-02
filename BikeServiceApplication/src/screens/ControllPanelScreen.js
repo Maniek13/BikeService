@@ -41,8 +41,6 @@ class ControllPanelScreen extends Component {
     }
   }
 
-
-
   async componentDidMount (){
     Response.response = {
       code: 0,
@@ -127,7 +125,7 @@ class ControllPanelScreen extends Component {
             style={ controlPanelStyle.searchBtn} 
             onPress={this.sortTask.bind(this, 'Header', this.state.orderHeader)}
           >
-            <Text style={ controlPanelStyle.searchBtnText}>Sortuj stan</Text>
+            <Text style={ controlPanelStyle.searchBtnText}>Sortuj tytuł</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={ controlPanelStyle.searchBtn}

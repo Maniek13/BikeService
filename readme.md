@@ -43,7 +43,7 @@ Login
 
 Administration panel
 
-<img src="https://user-images.githubusercontent.com/47826375/216470546-4c4c46b0-d49c-4196-b1fa-2f6b527b707d.jpg" width="100">
+<img src="https://user-images.githubusercontent.com/47826375/216471464-55a42f00-12de-4053-bc1f-0d65e2d014fc.jpg" width="100">
 
 Update task 
 
