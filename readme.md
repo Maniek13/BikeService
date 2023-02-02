@@ -1,4 +1,5 @@
-In progres version 0.9a
+In progres version apk v 0.9a
+
 
 
 Install app from BikeService.apk
@@ -14,8 +15,8 @@ ________________________________________________________________________________
 To use please compile apk with created settings file and configure IIS and DataBase
 
 
-Server:
-Run sql to create database (Or update if is upgrade to 0.9b)
+Server v0.9b:
+Run sql to create database (Or update if is upgrade server to 0.9b)
 Create user in database
 Add ConectionString to database on settings.xml file
 Publish web service to ISS or ect
