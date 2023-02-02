@@ -93,7 +93,14 @@ class TasksController{
 
     static dynamicSort(property, order) {
         return function (a,b) {
-            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            var result;
+            if(typeof a[property] === 'string'){
+
+                result = a[property].localeCompare(b[property]);
+            }
+            else{
+                result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            }
             return result * order;
         }
     }
