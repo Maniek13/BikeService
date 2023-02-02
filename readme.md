@@ -37,7 +37,6 @@ Compile apk and run on device or emulator
 
 
 
-v0.9a
 Main
 
 <img src="https://user-images.githubusercontent.com/47826375/202868309-54d9a319-cf5e-4820-bb3f-720f82eb5ab3.jpg" width="100"><img src="https://user-images.githubusercontent.com/47826375/202870025-63d24a41-28f3-4d3f-a3b9-3e73ce3912cf.jpg" width="100">
@@ -48,7 +47,7 @@ Login
 
 Administration panel
 
-<img src="https://user-images.githubusercontent.com/47826375/202868315-23893c01-a98e-43f5-994c-a9d92542becf.jpg" width="100">
+<img src="https://user-images.githubusercontent.com/47826375/216470546-4c4c46b0-d49c-4196-b1fa-2f6b527b707d.jpg" width="100">
 
 Update task 
 
