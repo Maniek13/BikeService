@@ -27,7 +27,8 @@ const conjectural = StyleSheet.create({
     width: '33%'
   },
   searchBtnText : {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'black'
   }
 });
 
