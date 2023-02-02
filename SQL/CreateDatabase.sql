@@ -5,25 +5,26 @@ USE bikeServiceDB
 GO
 
 CREATE TABLE app(
-	appID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	name nvarchar(max) NOT NULL,
-	appKey nvarchar(10) NOT NULL
+	appID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	name NVARCHAR(max) NOT NULL,
+	appKey NVARCHAR(10) NOT NULL
 )
 
 CREATE TABLE users(
-	userID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	login nvarchar(max) NOT NULL,
-	password nvarchar(max) NOT NULL,
-	appID int NOT NULL
+	userID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	login NVARCHAR(max) NOT NULL,
+	password NVARCHAR(max) NOT NULL,
+	appID INT NOT NULL
 )
 
 CREATE TABLE tasks(
-	taskID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	appID int NOT NULL,
-	header nvarchar(max) NOT NULL,
-	description nvarchar(max) NOT NULL,
-	state int  DEFAULT 0,
-	taskIDKey nvarchar(MAX) 
+	taskID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	appID INT NOT NULL,
+	header NVARCHAR(max) NOT NULL,
+	description NVARCHAR(max) NOT NULL,
+	state INT  DEFAULT 0,
+	taskIDKey NVARCHAR(MAX),
+	initDate DATETIME
 )
 
 GO
@@ -42,6 +43,6 @@ AS
 		DECLARE @nr int = (SELECT ABS(CHECKSUM(NEWID()) % (1000000 - 1 + 1)) + 1)
 	
 		UPDATE tasks
-		SET taskIDKey = CAST(@taskID as nvarchar) + @appKey + CAST(@nr as nvarchar)
+		SET taskIDKey = CAST(@taskID as nvarchar) + @appKey + CAST(@nr as nvarchar), initDate = GETDATE()
 		WHERE taskID = @taskID
 	END

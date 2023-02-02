@@ -1,4 +1,6 @@
-﻿namespace BikeWebService.Interfaces
+﻿using System;
+
+namespace BikeWebService.Interfaces
 {
     public interface IOrder
     {
@@ -8,5 +10,7 @@
         string Description { get; set; }
         int State { get; set; }
         string TaskIdKey { get; set; }
+
+        DateTime InitDate { get; set; }
     }
 }

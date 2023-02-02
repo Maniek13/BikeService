@@ -11,5 +11,6 @@ namespace BikeWebService.Models
         public string Description { get; set; } = "";
         public int State { get; set; } = 0;
         public string TaskIdKey { get; set; } = "";
+        public DateTime InitDate { get; set; }
     }
 }
