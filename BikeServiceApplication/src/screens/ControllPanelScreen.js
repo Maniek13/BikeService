@@ -106,6 +106,7 @@ class ControllPanelScreen extends Component {
           renderItem={({item}) => 
             <TouchableOpacity style={controlPanelStyle.listItem} onPress={this.editTask.bind(this, item)}>
               <Text style={controlPanelStyle.textList, {marginLeft: 10, color: 'black'}}>{item.Header}</Text>
+              <Text style={controlPanelStyle.textList, {color: 'black'}}>{item.InitDate}</Text>
               <Text style={controlPanelStyle.textList, {marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.State).Label)}</Text>
             </TouchableOpacity>
           }
@@ -115,7 +116,6 @@ class ControllPanelScreen extends Component {
         <TouchableOpacity style={mainStyle.circleBtn} onPress={this.addTask.bind(this)}>
             <Text style={controlPanelStyle.buttonText}>+</Text>
         </TouchableOpacity>
-        
       </View>
     );
   }

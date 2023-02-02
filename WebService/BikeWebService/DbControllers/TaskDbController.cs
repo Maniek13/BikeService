@@ -106,11 +106,11 @@ namespace BikeWebService.DbControllers
             try
             {
                 string query = @"
-                    DECLARE @table table([taskID] INT, [taskIDKey] NVARCHAR(MAX))
+                    DECLARE @table table([taskID] INT, [taskIDKey] NVARCHAR(MAX), [initDate] DATETIME)
 
                     INSERT INTO tasks 
                         (appID, header, description, state)
-                    OUTPUT Inserted.taskID, Inserted.taskIDKey INTO @table
+                    OUTPUT Inserted.taskID, Inserted.taskIDKey, Inserted.initDate INTO @table
                     VALUES
                         (@appId, @header, @description, 1)
                     
@@ -149,7 +149,7 @@ namespace BikeWebService.DbControllers
                             if (reader.Read())
                             {
                                 int.TryParse(reader["taskID"].ToString(), out taskId);
-                                DateTime.TryParse(reader["taskID"].ToString(), out initDate);
+                                DateTime.TryParse(reader["initDate"].ToString(), out initDate);
                             }
                         }
                     }

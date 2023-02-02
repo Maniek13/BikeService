@@ -18,6 +18,7 @@ class UserTask extends Component {
             <Text style={{color: '#000000', fontSize: 23, textAlign: 'center'}} name='title'>{this.props.task.Header}</Text>
             <Text style={mainStyle.text} name='description'>{this.props.task.Description}</Text>
             <Text style={mainStyle.text} name='state'>{String(Task.statusList.find(x => x.Value === this.props.task.State).Label)}</Text>
+            <Text style={mainStyle.text} name='date'>{this.props.task.InitDate}</Text>
         </View>
     );
   }

@@ -5,7 +5,8 @@ class Task{
         Description: "",
         State: 0,
         TaskIdKey: "",
-        AppId: 0
+        AppId: 0,
+        InitDate: ""
     }
 
     static statusList = [
