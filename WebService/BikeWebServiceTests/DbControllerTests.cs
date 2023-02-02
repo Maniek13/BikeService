@@ -19,7 +19,7 @@ namespace BikeWebServiceTests
                 Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5"
             };
 
-            DbController db = new DbController();
+            BaseDbController db = new BaseDbController();
             Assert.AreNotEqual(0, db.CheckIsUser(user));
         }
 
@@ -32,13 +32,13 @@ namespace BikeWebServiceTests
                 Password = "a"
             };
 
-            DbController db = new DbController();
+            BaseDbController db = new BaseDbController();
             Assert.AreEqual(0, db.CheckIsUser(user));
         }
         [TestMethod]
         public void GetTask()
         {
-            DbController db = new DbController();
+            BaseDbController db = new BaseDbController();
             Order order = db.GetTask("11BS112345");
 
 
@@ -69,7 +69,7 @@ namespace BikeWebServiceTests
                 Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5"
             };
 
-            DbController db = new DbController();
+            BaseDbController db = new BaseDbController();
             List<Order> result = db.GetTasks(user);
 
             Assert.IsInstanceOfType(result, typeof(List<Order>));

@@ -1,4 +1,5 @@
 ﻿using BikeWebService.Classes;
+using BikeWebService.DbControllers;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace BikeWebService.Controllers
 
             try
             {
-                DbController dbController = new DbController();
+                TaskDbController dbController = new TaskDbController();
                 Order task = dbController.GetTask(taskIDKey);
 
                 if (task == null)
@@ -66,7 +67,7 @@ namespace BikeWebService.Controllers
             {
                 user.Password = Crypto.EncryptSha256(user.Password);
 
-                DbController dbController = new DbController();
+                TaskDbController dbController = new TaskDbController();
 
                 return dbController.GetTasks(user);
             }
@@ -92,7 +93,7 @@ namespace BikeWebService.Controllers
 
                 ValidateTask(order);
 
-                DbController dbController = new DbController();
+                TaskDbController dbController = new TaskDbController();
                 order = dbController.AddOrder(order);
 
                 if(order.TaskId == 0)
@@ -114,7 +115,7 @@ namespace BikeWebService.Controllers
             {
                 ValidateTask(order);
 
-                DbController dbController = new DbController();
+                TaskDbController dbController = new TaskDbController();
 
                 if (dbController.EditOrder(order) == 0)
                 {
@@ -133,7 +134,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                DbController dbController = new DbController();
+                TaskDbController dbController = new TaskDbController();
 
                 if (dbController.DeleteOrder(id) == 0)
                 {

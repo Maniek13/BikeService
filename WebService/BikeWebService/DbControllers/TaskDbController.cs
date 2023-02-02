@@ -1,184 +1,12 @@
-﻿using BikeWebService.Classes;
-using BikeWebService.Interfaces;
-using BikeWebService.Models;
-using Microsoft.Data.SqlClient;
+﻿using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
-using System.Threading.Tasks;
-using System.Web.Http.Results;
-using System.Xml;
-namespace BikeWebService.Controllers
+using System.Data.SqlClient;
+
+namespace BikeWebService.DbControllers
 {
-    public class DbController
+    public class TaskDbController : BaseDbController
     {
-        private readonly string _connectionString;
-
-        public DbController() 
-        {
-            _connectionString = Settings.GetConnectionString();
-        }
-        public User CheckIsUser(User user)
-        {
-            string query = @"  
-                SELECT userID, appID FROM users 
-                WHERE login = @login AND password = @password;";
-            int id = 0;
-            int appId = 0;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@login",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = user.Login
-                        });
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@password",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = user.Password
-                        });
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                int.TryParse(reader["userID"].ToString(), out id);
-                                int.TryParse(reader["appID"].ToString(), out appId);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
-            user.Id = id;
-            user.AppId= appId;
-            return user;
-        }
-        public User AddUser(User user)
-        {
-            try
-            {
-                string query = @"
-                    INSERT INTO users 
-                        (login, password, appID)
-                    OUTPUT Inserted.userID
-                    VALUES
-                        (@login, @password, @appID)";
-                int userId = 0;
-
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@login",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = user.Login
-                        });
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@password",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = user.Password
-                        });
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@appID",
-                            SqlDbType = System.Data.SqlDbType.Int,
-                            Value = user.AppId
-                        });
-
-                        connection.Open();
-
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                int.TryParse(reader["userID"].ToString(), out userId);
-                            }
-                        }
-                    }
-                }
-
-                user.Id = userId;
-
-                return user;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        public int EditUser(string login, string password, int id)
-        {
-            try
-            {
-                int result = 0;
-                string query = @"
-                    UPDATE users 
-                    SET
-                        login = @login, 
-                        password = @password
-                    OUTPUT INSERTED.userID
-                    WHERE
-                         userID = @userId";
-
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@login",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = login
-                        });
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@password",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = password
-                        });
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@userId",
-                            SqlDbType = System.Data.SqlDbType.Int,
-                            Value = id
-                        });
-
-                        connection.Open();
-
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                int.TryParse(reader["userID"].ToString(), out result);
-                            }
-                        }
-                    }
-                }
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
         public Order GetTask(string taskKey)
         {
             try
@@ -215,11 +43,11 @@ namespace BikeWebService.Controllers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
         public List<Order> GetTasks(User user)
         {
@@ -273,7 +101,7 @@ namespace BikeWebService.Controllers
         }
         public Order AddOrder(Order order)
         {
-            
+
             try
             {
                 string query = @"
@@ -331,7 +159,7 @@ namespace BikeWebService.Controllers
                 //SetOrderKey(order.taskIDKey, taskId);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -404,7 +232,8 @@ namespace BikeWebService.Controllers
             {
                 int result = 0;
 
-                if(IsOrder(id) == 0){
+                if (IsOrder(id) == 0)
+                {
                     return result;
                 }
 
@@ -465,9 +294,9 @@ namespace BikeWebService.Controllers
                         });
 
                         connection.Open();
-           
 
-                        using(SqlDataReader reader = command.ExecuteReader())
+
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
@@ -558,11 +387,11 @@ namespace BikeWebService.Controllers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-       
+
         }
         private string GenerateOrderKey(int appId, int taskId)
         {
@@ -579,10 +408,10 @@ namespace BikeWebService.Controllers
 
                 int number = random.Next(1, 1000000);
 
-                string orderKey =  $"{taskId}{appKey}{number}";
+                string orderKey = $"{taskId}{appKey}{number}";
                 return orderKey;
             }
-            catch(Exception ex )
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -631,12 +460,12 @@ namespace BikeWebService.Controllers
         }
         private Order ConvertToTask(Object[] obj)
         {
-            if (obj == null || obj.Length == 0) 
+            if (obj == null || obj.Length == 0)
             {
                 return null;
             }
 
-            return new  Order()
+            return new Order()
             {
                 TaskId = Convert.ToInt32(obj[0].ToString()),
                 AppId = Convert.ToInt32(obj[1].ToString()),

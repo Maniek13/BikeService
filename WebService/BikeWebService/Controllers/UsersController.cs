@@ -1,8 +1,7 @@
 ﻿using BikeWebService.Classes;
+using BikeWebService.DbControllers;
 using BikeWebService.Models;
 using System;
-using System.Web.Http.Results;
-using System.Web.UI.WebControls;
 
 namespace BikeWebService.Controllers
 {
@@ -30,7 +29,7 @@ namespace BikeWebService.Controllers
             {
                 user.Password = Crypto.EncryptSha256(user.Password);
 
-                DbController dbController = new DbController();
+                UserDbController dbController = new UserDbController();
                 user = dbController.CheckIsUser(user);
 
                 if (user.Id.Equals(0))
@@ -52,7 +51,7 @@ namespace BikeWebService.Controllers
             {
                 user.Password = Crypto.EncryptSha256(user.Password);
 
-                DbController dbController = new DbController();
+                UserDbController dbController = new UserDbController();
                 user = dbController.AddUser(user);
 
                 if (user.Id.Equals(0))
@@ -76,7 +75,7 @@ namespace BikeWebService.Controllers
                 ValidateUser(user);
                 user.Password = Crypto.EncryptSha256(user.Password);
 
-                DbController dbController = new DbController();
+                UserDbController dbController = new UserDbController();
                
                 if(dbController.EditUser(user.Login, user.Password, user.Id) == 0)
                 {

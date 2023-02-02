@@ -217,7 +217,9 @@
     </Compile>
     <Compile Include="Classes\Crypto.cs" />
     <Compile Include="Classes\Settings.cs" />
-    <Compile Include="Controllers\DbController.cs" />
+    <Compile Include="DbControllers\BaseDbController.cs" />
+    <Compile Include="DbControllers\TaskDbController.cs" />
+    <Compile Include="DbControllers\UserDbController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Interfaces\IOrder.cs" />
