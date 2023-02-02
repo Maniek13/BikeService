@@ -1,7 +1,5 @@
 In progres version apk v 0.9b
 
-
-
 Install app from BikeService.apk
 
 login data
@@ -15,8 +13,7 @@ ________________________________________________________________________________
 To use please compile apk with created settings file and configure IIS and DataBase
 
 
-Server v0.9b:
-Run sql to create database (Or update if is upgrade server to 0.9b)
+Run sql to create database (Or update you upgrade server from 0.9a to 0.9b)
 Create user in database
 Add ConectionString to database on settings.xml file
 Publish web service to ISS or ect
@@ -34,7 +31,6 @@ export default Settings;
 _______________________________________
 
 Compile apk and run on device or emulator
-
 
 
 Main
