@@ -14,13 +14,20 @@ const conjectural = StyleSheet.create({
     marginRight: 10,
     flexDirection:'row', 
     flexWrap:'wrap',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderRadius: 10
   },
   buttonText : {
     color: 'white',
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold'
+  },
+  searchBtn : {
+    width: '33%'
+  },
+  searchBtnText : {
+    textAlign: 'center'
   }
 });
 

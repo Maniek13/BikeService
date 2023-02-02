@@ -87,6 +87,17 @@ class TasksController{
         await NetController.getDataFromSOAP('http://tempuri.org/EditOrder ', body, 'EditOrderResult');
     }
 
+    static Sort(property, type){
+        return Array.from(this.tasksList).sort(this.dynamicSort(property, type));
+    }
+
+    static dynamicSort(property, order) {
+        return function (a,b) {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * order;
+        }
+    }
+
     static objectLength( object ) {
         var length = 0;
         for( var key in object ) {
