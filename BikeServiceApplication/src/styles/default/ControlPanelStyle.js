@@ -9,13 +9,12 @@ const conjectural = StyleSheet.create({
   },
   listItem : {
     borderWidth: 1,
-    marginBottom: 5,
     marginLeft: 10,
-    marginRight: 10,
     flexDirection:'row', 
     flexWrap:'wrap',
     backgroundColor: 'white',
-    borderRadius: 10
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10
   },
   buttonText : {
     color: 'white',
@@ -29,6 +28,27 @@ const conjectural = StyleSheet.create({
   searchBtnText : {
     textAlign: 'center',
     color: 'black'
+  },
+  deleteBtn : {
+    width: 20,
+    backgroundColor: 'red',
+    borderWidth: 1,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    marginRight: 10,
+    borderLeftWidth: 0
+  },
+  deleteTxt : {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  itemConteiner: {
+    padding: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
   }
 });
 

@@ -12,6 +12,7 @@ import Settings from '../objects/Settings';
 
 import MainStyles from '../styles/MainStyles';
 import ControlPanelStyles from '../styles/ControlPanelStyles';
+import Popup from '../components/Popup'
 
 class ControllPanelScreen extends Component {
   constructor(props){
@@ -23,7 +24,10 @@ class ControllPanelScreen extends Component {
       error: {},
       orderHeader: 1,
       orderState: 1,
-      orderInitDate: 1
+      orderInitDate: 1,
+      showPopup: false,
+      popupMessage: '',
+      popupHeader: ''
     };
   }
 
@@ -48,10 +52,10 @@ class ControllPanelScreen extends Component {
         message: ''
       }
     }
-    
-    await TasksController.getTasks();
     this.setState({ showError: false });
 
+    await TasksController.getTasks();
+    
     Response.getDate(this.onEndLoading.bind(this));
 
     this.focusListener = this.props.navigation.addListener('focus', () => {
@@ -112,7 +116,50 @@ class ControllPanelScreen extends Component {
 
     this.setState({ refreshed: this.state.refreshed + 1 });
   }
-  
+
+  showDeletePopup(item){
+    Task.task = item;
+    this.setState({ popupHeader: "Usuwanie zlecenia nr: " + item.TaskId})
+    this.setState({ popupMessage: "Na pewno usunąć zadanie: " + item.Header})
+    this.setState({ showPopup: true})
+  }
+
+  exitDeletePopup(){
+    this.setState({ showPopup: false})
+  }
+
+  async onDelete(handleError){
+    Response.response = {
+      code: 0,
+      data: {
+        message: ''
+      }
+    }
+
+    await TasksController.deleteTask();
+
+    onTime = setInterval(() => {
+      if(Response.response.code !== 0){
+        if(Response.response.code === 1){
+          let index = TasksController.tasksList.indexOf(Task.task);
+          if (index !== -1) {
+            TasksController.tasksList.splice(index, 1);
+          }
+          this.setState({ refreshed: this.state.refreshed + 1 });
+          this.setState({ showPopup: false});
+        }
+        else{
+          let error = {
+            code: Response.response.code,
+            message: Response.response.data.message
+          }
+          handleError(error);
+        }
+        clearInterval(onTime);
+      }
+    }, 100);
+  }
+
   render() {
     return (
       <View style={mainStyle.conteiner}>
@@ -145,21 +192,28 @@ class ControllPanelScreen extends Component {
           data={TasksController.tasksList}
           extraData={this.state.refreshed}
           renderItem={({item}) => 
+          <View style={controlPanelStyle.itemConteiner}>
             <TouchableOpacity style={controlPanelStyle.listItem} onPress={this.editTask.bind(this, item)}>
               <Text style={controlPanelStyle.textList, {textAlign: 'center', marginTop: 5, width: '100%', color: 'black', fontWeight: 'bold', fontSize: 16}}>{item.Header}</Text>
               <View style={ {width: '100%', paddingTop: 15, paddingBottom: 5, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
                 <Text style={controlPanelStyle.textList, {fontSize: 12, marginLeft: 10, color: 'black'}}>{item.InitDate}</Text>
                 <Text style={controlPanelStyle.textList, {fontSize: 12, marginLeft: 'auto', marginRight: 10, color: 'black'}}>{String(Task.statusList.find(x => x.Value === item.State).Label)}</Text>
               </View>
-             
             </TouchableOpacity>
+            <TouchableOpacity  style={controlPanelStyle.deleteBtn} onPress={this.showDeletePopup.bind(this, item)}>
+              <Text style={controlPanelStyle.deleteTxt}>X</Text>
+            </TouchableOpacity>
+          </View>
           }
         />
         {this.state.showError === true ? <Error error = {this.state.error.data}/> : ''}
+        {this.state.showPopup === true ? <Popup message = {this.state.popupMessage} header = {this.state.popupHeader} handleAction = {this.onDelete.bind(this)} exitAction = {this.exitDeletePopup.bind(this)}/> : ''}
 
         <TouchableOpacity style={mainStyle.circleBtn} onPress={this.addTask.bind(this)}>
             <Text style={controlPanelStyle.buttonText}>+</Text>
         </TouchableOpacity>
+
+ 
       </View>
     );
   }

@@ -9,7 +9,7 @@ class Error extends Component {
     render() {
         return (
             <View>
-                <Text style={styles.text} name='state'>{this.props.error.message}</Text>
+                <Text style={styles.text} name='state'>{this.props.error.message}</Text>             
             </View>
         );
     }

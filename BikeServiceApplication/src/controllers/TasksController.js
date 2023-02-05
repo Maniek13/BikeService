@@ -15,7 +15,7 @@ class TasksController{
             </soap12:Body>\
             </soap12:Envelope>';
     
-        await NetController.getDataFromSOAP('http://tempuri.org/GetTask ', body, 'GetTaskResult');
+        await NetController.getDataFromSOAP('http://tempuri.org/GetTask', body, 'GetTaskResult');
     }
 
     static async getTasks(){
@@ -32,7 +32,7 @@ class TasksController{
             </soap12:Body>\
             </soap12:Envelope>';
     
-        await NetController.getDataFromSOAP('http://tempuri.org/GetTasks ', body, 'GetTasksResult');
+        await NetController.getDataFromSOAP('http://tempuri.org/GetTasks', body, 'GetTasksResult');
     }
 
 
@@ -58,7 +58,7 @@ class TasksController{
             </soap12:Body>\
             </soap12:Envelope>';
 
-        await NetController.getDataFromSOAP('http://tempuri.org/AddOrder ', body, 'AddOrderResult');
+        await NetController.getDataFromSOAP('http://tempuri.org/AddOrder', body, 'AddOrderResult');
     }
 
     static async updateTask(){
@@ -84,7 +84,27 @@ class TasksController{
         </soap12:Body>\
         </soap12:Envelope>';
 
-        await NetController.getDataFromSOAP('http://tempuri.org/EditOrder ', body, 'EditOrderResult');
+        await NetController.getDataFromSOAP('http://tempuri.org/EditOrder', body, 'EditOrderResult');
+    }
+
+    
+    static async deleteTask(){
+        let body = '<?xml version="1.0" encoding="utf-8"?>\
+        <soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\
+        <soap12:Body>\
+            <DeleteOrder xmlns="http://tempuri.org/">\
+                <user>\
+                    <Id>'+User.user.Id+'</Id>\
+                    <AppId>'+User.user.AppId+'</AppId>\
+                    <Login>'+User.user.Login+'</Login>\
+                    <Password>'+User.user.Password+'</Password>\
+                </user>\
+                <orderId>'+Task.task.TaskId+'</orderId>\
+            </DeleteOrder>\
+        </soap12:Body>\
+        </soap12:Envelope>';
+
+        await NetController.getDataFromSOAP('http://tempuri.org/DeleteOrder', body, 'DeleteOrderResult');
     }
 
     static Sort(property, type){

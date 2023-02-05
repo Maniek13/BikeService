@@ -243,7 +243,6 @@ namespace BikeWebService.DbControllers
 
                 string query = @"
                     DELETE FROM tasks
-                    OUTPUT INSERTED.taskID
                     WHERE taskID = @taskID";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -261,10 +260,8 @@ namespace BikeWebService.DbControllers
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
-                            {
-                                int.TryParse(reader["taskID"].ToString(), out result);
-                            }
+                                result = id;
+                            
                         }
                     }
                 }
