@@ -258,11 +258,9 @@ namespace BikeWebService.DbControllers
 
                         connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                                result = id;
-                            
-                        }
+                        using (SqlDataReader reader = command.ExecuteReader()){}
+
+                        result = id;
                     }
                 }
 
