@@ -29,6 +29,8 @@ class ControllPanelScreen extends Component {
       popupMessage: '',
       popupHeader: ''
     };
+
+    this.refreshedInterval = setInterval(this.setList.bind(this), 180000);
   }
 
   onEndLoading(statment){
@@ -46,6 +48,14 @@ class ControllPanelScreen extends Component {
   }
 
   async componentDidMount (){
+    this.setList();
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.refreshedInterval)
+  }
+
+  async setList(){
     Response.response = {
       code: 0,
       data: {

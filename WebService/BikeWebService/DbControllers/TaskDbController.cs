@@ -170,11 +170,14 @@ namespace BikeWebService.DbControllers
 
             return order;
         }
+
         public int EditOrder(Order order)
         {
             try
             {
                 int result = 0;
+
+
                 string query = @"
                     UPDATE tasks 
                     SET header = @header, description = @description, state = @state
