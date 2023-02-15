@@ -7,6 +7,7 @@ namespace BikeWebService.DbControllers
 {
     public class TaskDbController : BaseDbController
     {
+        #region public function
         public Order GetTask(string taskKey)
         {
             try
@@ -357,6 +358,9 @@ namespace BikeWebService.DbControllers
                 throw new Exception(ex.Message);
             }
         }
+        #endregion
+
+        #region private functions
         private string getOrderKey(int id)
         {
 
@@ -524,5 +528,6 @@ namespace BikeWebService.DbControllers
                 InitDate = date
             };
         }
+        #endregion
     }
 }

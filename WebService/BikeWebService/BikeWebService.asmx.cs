@@ -11,7 +11,7 @@ namespace BikeWebService
     [System.ComponentModel.ToolboxItem(false)]
     public class BikeWebService : System.Web.Services.WebService
     {
-
+        #region methods for user
         [WebMethod]
         public ResponseModel<User> LogIn(User user)
         {
@@ -94,7 +94,9 @@ namespace BikeWebService
                 };
             }
         }
+        #endregion
 
+        #region methods for tasks
         [WebMethod]
         public ResponseModel<Order> GetTask(string taskIDKey)
         {
@@ -180,8 +182,6 @@ namespace BikeWebService
             }
         }
 
-       
-
         [WebMethod]
         public ResponseModel<Order> EditOrder(User user, Order order, Order orderOld = null)
         {
@@ -213,8 +213,6 @@ namespace BikeWebService
                 };
             }
         }
- 
-
         [WebMethod]
         public ResponseModel<int> DeleteOrder(User user, int orderId)
         {
@@ -241,5 +239,6 @@ namespace BikeWebService
                 };
             }
         }
-    } 
+        #endregion
+    }
 }

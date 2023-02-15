@@ -7,6 +7,7 @@ namespace BikeWebService.Controllers
 {
     public class UsersController
     {
+        #region public functions
         static public void ValidateUser(User user)
         {
             if (Object.Equals(user, null))
@@ -89,6 +90,6 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
-
+        #endregion
     }
 }

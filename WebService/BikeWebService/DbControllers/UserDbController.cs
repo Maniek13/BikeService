@@ -9,6 +9,7 @@ namespace BikeWebService.DbControllers
 {
     public class UserDbController : BaseDbController
     {
+        #region public functions
         public User CheckIsUser(User user)
         {
             string query = @"  
@@ -169,5 +170,6 @@ namespace BikeWebService.DbControllers
                 throw new Exception(ex.Message);
             }
         }
+        #endregion
     }
 }

@@ -8,6 +8,7 @@ namespace BikeWebService.Controllers
 {
     public class TasksController
     {
+        #region private functions
         static private void validateTask(Order task)
         {
             if (Object.Equals(task, null))
@@ -31,7 +32,9 @@ namespace BikeWebService.Controllers
                 throw new Exception("Prosze podać id aplikacji");
             }
         }
+        #endregion
 
+        #region public functions
         static public Order FindTask(string taskIDKey)
         {
             if (String.IsNullOrEmpty(taskIDKey))
@@ -161,5 +164,6 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+        #endregion 
     }
 }
