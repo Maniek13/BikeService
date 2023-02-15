@@ -9,7 +9,7 @@ namespace BikeWebService.DbControllers
 {
     internal class UserDbController : BaseDbController
     {
-        #region public functions
+        #region internal functions
 
         internal void CheckIsUser(User user)
         {
