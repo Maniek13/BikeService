@@ -22,6 +22,8 @@ namespace BikeWebService.Controllers
             {
                 throw new Exception("Pole hasło nie może być puste");
             }
+
+            user.Password = Crypto.EncryptSha256(user.Password);
         }
 
         #endregion
@@ -32,8 +34,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                validateUser(user);
-                user.Password = Crypto.EncryptSha256(user.Password);
+                validateUser(user);                
 
                 UserDbController dbController = new UserDbController();
                 dbController.CheckIsUser(user);
@@ -55,7 +56,6 @@ namespace BikeWebService.Controllers
             try
             {
                 validateUser(user);
-                user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
                 dbController.AddUser(user);
@@ -77,7 +77,6 @@ namespace BikeWebService.Controllers
             try
             {
                 validateUser(user);
-                user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
                

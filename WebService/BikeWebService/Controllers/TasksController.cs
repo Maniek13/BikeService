@@ -71,7 +71,6 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                user.Password = Crypto.EncryptSha256(user.Password);
 
                 TaskDbController dbController = new TaskDbController();
 
