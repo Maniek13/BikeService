@@ -14,6 +14,7 @@ To use please compile apk with created settings file and configure IIS and DataB
 
 
 Run sql to create database (Or update you upgrade server from 0.9a to 0.9b)
+Run sql CreateIndex to set indexes 
 Create user in database
 Add ConectionString to database on settings.xml file
 Publish web service to ISS or ect

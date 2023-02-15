@@ -274,6 +274,55 @@ namespace BikeWebService.DbControllers
                 throw new Exception(ex.Message);
             }
         }
+
+        public int NrOfSpecifyOrders(int stateNr, int AppId)
+        {
+
+            try
+            {
+                string query = @"
+                    SELECT SUM(t.state) FROM tasks t
+                    JOIN users u ON t.appID = u.appID
+                    WHERE login = @login AND password = @password
+                    ORDER BY t.state, t.initDate, t.header ASC";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@login",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = user.Login
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@password",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = user.Password
+                        });
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Object[] values = new Object[reader.FieldCount];
+                                reader.GetValues(values);
+                                tasks.Add(ConvertToTask(values));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public int IsOrder(int taskId)
         {
             try
