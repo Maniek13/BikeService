@@ -5,11 +5,10 @@ using System;
 
 namespace BikeWebService.Controllers
 {
-    public class UsersController
+    internal class UsersController
     {
-        #region public functions
-
-        static public void ValidateUser(User user)
+        #region private functions
+        static private void ValidateUser(User user)
         {
             if (Object.Equals(user, null))
             {
@@ -19,17 +18,21 @@ namespace BikeWebService.Controllers
             {
                 throw new Exception("Pole login nie może być puste");
             }
-            else if (String.IsNullOrEmpty(user.Password) )
+            else if (String.IsNullOrEmpty(user.Password))
             {
                 throw new Exception("Pole hasło nie może być puste");
             }
         }
 
+        #endregion
 
-        static public void CheckIsUser(User user)
+        #region internal functions
+
+        static internal void CheckIsUser(User user)
         {
             try
             {
+                ValidateUser(user);
                 user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
@@ -47,11 +50,11 @@ namespace BikeWebService.Controllers
             }  
         }
 
-
-        static public void AddUser(User user)
+        static internal void AddUser(User user)
         {
             try
             {
+                ValidateUser(user);
                 user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
@@ -68,8 +71,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-
-        static public void EditUser(User user)
+        static internal void EditUser(User user)
         {
 
             try

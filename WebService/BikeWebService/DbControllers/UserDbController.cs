@@ -7,11 +7,11 @@ using System.Web;
 
 namespace BikeWebService.DbControllers
 {
-    public class UserDbController : BaseDbController
+    internal class UserDbController : BaseDbController
     {
         #region public functions
 
-        public void CheckIsUser(User user)
+        internal void CheckIsUser(User user)
         {
             string query = @"  
                 SELECT userID, appID FROM users 
@@ -60,7 +60,7 @@ namespace BikeWebService.DbControllers
             user.AppId = appId;
         }
 
-        public void AddUser(User user)
+        internal void AddUser(User user)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        public int EditUser(string login, string password, int id)
+        internal int EditUser(string login, string password, int id)
         {
             try
             {

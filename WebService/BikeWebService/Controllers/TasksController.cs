@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BikeWebService.Controllers
 {
-    public class TasksController
+    internal class TasksController
     {
         #region private functions
 
@@ -36,9 +36,9 @@ namespace BikeWebService.Controllers
 
         #endregion
 
-        #region public functions
+        #region internal functions
 
-        static public Order FindTask(string taskIDKey)
+        static internal Order FindTask(string taskIDKey)
         {
             if (String.IsNullOrEmpty(taskIDKey))
             {
@@ -67,8 +67,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-
-        static public List<Order> GetTasks(User user)
+        static internal List<Order> GetTasks(User user)
         {
             try
             {
@@ -85,8 +84,7 @@ namespace BikeWebService.Controllers
 
         }
 
-
-        static public bool IsSame(Order oldOrder)
+        static internal bool IsSame(Order oldOrder)
         {
 
             try
@@ -101,8 +99,7 @@ namespace BikeWebService.Controllers
 
         }
 
-
-        static public void AddTask(int appId, Order order)
+        static internal void AddTask(int appId, Order order)
         {
             
             try
@@ -130,8 +127,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-
-        static public void EditTask(Order order)
+        static internal void EditTask(Order order)
         {
             try
             {
@@ -150,8 +146,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-
-        static public void DeleteTask(int id)
+        static internal void DeleteTask(int id)
         {
             try
             {

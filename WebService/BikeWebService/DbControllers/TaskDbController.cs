@@ -5,11 +5,11 @@ using System.Data.SqlClient;
 
 namespace BikeWebService.DbControllers
 {
-    public class TaskDbController : BaseDbController
+    internal class TaskDbController : BaseDbController
     {
-        #region public function
+        #region internal function
 
-        public Order GetTask(string taskKey)
+        internal Order GetTask(string taskKey)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace BikeWebService.DbControllers
 
         }
 
-        public List<Order> GetTasks(User user)
+        internal List<Order> GetTasks(User user)
         {
             List<Order> tasks = new List<Order>();
 
@@ -104,7 +104,7 @@ namespace BikeWebService.DbControllers
             return tasks;
         }
 
-        public void AddOrder(Order order)
+        internal void AddOrder(Order order)
         {
             order.State = 1;
 
@@ -187,7 +187,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        public int EditOrder(Order order)
+        internal int EditOrder(Order order)
         {
             try
             {
@@ -250,7 +250,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        public int DeleteOrder(int id)
+        internal int DeleteOrder(int id)
         {
             try
             {
@@ -292,7 +292,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        public bool IsSameOrder(Order order)
+        internal bool IsSameOrder(Order order)
         {
             
             try
@@ -336,7 +336,7 @@ namespace BikeWebService.DbControllers
             }  
         }
 
-        public int IsOrder(int taskId)
+        internal int IsOrder(int taskId)
         {
             try
             {
@@ -421,7 +421,6 @@ namespace BikeWebService.DbControllers
             }
         }
 
-      
         [Obsolete("Is created in the insert triger, please don't use", true)]
         private void setOrderKey(string orderKey, int id)
         {

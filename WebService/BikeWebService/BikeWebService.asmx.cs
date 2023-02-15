@@ -18,7 +18,6 @@ namespace BikeWebService
         {
             try
             {
-                UsersController.ValidateUser(user);
                 UsersController.CheckIsUser(user);
 
                 ResponseModel<User> response = new ResponseModel<User>
@@ -47,7 +46,6 @@ namespace BikeWebService
         {
             try
             {
-                UsersController.ValidateUser(user);
                 UsersController.AddUser(user);
 
                 ResponseModel<User> response = new ResponseModel<User>
@@ -72,12 +70,12 @@ namespace BikeWebService
         }
 
         [WebMethod]
-        public ResponseModel<User> EditUser(User user)
+        public ResponseModel<User> EditUser(User user, User newUser)
         {
             try
             {
-                UsersController.ValidateUser(user);
-                UsersController.EditUser(user);
+                UsersController.CheckIsUser(user);
+                UsersController.EditUser(newUser);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
@@ -134,8 +132,7 @@ namespace BikeWebService
         {
             try
             { 
-                UsersController.ValidateUser(user);
-
+                UsersController.CheckIsUser(user);
                 List<Order> result = TasksController.GetTasks(user);
 
                 return new ResponseModel<List<Order>>()
@@ -161,13 +158,13 @@ namespace BikeWebService
         {
             try
             {
-                if(order.AppId == 0)
+                UsersController.CheckIsUser(user);
+
+                if (order.AppId == 0)
                 {
-                    UsersController.ValidateUser(user);
-                    UsersController.CheckIsUser(user);
                     order.AppId = user.AppId;
                 }
-                
+
                 TasksController.AddTask(order.AppId, order);
 
                 return new ResponseModel<Order>()
@@ -193,7 +190,6 @@ namespace BikeWebService
         {
             try
             {
-                UsersController.ValidateUser(user);
                 UsersController.CheckIsUser(user);
 
                 if(orderOld != null )
@@ -225,7 +221,6 @@ namespace BikeWebService
         {
             try
             {
-                UsersController.ValidateUser(user);
                 UsersController.CheckIsUser(user);
                 TasksController.DeleteTask(orderId);
 
