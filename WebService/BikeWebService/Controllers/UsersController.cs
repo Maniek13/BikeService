@@ -26,21 +26,20 @@ namespace BikeWebService.Controllers
         }
 
 
-        static public User CheckIsUser(User user)
+        static public void CheckIsUser(User user)
         {
             try
             {
                 user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
-                user = dbController.CheckIsUser(user);
+                dbController.CheckIsUser(user);
 
                 if (user.Id.Equals(0))
                 {
                     throw new Exception("Niepoprawne dane logowania");
                 }
 
-                return user;
             }
             catch(Exception ex)
             {
@@ -49,21 +48,19 @@ namespace BikeWebService.Controllers
         }
 
 
-        static public User AddUser(User user)
+        static public void AddUser(User user)
         {
             try
             {
                 user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
-                user = dbController.AddUser(user);
+                dbController.AddUser(user);
 
                 if (user.Id.Equals(0))
                 {
                     throw new Exception("Niepoprawne dane");
                 }
-
-                return user;
             }
             catch (Exception ex)
             {
@@ -72,7 +69,7 @@ namespace BikeWebService.Controllers
         }
 
 
-        static public User EditUser(User user)
+        static public void EditUser(User user)
         {
 
             try
@@ -86,8 +83,6 @@ namespace BikeWebService.Controllers
                 {
                     throw new Exception("Błąd edycji");
                 }
-
-                return user;
             }
             catch (Exception ex)
             {

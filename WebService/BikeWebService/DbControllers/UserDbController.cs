@@ -11,7 +11,7 @@ namespace BikeWebService.DbControllers
     {
         #region public functions
 
-        public User CheckIsUser(User user)
+        public void CheckIsUser(User user)
         {
             string query = @"  
                 SELECT userID, appID FROM users 
@@ -58,10 +58,9 @@ namespace BikeWebService.DbControllers
 
             user.Id = id;
             user.AppId = appId;
-            return user;
         }
 
-        public User AddUser(User user)
+        public void AddUser(User user)
         {
             try
             {
@@ -109,8 +108,7 @@ namespace BikeWebService.DbControllers
                 }
 
                 user.Id = userId;
-
-                return user;
+                
             }
             catch (Exception ex)
             {

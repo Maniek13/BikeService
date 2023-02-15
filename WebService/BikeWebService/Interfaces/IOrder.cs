@@ -11,6 +11,6 @@ namespace BikeWebService.Interfaces
         int State { get; set; }
         string TaskIdKey { get; set; }
 
-        DateTime InitDate { get; set; }
+        DateTime? InitDate { get; set; }
     }
 }

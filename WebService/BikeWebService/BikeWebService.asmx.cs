@@ -19,12 +19,13 @@ namespace BikeWebService
             try
             {
                 UsersController.ValidateUser(user);
+                UsersController.CheckIsUser(user);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
                     message = "OK",
                     resultCode = 1,
-                    Data = UsersController.CheckIsUser(user)
+                    Data = user
                 };
 
                 return response;
@@ -47,12 +48,13 @@ namespace BikeWebService
             try
             {
                 UsersController.ValidateUser(user);
+                UsersController.AddUser(user);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
                     message = "OK",
                     resultCode = 1,
-                    Data = UsersController.AddUser(user)
+                    Data = user
                 };
 
                 return response;
@@ -75,12 +77,13 @@ namespace BikeWebService
             try
             {
                 UsersController.ValidateUser(user);
+                UsersController.EditUser(user);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
                     message = "OK",
                     resultCode = 1,
-                    Data = UsersController.EditUser(user)
+                    Data = user
                 };
 
                 return response;
@@ -165,8 +168,7 @@ namespace BikeWebService
                     order.AppId = user.AppId;
                 }
                 
-
-                order = TasksController.AddTask(order.AppId, order);
+                TasksController.AddTask(order.AppId, order);
 
                 return new ResponseModel<Order>()
                 {
@@ -198,7 +200,7 @@ namespace BikeWebService
                     if (!TasksController.IsSame(orderOld))
                         throw new Exception("Zamowienie zostało zmienione. Odświerz dane");
 
-                order = TasksController.EditTask(order);
+                TasksController.EditTask(order);
 
                 return new ResponseModel<Order>()
                 {

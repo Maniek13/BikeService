@@ -102,7 +102,7 @@ namespace BikeWebService.Controllers
         }
 
 
-        static public Order AddTask(int appId, Order order)
+        static public void AddTask(int appId, Order order)
         {
             
             try
@@ -114,18 +114,15 @@ namespace BikeWebService.Controllers
                     order.State = 1;
                 }
                 
-
                 validateTask(order);
 
                 TaskDbController dbController = new TaskDbController();
-                order = dbController.AddOrder(order);
+                dbController.AddOrder(order);
 
                 if(order.TaskId == 0)
                 {
                     throw new Exception("Błąd zapisu zlecenia w bazie danych");
                 }
-                
-                return order;
             }
             catch (Exception ex)
             {
@@ -134,7 +131,7 @@ namespace BikeWebService.Controllers
         }
 
 
-        static public Order EditTask(Order order)
+        static public void EditTask(Order order)
         {
             try
             {
@@ -146,8 +143,6 @@ namespace BikeWebService.Controllers
                 {
                     throw new Exception("Błąd edycji zlecenia");
                 }
-
-                return order;
             }
             catch (Exception ex)
             {
