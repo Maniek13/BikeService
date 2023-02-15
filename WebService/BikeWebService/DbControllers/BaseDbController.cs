@@ -1,8 +1,9 @@
 ﻿using BikeWebService.Classes;
+using Microsoft.Data.SqlClient;
 
 namespace BikeWebService.DbControllers
 {
-    public class BaseDbController
+    public abstract class BaseDbController
     {
         internal readonly string _connectionString;
 

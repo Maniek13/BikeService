@@ -8,6 +8,7 @@ namespace BikeWebService.Controllers
     public class UsersController
     {
         #region public functions
+
         static public void ValidateUser(User user)
         {
             if (Object.Equals(user, null))
@@ -23,6 +24,7 @@ namespace BikeWebService.Controllers
                 throw new Exception("Pole hasło nie może być puste");
             }
         }
+
 
         static public User CheckIsUser(User user)
         {
@@ -46,6 +48,7 @@ namespace BikeWebService.Controllers
             }  
         }
 
+
         static public User AddUser(User user)
         {
             try
@@ -67,6 +70,7 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
 
         static public User EditUser(User user)
         {
@@ -90,6 +94,7 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
         #endregion
     }
 }

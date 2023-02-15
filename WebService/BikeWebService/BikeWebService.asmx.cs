@@ -12,6 +12,7 @@ namespace BikeWebService
     public class BikeWebService : System.Web.Services.WebService
     {
         #region methods for user
+
         [WebMethod]
         public ResponseModel<User> LogIn(User user)
         {
@@ -39,6 +40,7 @@ namespace BikeWebService
                 };
             }
         }
+
         [WebMethod]
         public ResponseModel<User> Register(User user)
         {
@@ -94,9 +96,11 @@ namespace BikeWebService
                 };
             }
         }
+
         #endregion
 
         #region methods for tasks
+
         [WebMethod]
         public ResponseModel<Order> GetTask(string taskIDKey)
         {
@@ -214,6 +218,7 @@ namespace BikeWebService
             }
         }
         [WebMethod]
+
         public ResponseModel<int> DeleteOrder(User user, int orderId)
         {
             try
@@ -239,6 +244,7 @@ namespace BikeWebService
                 };
             }
         }
+
         #endregion
     }
 }

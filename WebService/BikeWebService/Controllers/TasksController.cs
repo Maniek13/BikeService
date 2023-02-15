@@ -9,6 +9,7 @@ namespace BikeWebService.Controllers
     public class TasksController
     {
         #region private functions
+
         static private void validateTask(Order task)
         {
             if (Object.Equals(task, null))
@@ -32,9 +33,11 @@ namespace BikeWebService.Controllers
                 throw new Exception("Prosze podać id aplikacji");
             }
         }
+
         #endregion
 
         #region public functions
+
         static public Order FindTask(string taskIDKey)
         {
             if (String.IsNullOrEmpty(taskIDKey))
@@ -64,6 +67,7 @@ namespace BikeWebService.Controllers
             }
         }
 
+
         static public List<Order> GetTasks(User user)
         {
             try
@@ -81,6 +85,7 @@ namespace BikeWebService.Controllers
 
         }
 
+
         static public bool IsSame(Order oldOrder)
         {
 
@@ -95,6 +100,7 @@ namespace BikeWebService.Controllers
             }
 
         }
+
 
         static public Order AddTask(int appId, Order order)
         {
@@ -127,6 +133,7 @@ namespace BikeWebService.Controllers
             }
         }
 
+
         static public Order EditTask(Order order)
         {
             try
@@ -148,6 +155,7 @@ namespace BikeWebService.Controllers
             }
         }
 
+
         static public void DeleteTask(int id)
         {
             try
@@ -164,6 +172,7 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
         #endregion 
     }
 }
