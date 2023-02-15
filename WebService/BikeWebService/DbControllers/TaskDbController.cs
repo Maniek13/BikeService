@@ -35,7 +35,7 @@ namespace BikeWebService.DbControllers
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
 
-                                return ConvertToTask(values);
+                                return convertToTask(values);
                             }
 
                             return null;
@@ -87,7 +87,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                tasks.Add(ConvertToTask(values));
+                                tasks.Add(convertToTask(values));
                             }
                         }
                     }
@@ -156,7 +156,7 @@ namespace BikeWebService.DbControllers
                 }
 
                 order.TaskId = taskId;
-                order.TaskIdKey = GetOrderKey(taskId);
+                order.TaskIdKey = getOrderKey(taskId);
                 order.InitDate= initDate;
 
                 //in triger on insert
@@ -170,7 +170,6 @@ namespace BikeWebService.DbControllers
 
             return order;
         }
-
         public int EditOrder(Order order)
         {
             try
@@ -304,7 +303,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                return order.Equals(ConvertToTask(values));
+                                return order.Equals(convertToTask(values));
                             }
 
                             return false;
@@ -358,7 +357,7 @@ namespace BikeWebService.DbControllers
                 throw new Exception(ex.Message);
             }
         }
-        private string GetOrderKey(int id)
+        private string getOrderKey(int id)
         {
 
             string taskIdKey = "";
@@ -401,7 +400,7 @@ namespace BikeWebService.DbControllers
             return taskIdKey;
         }
         [Obsolete("Is created in the insert triger, please don't use", true)]
-        private void SetOrderKey(string orderKey, int id)
+        private void setOrderKey(string orderKey, int id)
         {
             try
             {
@@ -440,11 +439,11 @@ namespace BikeWebService.DbControllers
 
         }
         [Obsolete("Key is generate in database")]
-        private string GenerateOrderKey(int appId, int taskId)
+        private string generateOrderKey(int appId, int taskId)
         {
             try
             {
-                string appKey = GetAppKey(appId);
+                string appKey = getAppKey(appId);
 
                 if (String.IsNullOrEmpty(appKey))
                 {
@@ -463,7 +462,7 @@ namespace BikeWebService.DbControllers
                 throw new Exception(ex.Message);
             }
         }
-        private string GetAppKey(int appId)
+        private string getAppKey(int appId)
         {
             string appKey = "";
 
@@ -505,7 +504,7 @@ namespace BikeWebService.DbControllers
 
             return appKey;
         }
-        private Order ConvertToTask(Object[] obj)
+        private Order convertToTask(Object[] obj)
         {
             if (obj == null || obj.Length == 0)
             {

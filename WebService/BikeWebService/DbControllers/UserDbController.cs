@@ -9,7 +9,6 @@ namespace BikeWebService.DbControllers
 {
     public class UserDbController : BaseDbController
     {
-
         public User CheckIsUser(User user)
         {
             string query = @"  

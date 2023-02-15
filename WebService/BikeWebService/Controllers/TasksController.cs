@@ -8,7 +8,7 @@ namespace BikeWebService.Controllers
 {
     public class TasksController
     {
-        static private void ValidateTask(Order task)
+        static private void validateTask(Order task)
         {
             if (Object.Equals(task, null))
             {
@@ -106,7 +106,7 @@ namespace BikeWebService.Controllers
                 }
                 
 
-                ValidateTask(order);
+                validateTask(order);
 
                 TaskDbController dbController = new TaskDbController();
                 order = dbController.AddOrder(order);
@@ -128,7 +128,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                ValidateTask(order);
+                validateTask(order);
 
                 TaskDbController dbController = new TaskDbController();
 
