@@ -8,7 +8,7 @@ namespace BikeWebService.Controllers
     internal class UsersController
     {
         #region private functions
-        static private void ValidateUser(User user)
+        static private void validateUser(User user)
         {
             if (Object.Equals(user, null))
             {
@@ -32,7 +32,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                ValidateUser(user);
+                validateUser(user);
                 user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
@@ -54,7 +54,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                ValidateUser(user);
+                validateUser(user);
                 user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
@@ -76,7 +76,7 @@ namespace BikeWebService.Controllers
 
             try
             {
-                ValidateUser(user);
+                validateUser(user);
                 user.Password = Crypto.EncryptSha256(user.Password);
 
                 UserDbController dbController = new UserDbController();
