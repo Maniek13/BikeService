@@ -180,13 +180,19 @@ namespace BikeWebService
             }
         }
 
+       
+
         [WebMethod]
-        public ResponseModel<Order> EditOrder(User user, Order order)
+        public ResponseModel<Order> EditOrder(User user, Order order, Order orderOld = null)
         {
             try
             {
                 UsersController.ValidateUser(user);
                 UsersController.CheckIsUser(user);
+
+                if(orderOld != null )
+                    if (!TasksController.IsSame(orderOld))
+                        throw new Exception("Zamowienie zostało zmienione. Odświerz dane");
 
                 order = TasksController.EditTask(order);
 
@@ -207,7 +213,7 @@ namespace BikeWebService
                 };
             }
         }
-
+ 
 
         [WebMethod]
         public ResponseModel<int> DeleteOrder(User user, int orderId)

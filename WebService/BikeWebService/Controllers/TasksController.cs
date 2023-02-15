@@ -78,6 +78,21 @@ namespace BikeWebService.Controllers
 
         }
 
+        static public bool IsSame(Order oldOrder)
+        {
+
+            try
+            {
+                TaskDbController dbController = new TaskDbController();
+                return dbController.IsSameOrder(oldOrder);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
         static public Order AddTask(int appId, Order order)
         {
             

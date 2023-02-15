@@ -274,17 +274,14 @@ namespace BikeWebService.DbControllers
                 throw new Exception(ex.Message);
             }
         }
-
-        public int NrOfSpecifyOrders(int stateNr, int AppId)
+        public bool IsSameOrder(Order order)
         {
-
+            
             try
             {
                 string query = @"
-                    SELECT SUM(t.state) FROM tasks t
-                    JOIN users u ON t.appID = u.appID
-                    WHERE login = @login AND password = @password
-                    ORDER BY t.state, t.initDate, t.header ASC";
+                SELECT * FROM tasks 
+                WHERE taskID = @taskId;";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
@@ -293,27 +290,24 @@ namespace BikeWebService.DbControllers
 
                         command.Parameters.Add(new SqlParameter()
                         {
-                            ParameterName = "@login",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = user.Login
-                        });
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@password",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = user.Password
+                            ParameterName = "@taskId",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = order.TaskId
                         });
 
                         connection.Open();
 
+
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            while (reader.Read())
+                            if (reader.Read())
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                tasks.Add(ConvertToTask(values));
+                                return order.Equals(ConvertToTask(values));
                             }
+
+                            return false;
                         }
                     }
                 }
@@ -321,7 +315,7 @@ namespace BikeWebService.DbControllers
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
+            }  
         }
         public int IsOrder(int taskId)
         {

@@ -16,7 +16,12 @@ namespace BikeWebService.Models
         public override bool Equals(object obj)
         {
             Order other = obj as Order;
-            if(!this.TaskId.Equals(other.TaskId))
+
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            if (!this.TaskId.Equals(other.TaskId))
             {
                 return false;
             }
