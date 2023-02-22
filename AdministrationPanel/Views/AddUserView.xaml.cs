@@ -25,8 +25,7 @@ namespace ToDoApp.Views
             };
 
             viewModel.User = user;
-            viewModel.AddUser(user);
-
+            viewModel.AddUser();
         }
     }
 }

@@ -2,8 +2,9 @@
 {
     public class User
     {
-        public string Login { get; set; } = "login";
-        public string Password { get; set; } = "hasło";
+        public int Id { get; set; } = 0;
+        public string Login { get; set; } 
+        public string Password { get; set; }
 
     }
 }

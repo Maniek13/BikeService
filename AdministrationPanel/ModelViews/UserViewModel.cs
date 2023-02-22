@@ -1,6 +1,8 @@
 ﻿using ToDoApp.Controller;
 using ToDoApp.HelperClasses;
 using ToDoApp.Models;
+using Windows.Security.Authentication.OnlineId;
+using Windows.UI.Xaml.Navigation;
 
 namespace ToDoApp.ModelViews
 {
@@ -20,9 +22,20 @@ namespace ToDoApp.ModelViews
             }
         }
 
-        internal void AddUser(User user)
+        internal void EditUser()
         {
-            UserController.AddUser(user);
+            if (User.Id != 0)
+            {
+                UserController.EditUser(User);
+            }
+        }
+
+        internal void AddUser()
+        {
+            if (User.Id == 0)
+            {
+                UserController.AddUser(User);
+            }
         }
     }
 }

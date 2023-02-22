@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using ToDoApp.Controller;
 using ToDoApp.Models;
 using Windows.UI.Xaml.Controls;
@@ -21,9 +22,9 @@ namespace ToDoApp.ModelViews
             _users = UserController.Get();
         }
 
-        internal void ShowContent(Frame frame, Type typeOf)
+        internal void ShowContent(Frame frame, Type typeOf, User user = null)
         {
-            frame.Navigate(typeOf);
+            frame.Navigate(typeOf, user);
         }
     }
 }

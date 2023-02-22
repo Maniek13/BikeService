@@ -1,4 +1,8 @@
-﻿using ToDoApp.ModelViews;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
+using ToDoApp.Models;
+using ToDoApp.ModelViews;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -13,9 +17,14 @@ namespace ToDoApp.Views
             viewModel = new ListOfUserViewModel();
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private void ShowAddView_Click(object sender, RoutedEventArgs e)
         {
             viewModel.ShowContent(MainContent ,typeof(AddUserView));
+        }
+
+        private void ShowEditView_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.ShowContent(MainContent, typeof(EditUserView), (User)((Button)sender).Tag);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace ToDoApp
+namespace ToDoApp.Views
 {
-    internal sealed partial class MainPage : Page
+    internal sealed partial class LoginPage : Page
     {
-        internal MainPage()
+        internal LoginPage()
         {
             this.InitializeComponent();
         }

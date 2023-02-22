@@ -1,23 +1,27 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using ToDoApp.Models;
 
 namespace ToDoApp.Controller
 {
     internal class UserController
     {
-        private static ObservableCollection<User> users = new ObservableCollection<User>()
+        private static ObservableCollection<User> _users = new ObservableCollection<User>()
         {
             new User()
             {
+                Id = 1,
                 Login = "pierwszy",
                 Password= "password1"
             },
              new User()
             {
+                Id = 2,
                 Login = "drugi",
                 Password= "password2"
             },  new User()
             {
+                Id= 3,
                 Login = "trzeci",
                 Password= "password3"
             }
@@ -25,11 +29,17 @@ namespace ToDoApp.Controller
 
         internal static ObservableCollection<User> Get()
         {
-            return users;
+            return _users;
         }
         internal static void AddUser(User user)
         {
-            users.Add(user);
+            user.Id= _users.Count+1;
+            _users.Add(user);
+        }
+        internal static void EditUser(User user)
+        {
+            _users.RemoveAt(user.Id-1);
+            _users.Insert(user.Id-1, user);
         }
     }
 }
