@@ -3,9 +3,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace ToDoApp
 {
-    public sealed partial class MainPage : Page
+    internal sealed partial class MainPage : Page
     {
-        public MainPage()
+        internal MainPage()
         {
             this.InitializeComponent();
         }

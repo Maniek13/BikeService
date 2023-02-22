@@ -11,18 +11,17 @@ namespace ToDoApp.ModelViews
         private ObservableCollection<User> _users { get; set; }
         public ObservableCollection<User> Users { get { return _users; } }
 
-
         public ListOfUserViewModel()
         {
             GetUsers();
         }
 
-        public void GetUsers()
+        internal void GetUsers()
         {
             _users = UserController.Get();
         }
 
-        public void ShowContent(Frame frame, Type typeOf)
+        internal void ShowContent(Frame frame, Type typeOf)
         {
             frame.Navigate(typeOf);
         }

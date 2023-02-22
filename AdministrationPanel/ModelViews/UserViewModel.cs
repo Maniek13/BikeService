@@ -20,7 +20,7 @@ namespace ToDoApp.ModelViews
             }
         }
 
-        public void AddUser(User user)
+        internal void AddUser(User user)
         {
             UserController.AddUser(user);
         }

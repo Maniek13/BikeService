@@ -4,11 +4,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace ToDoApp.Views
 {
-    public sealed partial class ListOfUser : Page
+    internal sealed partial class ListOfUser : Page
     {
-        public ListOfUserViewModel viewModel { get; set; }
-
-        public ListOfUser()
+        internal ListOfUserViewModel viewModel { get; set; }
+        internal ListOfUser()
         {
             InitializeComponent();
             viewModel = new ListOfUserViewModel();

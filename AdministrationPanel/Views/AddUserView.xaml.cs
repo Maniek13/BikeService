@@ -5,10 +5,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace ToDoApp.Views
 {
-    public sealed partial class AddUserView : Page
+    internal sealed partial class AddUserView : Page
     {
-        public UserViewModel viewModel { get; set; }
-        public AddUserView()
+        internal UserViewModel viewModel { get; set; }
+        internal AddUserView()
         {
             InitializeComponent();
             viewModel = new UserViewModel();

@@ -3,7 +3,7 @@ using ToDoApp.Models;
 
 namespace ToDoApp.Controller
 {
-    public class UserController
+    internal class UserController
     {
         private static ObservableCollection<User> users = new ObservableCollection<User>()
         {
@@ -23,11 +23,11 @@ namespace ToDoApp.Controller
             }
         };
 
-        public static ObservableCollection<User> Get()
+        internal static ObservableCollection<User> Get()
         {
             return users;
         }
-        public static void AddUser(User user)
+        internal static void AddUser(User user)
         {
             users.Add(user);
         }
