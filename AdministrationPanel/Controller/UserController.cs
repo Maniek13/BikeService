@@ -26,9 +26,7 @@ namespace ToDoApp.Controller
                 List<User> users = service.GetUsers(_user);
 
                 for(int i = 0; i < users.Count; i++)
-                {
                     _users.Add(users[i]);
-                }
 
                 return _users;
             }
@@ -59,7 +57,6 @@ namespace ToDoApp.Controller
 
                 if (user.Id == 0)
                     throw new Exception("Błędne dane");
-
 
                 _user.Id = user.Id;
                 _user.AppId = user.AppId;
