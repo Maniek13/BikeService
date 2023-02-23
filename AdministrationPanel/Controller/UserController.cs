@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using ToDoApp.Models;
 
 namespace ToDoApp.Controller
@@ -40,6 +42,19 @@ namespace ToDoApp.Controller
         {
             _users.RemoveAt(user.Id-1);
             _users.Insert(user.Id-1, user);
+        }
+        internal static void Login(User user)
+        {
+            try
+            {
+                user = ServiceController.LogIn(user);
+                if (user.Id == 0)
+                    throw new Exception("Błędne dane");
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
     }
 }

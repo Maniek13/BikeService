@@ -2,17 +2,26 @@
     x:Class="ToDoApp.Views.ListOfUser"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ToDoApp.ModelViews"
+    xmlns:local="using:ToDoApp.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1497">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.DataContext>
         <local:ListOfUserViewModel/>
     </Page.DataContext>
+    
     <Grid>
-        <StackPanel Width="200" Height="NaN" HorizontalAlignment="Right" UseLayoutRounding="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Right" UseLayoutRounding="False" BorderThickness="2,0,0,0">
+            <StackPanel.BorderBrush>
+                <SolidColorBrush Color="#FF23107C"/>
+            </StackPanel.BorderBrush>
             <ListView x:Name="UserList" ItemsSource="{Binding Users}" Width="200" Margin="0,10,0,0" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -37,8 +46,8 @@
                 Dodaj nowego użytkownika
             </Button>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Width="1298">
-            <Frame x:Name="MainContent"  Width="800" Height="500"/>
+        <StackPanel Grid.Column="0" UseLayoutRounding="False" >
+            <Frame x:Name="MainContent"/>
         </StackPanel>
     </Grid>
 </Page>

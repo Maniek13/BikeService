@@ -1,18 +1,38 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using ToDoApp.ViewModel;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace ToDoApp.Views
 {
     internal sealed partial class LoginPage : Page
     {
+        internal LoginViewModel viewModel { get; set; }
         internal LoginPage()
         {
             this.InitializeComponent();
+            viewModel= new LoginViewModel();
         }
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Views.ListOfUser));
+            try
+            {
+                errorField.Text = "";
+                errorField.Visibility = Visibility.Collapsed;
+
+                viewModel.frame = Frame;
+                viewModel.User.Login = loginInput.Text;
+                viewModel.User.Password = paswordInput.Text;
+
+                viewModel.Login();
+            }
+            catch (Exception ex)
+            {
+                errorField.Text = ex.Message;
+                errorField.Visibility = Visibility.Visible;
+            }
+           
         }
     }
 }
