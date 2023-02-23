@@ -13,7 +13,7 @@ namespace ToDoApp.Controller
             {
                 User serviceUser = ConvertToServiceUser(user);
                 //after convert user is nul #?!@#?!@ only this one
-                using (BikeWebService.BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
+                using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
                     var service = client.GetUsersAsync(serviceUser);
                     service.Wait();
@@ -28,7 +28,7 @@ namespace ToDoApp.Controller
 
                     for(int i = 0; i< serviceUsers.Count; i++)
                     {
-                        BikeWebService.User tempUser = serviceUsers.ElementAt(i);
+                        User tempUser = serviceUsers.ElementAt(i);
                         users.Add(ConvertToUser(tempUser));
                     }
 
