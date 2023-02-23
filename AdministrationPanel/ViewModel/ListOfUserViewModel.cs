@@ -8,26 +8,28 @@ namespace ToDoApp.ViewModel
 {
     public class ListOfUserViewModel
     {
+        #region private members
         private ObservableCollection<User> _users { get; set; }
+        private UserController _controler;
+        #endregion
+
         public ObservableCollection<User> Users { get { return _users; } }
-
-
         public ListOfUserViewModel()
         {
-            _users = UserController.SetList();
+            _controler = new UserController();
+            _users = _controler.SetList();
         }
 
         public void GetUsers()
         {
             try
             {
-                _users = UserController.GetUsers();
+                _users = _controler.GetUsers();
             }
             catch(Exception ex) 
             {
                 throw new Exception(ex.Message);
             }
-            
         }
 
         internal void ShowContent(Frame frame, Type typeOf, User user = null)

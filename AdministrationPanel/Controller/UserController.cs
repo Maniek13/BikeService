@@ -7,19 +7,23 @@ namespace ToDoApp.Controller
 {
     internal class UserController
     {
-        private static User User = new User();
+        #region private members
+        private static User _user = new User();
+        private static ObservableCollection<User> _users = new ObservableCollection<User>() { };
+        #endregion
 
-        private static ObservableCollection<User> _users = new ObservableCollection<User>(){};
-        internal static ObservableCollection<User> SetList()
+        internal static User User { get { return _user; } }
+        internal ObservableCollection<User> SetList()
         {
             return _users;
         }
-        internal static ObservableCollection<User> GetUsers()
+        internal ObservableCollection<User> GetUsers()
         {
             try
             {
                 _users.Clear();
-                List<User> users = ServiceController.GetUsers(User);
+                ServiceController service = new ServiceController();
+                List<User> users = service.GetUsers(_user);
 
                 for(int i = 0; i < users.Count; i++)
                 {
@@ -33,31 +37,32 @@ namespace ToDoApp.Controller
                 throw new Exception(ex.Message, ex);
             }
         }
-        internal static void AddUser(User user)
+        internal void AddUser(User user)
         {
             user.Id= _users.Count+1;
             _users.Add(user);
         }
-        internal static void EditUser(User user)
+        internal void EditUser(User user)
         {
             _users.RemoveAt(user.Id-1);
             _users.Insert(user.Id-1, user);
         }
-        internal static void Login(string login, string password)
+        internal void Login(string login, string password)
         {
             try
             {
-                User.Login = login;
-                User.Password = password;
+                _user.Login = login;
+                _user.Password = password;
 
-                User user = ServiceController.LogIn(User);
+                ServiceController service = new ServiceController();
+                User user = service.LogIn(_user);
 
                 if (user.Id == 0)
                     throw new Exception("Błędne dane");
 
 
-                User.Id = user.Id;
-                User.AppId = user.AppId;
+                _user.Id = user.Id;
+                _user.AppId = user.AppId;
             }
             catch(Exception ex)
             {

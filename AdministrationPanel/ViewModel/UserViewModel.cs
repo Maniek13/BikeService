@@ -6,7 +6,15 @@ namespace ToDoApp.ViewModel
 {
     public class UserViewModel : PropertyChange
     {
+        #region private members
         private User _user = new User();
+        private UserController _controller;
+        #endregion
+
+        public UserViewModel() 
+        { 
+            _controller = new UserController();
+        }
         public User User
         {
             get
@@ -24,7 +32,7 @@ namespace ToDoApp.ViewModel
         {
             if (User.Id != 0)
             {
-                UserController.EditUser(User);
+                _controller.EditUser(User);
             }
         }
 
@@ -32,7 +40,7 @@ namespace ToDoApp.ViewModel
         {
             if (User.Id == 0)
             {
-                UserController.AddUser(User);
+                _controller.AddUser(User);
             }
         }
     }

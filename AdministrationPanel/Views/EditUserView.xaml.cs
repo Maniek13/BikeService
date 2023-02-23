@@ -32,10 +32,5 @@ namespace ToDoApp.Views
             }
             viewModel.EditUser();
         }
-
-        private void paswordInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

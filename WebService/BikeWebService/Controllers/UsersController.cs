@@ -56,7 +56,6 @@ namespace BikeWebService.Controllers
             {
                 validateUser(user);
                 UserDbController dbController = new UserDbController();
-
                 dbController.CheckIsAministratorUser(user);
 
                 if (user.Id.Equals(0))

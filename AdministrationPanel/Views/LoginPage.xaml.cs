@@ -32,7 +32,6 @@ namespace ToDoApp.Views
                 errorField.Text = ex.Message;
                 errorField.Visibility = Visibility.Visible;
             }
-           
         }
     }
 }
