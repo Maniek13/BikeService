@@ -9,7 +9,7 @@ namespace ToDoApp.Controller
     {
         #region private members
         private static User _user = new User();
-        private static ObservableCollection<User> _users = new ObservableCollection<User>() { };
+        private static ObservableCollection<User> _users = new ObservableCollection<User>();
         #endregion
 
         #region  static member
