@@ -1,10 +1,8 @@
 ﻿using ToDoApp.Controller;
 using ToDoApp.HelperClasses;
 using ToDoApp.Models;
-using Windows.Security.Authentication.OnlineId;
-using Windows.UI.Xaml.Navigation;
 
-namespace ToDoApp.ModelViews
+namespace ToDoApp.ViewModel
 {
     public class UserViewModel : PropertyChange
     {

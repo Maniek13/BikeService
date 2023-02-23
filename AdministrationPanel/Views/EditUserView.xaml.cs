@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using ToDoApp.Models;
-using ToDoApp.ModelViews;
+﻿using ToDoApp.Models;
+using ToDoApp.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;

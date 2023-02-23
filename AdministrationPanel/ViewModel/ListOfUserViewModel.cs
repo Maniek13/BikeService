@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using ToDoApp.Controller;
 using ToDoApp.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace ToDoApp.ModelViews
+namespace ToDoApp.ViewModel
 {
     public class ListOfUserViewModel
     {

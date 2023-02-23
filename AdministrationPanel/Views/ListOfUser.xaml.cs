@@ -1,8 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using ToDoApp.Models;
-using ToDoApp.ModelViews;
+﻿using ToDoApp.Models;
+using ToDoApp.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
