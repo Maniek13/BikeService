@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ToDoApp.BikeWebService;
 
 namespace ToDoApp.Controller
 {
@@ -10,18 +11,18 @@ namespace ToDoApp.Controller
         {
             try
             {
-                BikeWebService.User serviceUser = ConvertToServiceUser(user);
-
-                using (BikeWebService.BikeWebServiceSoapClient client = new BikeWebService.BikeWebServiceSoapClient(new BikeWebService.BikeWebServiceSoapClient.EndpointConfiguration()))
+                User serviceUser = ConvertToServiceUser(user);
+                //after convert user is nul #?!@#?!@ only this one
+                using (BikeWebService.BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
                     var service = client.GetUsersAsync(serviceUser);
                     service.Wait();
-                    var res = service.Result;
+                    var res = service.Result.Body.GetUsersResult;
 
-                    if (res.Body.GetUsersResult.resultCode != 1)
-                        throw new Exception(res.Body.GetUsersResult.message);
+                    if (res.resultCode != 1)
+                        throw new Exception(res.message);
                     
-                    var serviceUsers = res.Body.GetUsersResult.Data;
+                    var serviceUsers = res.Data;
 
                     List<Models.User> users = new List<Models.User>();
 
@@ -44,23 +45,23 @@ namespace ToDoApp.Controller
         {
             try
             {
-                BikeWebService.User serviceUser = ConvertToServiceUser(user);
+                User serviceUser = ConvertToServiceUser(user);
 
-                using (BikeWebService.BikeWebServiceSoapClient client = new BikeWebService.BikeWebServiceSoapClient(new BikeWebService.BikeWebServiceSoapClient.EndpointConfiguration()))
+                using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
                     var service = client.LogInAsAdministratorAsync(serviceUser);
                     service.Wait();
-                    var res = service.Result;
+                    var res = service.Result.Body.LogInAsAdministratorResult;
 
-                    if (res.Body.LogInAsAdministratorResult.resultCode != 1)
-                        throw new Exception(res.Body.LogInAsAdministratorResult.message);
+                    if (res.resultCode != 1)
+                        throw new Exception(res.message);
 
                     return new Models.User
                     {
-                        Id = res.Body.LogInAsAdministratorResult.Data.Id,
-                        Login = res.Body.LogInAsAdministratorResult.Data.Login,
-                        Password = res.Body.LogInAsAdministratorResult.Data.Password,
-                        AppId = res.Body.LogInAsAdministratorResult.Data.AppId
+                        Id = res.Data.Id,
+                        Login = res.Data.Login,
+                        Password = res.Data.Password,
+                        AppId = res.Data.AppId
                     };
                 }
             }
@@ -71,9 +72,9 @@ namespace ToDoApp.Controller
         }
 
         #region private function
-        private BikeWebService.User ConvertToServiceUser(Models.User user)
+        private User ConvertToServiceUser(Models.User user)
         {
-            return new BikeWebService.User
+            return new User
             {
                 Id = user.Id,
                 Login = user.Login,
@@ -82,7 +83,7 @@ namespace ToDoApp.Controller
             };
         }
 
-        private Models.User ConvertToUser(BikeWebService.User user)
+        private Models.User ConvertToUser(User user)
         {
             return new Models.User
             {

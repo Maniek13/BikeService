@@ -160,7 +160,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BikeAppAdministrationPanel_TemporaryKey.pfx" />
+    <None Include="BikeAppAdministrationPanel_TemporaryKey.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Connected Services\BikeWebService\configuration91.svcinfo" />
     <None Include="Connected Services\BikeWebService\configuration.svcinfo" />
     <None Include="Connected Services\BikeWebService\Reference.svcmap">
