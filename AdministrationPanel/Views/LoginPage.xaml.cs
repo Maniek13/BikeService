@@ -25,7 +25,7 @@ namespace ToDoApp.Views
                 viewModel.User.Login = loginInput.Text;
                 viewModel.User.Password = paswordInput.Text;
 
-                viewModel.Login();
+                viewModel.Login(loginInput.Text, paswordInput.Text);
             }
             catch (Exception ex)
             {

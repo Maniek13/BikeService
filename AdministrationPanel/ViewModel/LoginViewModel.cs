@@ -21,11 +21,12 @@ namespace ToDoApp.ViewModel
             }
         }
 
-        internal void Login()
+        internal void Login(string login, string passweord)
         {
             try
             {
-                UserController.Login(User);
+                UserController.Login(login, passweord);
+
                 frame.Navigate(typeof(Views.ListOfUser));
             }
             catch (Exception ex)

@@ -49,5 +49,9 @@
         <StackPanel Grid.Column="0" UseLayoutRounding="False" >
             <Frame x:Name="MainContent"/>
         </StackPanel>
+        <StackPanel>
+            <TextBlock Visibility="Collapsed" x:Name="ErrorList"/>
+        </StackPanel>
+        
     </Grid>
 </Page>

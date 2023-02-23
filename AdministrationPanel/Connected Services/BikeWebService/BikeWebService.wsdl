@@ -31,6 +31,20 @@
           <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="LogInAsAdministrator">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogInAsAdministratorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LogInAsAdministratorResult" type="tns:ResponseModelOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="Register">
         <s:complexType>
           <s:sequence>
@@ -60,6 +74,32 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUsersResult" type="tns:ResponseModelOfListOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResponseModelOfListOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfUser" />
+          <s:element minOccurs="1" maxOccurs="1" name="resultCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetTask">
         <s:complexType>
           <s:sequence>
@@ -179,6 +219,12 @@
   <wsdl:message name="LogInSoapOut">
     <wsdl:part name="parameters" element="tns:LogInResponse" />
   </wsdl:message>
+  <wsdl:message name="LogInAsAdministratorSoapIn">
+    <wsdl:part name="parameters" element="tns:LogInAsAdministrator" />
+  </wsdl:message>
+  <wsdl:message name="LogInAsAdministratorSoapOut">
+    <wsdl:part name="parameters" element="tns:LogInAsAdministratorResponse" />
+  </wsdl:message>
   <wsdl:message name="RegisterSoapIn">
     <wsdl:part name="parameters" element="tns:Register" />
   </wsdl:message>
@@ -190,6 +236,12 @@
   </wsdl:message>
   <wsdl:message name="EditUserSoapOut">
     <wsdl:part name="parameters" element="tns:EditUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
   </wsdl:message>
   <wsdl:message name="GetTaskSoapIn">
     <wsdl:part name="parameters" element="tns:GetTask" />
@@ -226,6 +278,10 @@
       <wsdl:input message="tns:LogInSoapIn" />
       <wsdl:output message="tns:LogInSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="LogInAsAdministrator">
+      <wsdl:input message="tns:LogInAsAdministratorSoapIn" />
+      <wsdl:output message="tns:LogInAsAdministratorSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="Register">
       <wsdl:input message="tns:RegisterSoapIn" />
       <wsdl:output message="tns:RegisterSoapOut" />
@@ -233,6 +289,10 @@
     <wsdl:operation name="EditUser">
       <wsdl:input message="tns:EditUserSoapIn" />
       <wsdl:output message="tns:EditUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input message="tns:GetUsersSoapIn" />
+      <wsdl:output message="tns:GetUsersSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetTask">
       <wsdl:input message="tns:GetTaskSoapIn" />
@@ -266,6 +326,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="LogInAsAdministrator">
+      <soap:operation soapAction="http://tempuri.org/LogInAsAdministrator" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Register">
       <soap:operation soapAction="http://tempuri.org/Register" style="document" />
       <wsdl:input>
@@ -277,6 +346,15 @@
     </wsdl:operation>
     <wsdl:operation name="EditUser">
       <soap:operation soapAction="http://tempuri.org/EditUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap:operation soapAction="http://tempuri.org/GetUsers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -341,6 +419,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="LogInAsAdministrator">
+      <soap12:operation soapAction="http://tempuri.org/LogInAsAdministrator" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Register">
       <soap12:operation soapAction="http://tempuri.org/Register" style="document" />
       <wsdl:input>
@@ -352,6 +439,15 @@
     </wsdl:operation>
     <wsdl:operation name="EditUser">
       <soap12:operation soapAction="http://tempuri.org/EditUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap12:operation soapAction="http://tempuri.org/GetUsers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

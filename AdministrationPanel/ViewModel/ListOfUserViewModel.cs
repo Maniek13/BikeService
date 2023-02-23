@@ -11,14 +11,23 @@ namespace ToDoApp.ViewModel
         private ObservableCollection<User> _users { get; set; }
         public ObservableCollection<User> Users { get { return _users; } }
 
+
         public ListOfUserViewModel()
         {
-            GetUsers();
+            _users = UserController.SetList();
         }
 
-        internal void GetUsers()
+        public void GetUsers()
         {
-            _users = UserController.Get();
+            try
+            {
+                _users = UserController.GetUsers();
+            }
+            catch(Exception ex) 
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
 
         internal void ShowContent(Frame frame, Type typeOf, User user = null)

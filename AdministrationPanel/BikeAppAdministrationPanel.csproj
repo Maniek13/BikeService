@@ -193,6 +193,12 @@
     <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.GetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.GetUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.LogInAsAdministratorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.LogInResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

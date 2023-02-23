@@ -42,6 +42,34 @@ namespace BikeWebService
         }
 
         [WebMethod]
+        public ResponseModel<User> LogInAsAdministrator(User user)
+        {
+            try
+            {
+                UsersController.CheckIsAdministratorUser(user);
+
+                ResponseModel<User> response = new ResponseModel<User>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = user
+                };
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<User>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
+
+        [WebMethod]
         public ResponseModel<User> Register(User user)
         {
             try
@@ -98,6 +126,33 @@ namespace BikeWebService
             }
         }
 
+
+
+        [WebMethod]
+        public ResponseModel<List<User>> GetUsers(User user) 
+        {
+            try
+            {
+                ResponseModel<List<User>> response = new ResponseModel<List<User>>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = UsersController.GetAllUsers(user)
+                };
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<List<User>>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
         #endregion
 
         #region methods for tasks

@@ -2,6 +2,7 @@
 using BikeWebService.DbControllers;
 using BikeWebService.Models;
 using System;
+using System.Collections.Generic;
 
 namespace BikeWebService.Controllers
 {
@@ -29,7 +30,6 @@ namespace BikeWebService.Controllers
         #endregion
 
         #region internal functions
-
         static internal void CheckIsUser(User user)
         {
             try
@@ -49,6 +49,27 @@ namespace BikeWebService.Controllers
             {
                 throw new Exception(ex.Message);
             }  
+        }
+        static internal void CheckIsAdministratorUser(User user)
+        {
+            try
+            {
+                validateUser(user);
+                UserDbController dbController = new UserDbController();
+
+                dbController.CheckIsAministratorUser(user);
+
+                if (user.Id.Equals(0))
+                {
+                    throw new Exception("Niepoprawne dane logowania");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         static internal void AddUser(User user)
@@ -91,6 +112,22 @@ namespace BikeWebService.Controllers
             }
         }
 
+        static internal List<User> GetAllUsers(User user)
+        {
+            try
+            {
+                validateUser(user);
+                CheckIsAdministratorUser(user);
+
+                UserDbController dbController = new UserDbController();
+                return dbController.GetAllUser(user);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         #endregion
     }
 }

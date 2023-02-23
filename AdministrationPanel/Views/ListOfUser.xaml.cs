@@ -1,4 +1,5 @@
-﻿using ToDoApp.Models;
+﻿using System;
+using ToDoApp.Models;
 using ToDoApp.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -11,7 +12,18 @@ namespace ToDoApp.Views
         internal ListOfUser()
         {
             InitializeComponent();
-            viewModel = new ListOfUserViewModel();
+
+            try 
+            {
+                viewModel = new ListOfUserViewModel();
+                viewModel.GetUsers();
+            }
+            catch(Exception ex)
+            {
+                ErrorList.Text = ex.Message;
+                ErrorList.Visibility= Visibility.Visible;
+            }
+            
         }
 
         private void ShowAddView_Click(object sender, RoutedEventArgs e)
