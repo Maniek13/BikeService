@@ -12,7 +12,7 @@ namespace ToDoApp.Controller
             try
             {
                 User serviceUser = ConvertToServiceUser(user);
-                //after convert user is nul #?!@#?!@ only this one
+
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
                     var service = client.GetUsersAsync(serviceUser);
