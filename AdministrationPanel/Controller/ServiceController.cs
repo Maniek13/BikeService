@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDoApp.BikeWebService;
-using ToDoApp.Models;
-
 namespace ToDoApp.Controller
 {
     internal class ServiceController
