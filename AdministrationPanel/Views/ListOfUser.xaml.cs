@@ -24,7 +24,7 @@ namespace ToDoApp.Views
 
         private void ShowEditView_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ShowContent(MainContent, typeof(EditUserView), (User)((Button)sender).Tag);
+            viewModel.ShowContent(MainContent, typeof(EditUserView), ((Button)sender).Tag as User);
         }
     }
 }
