@@ -12,7 +12,11 @@ namespace ToDoApp.Controller
         private static ObservableCollection<User> _users = new ObservableCollection<User>() { };
         #endregion
 
+        #region  static member
         internal static User User { get { return _user; } }
+        #endregion
+
+        #region internal function
         internal ObservableCollection<User> SetList()
         {
             return _users;
@@ -66,5 +70,6 @@ namespace ToDoApp.Controller
                 throw new Exception(ex.Message, ex);
             }
         }
+        #endregion
     }
 }

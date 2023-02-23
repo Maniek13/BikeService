@@ -7,11 +7,12 @@ namespace ToDoApp.Controller
 {
     internal class ServiceController
     {
+        #region internal function
         internal List<Models.User> GetUsers(Models.User user)
         {
             try
             {
-                User serviceUser = ConvertToServiceUser(user);
+                User serviceUser = convertToServiceUser(user);
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
@@ -29,7 +30,7 @@ namespace ToDoApp.Controller
                     for(int i = 0; i< serviceUsers.Count; i++)
                     {
                         User tempUser = serviceUsers.ElementAt(i);
-                        users.Add(ConvertToUser(tempUser));
+                        users.Add(convertToUser(tempUser));
                     }
 
                     return users;
@@ -45,7 +46,7 @@ namespace ToDoApp.Controller
         {
             try
             {
-                User serviceUser = ConvertToServiceUser(user);
+                User serviceUser = convertToServiceUser(user);
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
@@ -70,9 +71,10 @@ namespace ToDoApp.Controller
                 throw new Exception(ex.Message, ex);
             }
         }
+        #endregion
 
         #region private function
-        private User ConvertToServiceUser(Models.User user)
+        private User convertToServiceUser(Models.User user)
         {
             return new User
             {
@@ -83,7 +85,7 @@ namespace ToDoApp.Controller
             };
         }
 
-        private Models.User ConvertToUser(User user)
+        private Models.User convertToUser(User user)
         {
             return new Models.User
             {
