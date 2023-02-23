@@ -115,7 +115,6 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                validateUser(user);
                 CheckIsAdministratorUser(user);
 
                 UserDbController dbController = new UserDbController();

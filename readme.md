@@ -15,6 +15,7 @@ To use please compile apk with created settings file and configure IIS and DataB
 
 Run sql to create database (Or update you upgrade server from 0.9a to 0.9b)
 Run sql CreateIndex to set indexes 
+Run sql CreateAdministrationDB
 Create user in database
 Add ConectionString to database on settings.xml file
 Publish web service to ISS or ect
@@ -34,6 +35,22 @@ _______________________________________
 Compile apk and run on device or emulator
 
 0.9b1
+
+
+__________________________
+Control panel (UWP) in progres
+Open from AppPackages
+
+login: test
+password: 12345
+
+working:
+login function
+
+
+___________________________
+
+Android App
 Main
 
 <img src="https://user-images.githubusercontent.com/47826375/202868309-54d9a319-cf5e-4820-bb3f-720f82eb5ab3.jpg" width="100"><img src="https://user-images.githubusercontent.com/47826375/202870025-63d24a41-28f3-4d3f-a3b9-3e73ce3912cf.jpg" width="100">
