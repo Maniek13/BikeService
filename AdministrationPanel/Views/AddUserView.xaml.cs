@@ -1,5 +1,5 @@
 ﻿using ToDoApp.Models;
-using ToDoApp.ViewModel;
+using ToDoApp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

@@ -4,7 +4,7 @@ using ToDoApp.Controller;
 using ToDoApp.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace ToDoApp.ViewModel
+namespace ToDoApp.ViewModels
 {
     public class ListOfUserViewModel
     {

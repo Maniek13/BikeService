@@ -1,14 +1,15 @@
-﻿using ToDoApp.Controller;
+﻿using ToDoApp.BaseClasses;
+using ToDoApp.Controller;
 using ToDoApp.HelperClasses;
 using ToDoApp.Models;
 
-namespace ToDoApp.ViewModel
+namespace ToDoApp.ViewModels
 {
     public class UserViewModel : PropertyChange
     {
         #region private members
         private User _user = new User();
-        private UserController _controller;
+        private UserControllerBase _controller;
         #endregion
 
         public UserViewModel() 

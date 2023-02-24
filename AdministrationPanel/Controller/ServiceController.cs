@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ToDoApp.BaseClasses;
 using ToDoApp.BikeWebService;
 
 namespace ToDoApp.Controller
 {
-    internal class ServiceController
+    internal class ServiceController : ServiceControllerBase
     {
         #region internal function
-        internal List<Models.User> GetUsers(Models.User user)
+        internal override List<Models.User> GetUsers(Models.User user)
         {
             try
             {
@@ -42,7 +43,7 @@ namespace ToDoApp.Controller
             }
         }
 
-        internal Models.User LogIn(Models.User user)
+        internal override Models.User LogIn(Models.User user)
         {
             try
             {

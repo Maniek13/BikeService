@@ -1,15 +1,16 @@
 ﻿using System;
+using ToDoApp.BaseClasses;
 using ToDoApp.Controller;
 using ToDoApp.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace ToDoApp.ViewModel
+namespace ToDoApp.ViewModels
 {
     public class LoginViewModel
     {
         #region private members
         private User _user = new User();
-        private UserController _controller;
+        private UserControllerBase _controller;
         #endregion
 
         public Frame frame = new Frame();

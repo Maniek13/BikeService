@@ -1,32 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using ToDoApp.BaseClasses;
 using ToDoApp.Models;
 
 namespace ToDoApp.Controller
 {
-    internal class UserController
+    internal class UserController : UserControllerBase
     {
-        #region private members
-        private static User _user = new User();
-        private static ObservableCollection<User> _users = new ObservableCollection<User>();
-        #endregion
-
-        #region  static member
-        internal static User User { get { return _user; } }
-        #endregion
+        private ServiceControllerBase service = new ServiceController();
 
         #region internal function
-        internal ObservableCollection<User> SetList()
+        internal override ObservableCollection<User> SetList()
         {
             return _users;
         }
-        internal ObservableCollection<User> GetUsers()
+        internal override ObservableCollection<User> GetUsers()
         {
             try
             {
                 _users.Clear();
-                ServiceController service = new ServiceController();
                 List<User> users = service.GetUsers(_user);
 
                 for(int i = 0; i < users.Count; i++)
@@ -39,24 +32,23 @@ namespace ToDoApp.Controller
                 throw new Exception(ex.Message, ex);
             }
         }
-        internal void AddUser(User user)
+        internal override void AddUser(User user)
         {
             user.Id= _users.Count+1;
             _users.Add(user);
         }
-        internal void EditUser(User user)
+        internal override void EditUser(User user)
         {
             _users.RemoveAt(user.Id-1);
             _users.Insert(user.Id-1, user);
         }
-        internal void Login(string login, string password)
+        internal override void Login(string login, string password)
         {
             try
             {
                 _user.Login = login;
                 _user.Password = password;
 
-                ServiceController service = new ServiceController();
                 User user = service.LogIn(_user);
 
                 if (user.Id == 0)
