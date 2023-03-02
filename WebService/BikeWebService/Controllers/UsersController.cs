@@ -1,5 +1,5 @@
-﻿using BikeWebService.Classes;
-using BikeWebService.DbControllers;
+﻿using BikeWebService.AbstractClasses;
+using BikeWebService.Classes;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,109 @@ namespace BikeWebService.Controllers
 {
     internal class UsersController
     {
+        private readonly object lockUser = new object();
+        private readonly UserDbControllerAbstractClass _userDbController;
+        public UsersController(UserDbControllerAbstractClass service)
+        {
+            _userDbController = service;
+        }
+  
+        #region internal functions
+        internal void CheckIsUser(User user)
+        {
+            try
+            {
+                validateUser(user);
+                _userDbController.CheckIsUser(user);
+
+                if (user.Id.Equals(0))
+                {
+                    throw new Exception("Niepoprawne dane logowania");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }  
+        }
+        internal void CheckIsAdministratorUser(User user)
+        {
+            try
+            {
+                validateUser(user);
+                _userDbController.CheckIsAministratorUser(user);
+
+                if (user.Id.Equals(0))
+                {
+                    throw new Exception("Niepoprawne dane logowania");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal void AddUser(User user)
+        {
+            try
+            {
+                lock(lockUser)
+                {
+                    validateUser(user);
+                    _userDbController.AddUser(user);
+
+                    if (user.Id.Equals(0))
+                    {
+                        throw new Exception("Niepoprawne dane");
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal void EditUser(User user)
+        {
+
+            try
+            {
+                lock (lockUser)
+                {
+                    validateUser(user);
+
+                    if (_userDbController.EditUser(user.Login, user.Password, user.Id) == 0)
+                    {
+                        throw new Exception("Błąd edycji");
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal List<User> GetAllUsers(User user)
+        {
+            try
+            {
+                CheckIsAdministratorUser(user);
+                return _userDbController.GetAllUser(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        #endregion
+
         #region private functions
-        static private void validateUser(User user)
+        private void validateUser(User user)
         {
             if (Object.Equals(user, null))
             {
@@ -26,106 +127,7 @@ namespace BikeWebService.Controllers
 
             user.Password = Crypto.EncryptSha256(user.Password);
         }
-
         #endregion
 
-        #region internal functions
-        static internal void CheckIsUser(User user)
-        {
-            try
-            {
-                validateUser(user);                
-
-                UserDbController dbController = new UserDbController();
-                dbController.CheckIsUser(user);
-
-                if (user.Id.Equals(0))
-                {
-                    throw new Exception("Niepoprawne dane logowania");
-                }
-
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }  
-        }
-        static internal void CheckIsAdministratorUser(User user)
-        {
-            try
-            {
-                validateUser(user);
-                UserDbController dbController = new UserDbController();
-                dbController.CheckIsAministratorUser(user);
-
-                if (user.Id.Equals(0))
-                {
-                    throw new Exception("Niepoprawne dane logowania");
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        static internal void AddUser(User user)
-        {
-            try
-            {
-                validateUser(user);
-
-                UserDbController dbController = new UserDbController();
-                dbController.AddUser(user);
-
-                if (user.Id.Equals(0))
-                {
-                    throw new Exception("Niepoprawne dane");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        static internal void EditUser(User user)
-        {
-
-            try
-            {
-                validateUser(user);
-
-                UserDbController dbController = new UserDbController();
-               
-                if(dbController.EditUser(user.Login, user.Password, user.Id) == 0)
-                {
-                    throw new Exception("Błąd edycji");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        static internal List<User> GetAllUsers(User user)
-        {
-            try
-            {
-                CheckIsAdministratorUser(user);
-
-                UserDbController dbController = new UserDbController();
-                return dbController.GetAllUser(user);
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        #endregion
     }
 }

@@ -1,17 +1,16 @@
-﻿using BikeWebService.Models;
+﻿using BikeWebService.AbstractClasses;
+using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace BikeWebService.DbControllers
 {
-    internal class UserDbController : BaseDbController
+    internal class UserDbController : UserDbControllerAbstractClass
     {
         #region internal functions
 
-        internal void CheckIsUser(User user)
+        internal override void CheckIsUser(User user)
         {
             string query = @"  
                 SELECT userID, appID FROM users 
@@ -60,7 +59,7 @@ namespace BikeWebService.DbControllers
             user.AppId = appId;
         }
 
-        internal void CheckIsAministratorUser(User user)
+        internal override void CheckIsAministratorUser(User user)
         {
             string query = @"  
                 SELECT u.userID, u.appID FROM administrators as a
@@ -110,7 +109,7 @@ namespace BikeWebService.DbControllers
             user.AppId = appId;
         }
 
-        internal void AddUser(User user)
+        internal override void AddUser(User user)
         {
             try
             {
@@ -166,7 +165,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        internal int EditUser(string login, string password, int id)
+        internal override int EditUser(string login, string password, int id)
         {
             try
             {
@@ -222,7 +221,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        internal List<User> GetAllUser(User user)
+        internal override List<User> GetAllUser(User user)
         {
             string query = @"SELECT * FROM users";
 

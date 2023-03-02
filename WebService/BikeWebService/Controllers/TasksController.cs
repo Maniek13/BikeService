@@ -1,5 +1,4 @@
-﻿using BikeWebService.Classes;
-using BikeWebService.DbControllers;
+﻿using BikeWebService.AbstractClasses;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,13 @@ namespace BikeWebService.Controllers
 {
     internal class TasksController
     {
+        readonly object lockTask = new object();
+        private readonly TaskDbControllerAbstractClass _taskDbController;
+        public TasksController(TaskDbControllerAbstractClass service)
+        {
+            _taskDbController = service;
+        }
+
         #region private functions
 
         static private void validateTask(Order task)
@@ -38,7 +44,7 @@ namespace BikeWebService.Controllers
 
         #region internal functions
 
-        static internal Order FindTask(string taskIDKey)
+        internal Order FindTask(string taskIDKey)
         {
             if (String.IsNullOrEmpty(taskIDKey))
             {
@@ -47,8 +53,7 @@ namespace BikeWebService.Controllers
 
             try
             {
-                TaskDbController dbController = new TaskDbController();
-                Order task = dbController.GetTask(taskIDKey);
+                Order task = _taskDbController.GetTask(taskIDKey);
 
                 if (task == null)
                 {
@@ -67,14 +72,11 @@ namespace BikeWebService.Controllers
             }
         }
 
-        static internal List<Order> GetTasks(User user)
+        internal List<Order> GetTasks(User user)
         {
             try
             {
-
-                TaskDbController dbController = new TaskDbController();
-
-                return dbController.GetTasks(user);
+                return _taskDbController.GetTasks(user);
             }
             catch (Exception ex)
             {
@@ -83,13 +85,11 @@ namespace BikeWebService.Controllers
 
         }
 
-        static internal bool IsSame(Order oldOrder)
+        internal bool IsSame(Order oldOrder)
         {
-
             try
             {
-                TaskDbController dbController = new TaskDbController();
-                return dbController.IsSameOrder(oldOrder);
+                return _taskDbController.IsSameOrder(oldOrder);
             }
             catch (Exception ex)
             {
@@ -98,45 +98,28 @@ namespace BikeWebService.Controllers
 
         }
 
-        static internal void AddTask(int appId, Order order)
+        internal void AddTask(int appId, Order order)
         {
             
             try
             {
-                order.AppId = appId;
-
-                if(order.State != 0)
+                lock (lockTask)
                 {
-                    order.State = 1;
-                }
-                
-                validateTask(order);
+                    order.AppId = appId;
 
-                TaskDbController dbController = new TaskDbController();
-                dbController.AddOrder(order);
+                    if (order.State != 0)
+                    {
+                        order.State = 1;
+                    }
 
-                if(order.TaskId == 0)
-                {
-                    throw new Exception("Błąd zapisu zlecenia w bazie danych");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+                    validateTask(order);
 
-        static internal void EditTask(Order order)
-        {
-            try
-            {
-                validateTask(order);
+                    _taskDbController.AddOrder(order);
 
-                TaskDbController dbController = new TaskDbController();
-
-                if (dbController.EditOrder(order) == 0)
-                {
-                    throw new Exception("Błąd edycji zlecenia");
+                    if (order.TaskId == 0)
+                    {
+                        throw new Exception("Błąd zapisu zlecenia w bazie danych");
+                    }
                 }
             }
             catch (Exception ex)
@@ -145,15 +128,36 @@ namespace BikeWebService.Controllers
             }
         }
 
-        static internal void DeleteTask(int id)
+        internal void EditTask(Order order)
         {
             try
             {
-                TaskDbController dbController = new TaskDbController();
-
-                if (dbController.DeleteOrder(id) == 0)
+                lock (lockTask)
                 {
-                    throw new Exception("Błąd usuwania zlecenia");
+                    validateTask(order);
+
+                    if (_taskDbController.EditOrder(order) == 0)
+                    {
+                        throw new Exception("Błąd edycji zlecenia");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal void DeleteTask(int id)
+        {
+            try
+            {
+                lock (lockTask)
+                {
+                    if (_taskDbController.DeleteOrder(id) == 0)
+                    {
+                        throw new Exception("Błąd usuwania zlecenia");
+                    }
                 }
             }
             catch (Exception ex)

@@ -2,13 +2,12 @@
 using Microsoft.Data.SqlClient;
 using System;
 
-namespace BikeWebService.DbControllers
+namespace BikeWebService.AbstractClasses
 {
-    public abstract class BaseDbController
+    internal abstract class BaseDbController
     {
         internal readonly string _connectionString;
-
-        public BaseDbController() 
+        internal BaseDbController() 
         {
             _connectionString = Settings.GetConnectionString();
         }

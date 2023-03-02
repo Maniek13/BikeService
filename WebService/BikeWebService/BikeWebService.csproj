@@ -472,18 +472,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractClasses\UserDbControllerAbstractClass.cs" />
     <Compile Include="BikeWebService.asmx.cs">
       <DependentUpon>BikeWebService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Crypto.cs" />
     <Compile Include="Classes\Settings.cs" />
-    <Compile Include="DbControllers\BaseDbController.cs" />
+    <Compile Include="AbstractClasses\BaseDbController.cs" />
     <Compile Include="DbControllers\TaskDbController.cs" />
     <Compile Include="DbControllers\UserDbController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Interfaces\IOrder.cs" />
+    <Compile Include="AbstractClasses\TaskDbControllerAbstractClass.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Models\HttpContextResponse.cs" />
     <Compile Include="Models\Order.cs" />
@@ -504,6 +506,7 @@
     <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

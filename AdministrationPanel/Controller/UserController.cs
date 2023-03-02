@@ -34,13 +34,13 @@ namespace ToDoApp.Controller
         }
         internal override void AddUser(User user)
         {
-            user.Id= _users.Count+1;
+            user.Id = _users.Count + 1;
             _users.Add(user);
         }
         internal override void EditUser(User user)
         {
-            _users.RemoveAt(user.Id-1);
-            _users.Insert(user.Id-1, user);
+            _users.RemoveAt(user.Id - 1);
+            _users.Insert(user.Id - 1, user);
         }
         internal override void Login(string login, string password)
         {
