@@ -13,6 +13,14 @@ namespace BikeWebService
     [System.ComponentModel.ToolboxItem(false)]
     public class BikeWebService : System.Web.Services.WebService
     {
+        private static readonly TasksController _tasksController;
+        private static readonly UsersController _usersController;
+        static BikeWebService()
+        {
+            _tasksController = new TasksController(new TaskDbController());
+            _usersController = new UsersController(new UserDbController());
+        }
+
         #region methods for user
 
         [WebMethod]
@@ -20,8 +28,7 @@ namespace BikeWebService
         {
             try
             {
-                UsersController usersController = new UsersController(new UserDbController());
-                usersController.CheckIsUser(user);
+                _usersController.CheckIsUser(user);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
@@ -49,8 +56,7 @@ namespace BikeWebService
         {
             try
             {
-                UsersController usersController = new UsersController(new UserDbController());
-                usersController.CheckIsAdministratorUser(user);
+                _usersController.CheckIsAdministratorUser(user);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
@@ -78,8 +84,7 @@ namespace BikeWebService
         {
             try
             {
-                UsersController usersController = new UsersController(new UserDbController());
-                usersController.AddUser(user);
+                _usersController.AddUser(user);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
@@ -107,9 +112,8 @@ namespace BikeWebService
         {
             try
             {
-                UsersController usersController = new UsersController(new UserDbController());
-                usersController.CheckIsUser(user);
-                usersController.EditUser(newUser);
+                _usersController.CheckIsUser(user);
+                _usersController.EditUser(newUser);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
@@ -137,13 +141,11 @@ namespace BikeWebService
         {
             try
             {
-                UsersController usersController = new UsersController(new UserDbController());
-
                 ResponseModel<List<User>> response = new ResponseModel<List<User>>
                 {
                     message = "OK",
                     resultCode = 1,
-                    Data = usersController.GetAllUsers(user)
+                    Data = _usersController.GetAllUsers(user)
                 };
 
                 return response;
@@ -168,8 +170,7 @@ namespace BikeWebService
         {
             try
             {
-                TasksController tasksController = new TasksController(new TaskDbController());
-                Order task = tasksController.FindTask(taskIDKey);
+                Order task = _tasksController.FindTask(taskIDKey);
 
                 return new ResponseModel<Order>()
                 {
@@ -193,12 +194,9 @@ namespace BikeWebService
         public ResponseModel<List<Order>> GetTasks(User user)
         {
             try
-            {
-                UsersController usersController = new UsersController(new UserDbController());
-                usersController.CheckIsUser(user);
-
-                TasksController tasksController = new TasksController(new TaskDbController());
-                List<Order> result = tasksController.GetTasks(user);
+            { 
+                _usersController.CheckIsUser(user);
+                List<Order> result = _tasksController.GetTasks(user);
 
                 return new ResponseModel<List<Order>>()
                 {
@@ -223,16 +221,14 @@ namespace BikeWebService
         {
             try
             {
-                UsersController usersController = new UsersController(new UserDbController());
-                usersController.CheckIsUser(user);
+                _usersController.CheckIsUser(user);
 
                 if (order.AppId == 0)
                 {
                     order.AppId = user.AppId;
                 }
 
-                TasksController tasksController = new TasksController(new TaskDbController());
-                tasksController.AddTask(order.AppId, order);
+                _tasksController.AddTask(order.AppId, order);
 
                 return new ResponseModel<Order>()
                 {
@@ -257,15 +253,13 @@ namespace BikeWebService
         {
             try
             {
-                UsersController usersController = new UsersController(new UserDbController());
-                usersController.CheckIsUser(user);
+                _usersController.CheckIsUser(user);
 
-                TasksController tasksController = new TasksController(new TaskDbController());
-                if (orderOld != null )
-                    if (!tasksController.IsSame(orderOld))
+                if(orderOld != null )
+                    if (!_tasksController.IsSame(orderOld))
                         throw new Exception("Zamowienie zostało zmienione. Odświerz dane");
 
-                tasksController.EditTask(order);
+                _tasksController.EditTask(order);
 
                 return new ResponseModel<Order>()
                 {
@@ -290,10 +284,8 @@ namespace BikeWebService
         {
             try
             {
-                UsersController usersController = new UsersController(new UserDbController());
-                usersController.CheckIsUser(user);
-                TasksController tasksController = new TasksController(new TaskDbController());
-                tasksController.DeleteTask(orderId);
+                _usersController.CheckIsUser(user);
+                _tasksController.DeleteTask(orderId);
 
                 return new ResponseModel<int>()
                 {
