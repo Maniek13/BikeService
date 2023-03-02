@@ -14,99 +14,6 @@ namespace BikeWebService.Controllers
         {
             _userDbController = service;
         }
-  
-        #region internal functions
-        internal void CheckIsUser(User user)
-        {
-            try
-            {
-                validateUser(user);
-                _userDbController.CheckIsUser(user);
-
-                if (user.Id.Equals(0))
-                {
-                    throw new Exception("Niepoprawne dane logowania");
-                }
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }  
-        }
-        internal void CheckIsAdministratorUser(User user)
-        {
-            try
-            {
-                validateUser(user);
-                _userDbController.CheckIsAministratorUser(user);
-
-                if (user.Id.Equals(0))
-                {
-                    throw new Exception("Niepoprawne dane logowania");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        internal void AddUser(User user)
-        {
-            try
-            {
-                validateUser(user);
-                _userDbController.AddUser(user);
-
-                if (user.Id.Equals(0))
-                {
-                    throw new Exception("Niepoprawne dane");
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        internal void EditUser(User user)
-        {
-
-            try
-            {
-                int id = 0;
-                validateUser(user);
-
-                lock (lockUser)
-                {
-                    id = _userDbController.EditUser(user.Login, user.Password, user.Id);
-                }
-                if ( id == 0)
-                {
-                    throw new Exception("Błąd edycji");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        internal List<User> GetAllUsers(User user)
-        {
-            try
-            {
-                CheckIsAdministratorUser(user);
-                return _userDbController.GetAllUser(user);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        #endregion
 
         #region private functions
         private void validateUser(User user)
@@ -128,5 +35,90 @@ namespace BikeWebService.Controllers
         }
         #endregion
 
+        #region internal functions
+        internal void CheckIsUser(User user)
+        {
+            try
+            {
+                validateUser(user);
+                _userDbController.CheckIsUser(user);
+
+                if (user.Id.Equals(0))
+                    throw new Exception("Niepoprawne dane logowania");
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }  
+        }
+        internal void CheckIsAdministratorUser(User user)
+        {
+            try
+            {
+                validateUser(user);
+                _userDbController.CheckIsAministratorUser(user);
+
+                if (user.Id.Equals(0))
+                    throw new Exception("Niepoprawne dane logowania");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal void AddUser(User user)
+        {
+            try
+            {
+                validateUser(user);
+                _userDbController.AddUser(user);
+
+                if (user.Id.Equals(0))
+                    throw new Exception("Niepoprawne dane");
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal void EditUser(User user)
+        {
+
+            try
+            {
+                int id = 0;
+                validateUser(user);
+
+                lock (lockUser)
+                {
+                    id = _userDbController.EditUser(user.Login, user.Password, user.Id);
+                }
+
+                if ( id == 0)
+                    throw new Exception("Błąd edycji");
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal List<User> GetAllUsers(User user)
+        {
+            try
+            {
+                CheckIsAdministratorUser(user);
+                return _userDbController.GetAllUser(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        #endregion
     }
 }

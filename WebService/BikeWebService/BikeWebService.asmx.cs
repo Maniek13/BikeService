@@ -224,9 +224,7 @@ namespace BikeWebService
                 _usersController.CheckIsUser(user);
 
                 if (order.AppId == 0)
-                {
                     order.AppId = user.AppId;
-                }
 
                 _tasksController.AddTask(order.AppId, order);
 
@@ -255,9 +253,8 @@ namespace BikeWebService
             {
                 _usersController.CheckIsUser(user);
 
-                if(orderOld != null )
-                    if (!_tasksController.IsSame(orderOld))
-                        throw new Exception("Zamowienie zostało zmienione. Odświerz dane");
+                if(orderOld != null && !_tasksController.IsSame(orderOld))
+                    throw new Exception("Zamowienie zostało zmienione. Odświerz dane");
 
                 _tasksController.EditTask(order);
 

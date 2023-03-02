@@ -149,9 +149,7 @@ namespace BikeWebService.DbControllers
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
-                            {
                                 int.TryParse(reader["userID"].ToString(), out userId);
-                            }
                         }
                     }
                 }
@@ -207,9 +205,7 @@ namespace BikeWebService.DbControllers
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
-                            {
                                 int.TryParse(reader["userID"].ToString(), out result);
-                            }
                         }
                     }
                 }
@@ -258,9 +254,7 @@ namespace BikeWebService.DbControllers
         private User convertToTask(Object[] obj)
         {
             if (obj == null || obj.Length == 0)
-            {
                 return null;
-            }
 
             return new User()
             {

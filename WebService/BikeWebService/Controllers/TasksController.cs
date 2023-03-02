@@ -47,23 +47,18 @@ namespace BikeWebService.Controllers
         internal Order FindTask(string taskIDKey)
         {
             if (String.IsNullOrEmpty(taskIDKey))
-            {
                 throw new Exception("Brak identyfikatora zlecenia");
-            }
 
             try
             {
                 Order task = _taskDbController.GetTask(taskIDKey);
 
                 if (task == null)
-                {
                     throw new Exception("Niepoprawny identyfikator zlecenia");
-                }
 
                 if (task.State == 0)
-                {
                     throw new Exception("Zlecenie nie zostało dodane");
-                }
+
                 return task;
             }
             catch (Exception ex)
@@ -115,10 +110,7 @@ namespace BikeWebService.Controllers
                 _taskDbController.AddOrder(order);
 
                 if (order.TaskId == 0)
-                {
-                    throw new Exception("Błąd zapisu zlecenia w bazie danych");
-                }
-                
+                    throw new Exception("Błąd zapisu zlecenia w bazie danych");                
             }
             catch (Exception ex)
             {
@@ -139,10 +131,7 @@ namespace BikeWebService.Controllers
                 }
 
                 if (id  == 0)
-                {
                     throw new Exception("Błąd edycji zlecenia");
-                }
-                
             }
             catch (Exception ex)
             {
@@ -155,9 +144,7 @@ namespace BikeWebService.Controllers
             try
             {
                 if (_taskDbController.DeleteOrder(id) == 0) 
-                {
                     throw new Exception("Błąd usuwania zlecenia");
-                }
             }
             catch (Exception ex)
             {

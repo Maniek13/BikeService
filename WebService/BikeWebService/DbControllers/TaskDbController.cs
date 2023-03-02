@@ -162,9 +162,7 @@ namespace BikeWebService.DbControllers
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
-                            {
                                 int.TryParse(reader["taskID"].ToString(), out taskId);
-                            }
                         }
                     }
                 }
@@ -234,9 +232,7 @@ namespace BikeWebService.DbControllers
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
-                            {
                                 int.TryParse(reader["taskID"].ToString(), out result);
-                            }
                         }
                     }
                 }
@@ -256,9 +252,7 @@ namespace BikeWebService.DbControllers
                 int result = 0;
 
                 if (IsOrder(id) == 0)
-                {
                     return result;
-                }
 
                 string query = @"
                     DELETE FROM tasks
@@ -362,9 +356,7 @@ namespace BikeWebService.DbControllers
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
-                            {
                                 int.TryParse(reader["taskID"].ToString(), out id);
-                            }
                         }
                     }
                 }
@@ -468,9 +460,7 @@ namespace BikeWebService.DbControllers
                 string appKey = getAppKey(appId);
 
                 if (String.IsNullOrEmpty(appKey))
-                {
                     return "";
-                }
 
                 Random random = new Random();
 
@@ -513,9 +503,7 @@ namespace BikeWebService.DbControllers
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
-                            {
                                 appKey = reader["appkey"].ToString();
-                            }
                         }
                     }
                 }
@@ -531,9 +519,7 @@ namespace BikeWebService.DbControllers
         private Order convertToTask(Object[] obj)
         {
             if (obj == null || obj.Length == 0)
-            {
                 return null;
-            }
 
             DateTime date = new DateTime();
             DateTime.TryParse(obj[6].ToString(), out date);
