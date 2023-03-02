@@ -55,15 +55,12 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                lock(lockUser)
-                {
-                    validateUser(user);
-                    _userDbController.AddUser(user);
+                validateUser(user);
+                _userDbController.AddUser(user);
 
-                    if (user.Id.Equals(0))
-                    {
-                        throw new Exception("Niepoprawne dane");
-                    }
+                if (user.Id.Equals(0))
+                {
+                    throw new Exception("Niepoprawne dane");
                 }
                 
             }
@@ -78,16 +75,18 @@ namespace BikeWebService.Controllers
 
             try
             {
+                int id = 0;
+                validateUser(user);
+
                 lock (lockUser)
                 {
-                    validateUser(user);
-
-                    if (_userDbController.EditUser(user.Login, user.Password, user.Id) == 0)
-                    {
-                        throw new Exception("Błąd edycji");
-                    }
+                    id = _userDbController.EditUser(user.Login, user.Password, user.Id);
                 }
-                
+                if ( id == 0)
+                {
+                    throw new Exception("Błąd edycji");
+                }
+
             }
             catch (Exception ex)
             {

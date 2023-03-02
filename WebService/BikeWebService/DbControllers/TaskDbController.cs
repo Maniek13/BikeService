@@ -193,8 +193,6 @@ namespace BikeWebService.DbControllers
             try
             {
                 int result = 0;
-
-
                 string query = @"
                     UPDATE tasks 
                     SET header = @header, description = @description, state = @state

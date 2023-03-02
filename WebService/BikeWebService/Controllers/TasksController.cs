@@ -103,24 +103,22 @@ namespace BikeWebService.Controllers
             
             try
             {
-                lock (lockTask)
+                order.AppId = appId;
+
+                if (order.State != 0)
                 {
-                    order.AppId = appId;
-
-                    if (order.State != 0)
-                    {
-                        order.State = 1;
-                    }
-
-                    validateTask(order);
-
-                    _taskDbController.AddOrder(order);
-
-                    if (order.TaskId == 0)
-                    {
-                        throw new Exception("Błąd zapisu zlecenia w bazie danych");
-                    }
+                    order.State = 1;
                 }
+
+                validateTask(order);
+
+                _taskDbController.AddOrder(order);
+
+                if (order.TaskId == 0)
+                {
+                    throw new Exception("Błąd zapisu zlecenia w bazie danych");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -132,15 +130,19 @@ namespace BikeWebService.Controllers
         {
             try
             {
+                int id = 0;
+                validateTask(order);
+
                 lock (lockTask)
                 {
-                    validateTask(order);
-
-                    if (_taskDbController.EditOrder(order) == 0)
-                    {
-                        throw new Exception("Błąd edycji zlecenia");
-                    }
+                    id = _taskDbController.EditOrder(order);
                 }
+
+                if (id  == 0)
+                {
+                    throw new Exception("Błąd edycji zlecenia");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -152,12 +154,9 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                lock (lockTask)
+                if (_taskDbController.DeleteOrder(id) == 0) 
                 {
-                    if (_taskDbController.DeleteOrder(id) == 0)
-                    {
-                        throw new Exception("Błąd usuwania zlecenia");
-                    }
+                    throw new Exception("Błąd usuwania zlecenia");
                 }
             }
             catch (Exception ex)
