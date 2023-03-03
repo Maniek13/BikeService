@@ -8,7 +8,11 @@ namespace BikeWebService.Controllers
 {
     internal class UsersController
     {
-        private readonly object lockUser = new object();
+        private readonly object lockUser = new Lazy<object>(() =>
+        {
+            return new object();
+        });
+
         private readonly UserDbControllerAbstractClass _userDbController;
         public UsersController(UserDbControllerAbstractClass service)
         {

@@ -2,12 +2,17 @@
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace BikeWebService.Controllers
 {
     internal class TasksController
     {
-        readonly object lockTask = new object();
+        readonly object lockTask  = new Lazy<object>(() =>
+        {
+            return  new object ();
+        });
+
         private readonly TaskDbControllerAbstractClass _taskDbController;
         public TasksController(TaskDbControllerAbstractClass service)
         {
