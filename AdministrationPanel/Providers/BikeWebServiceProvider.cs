@@ -4,9 +4,9 @@ using System.Linq;
 using ToDoApp.BaseClasses;
 using ToDoApp.BikeWebService;
 
-namespace ToDoApp.Controller
+namespace ToDoApp.Providers
 {
-    internal class ServiceController : ServiceControllerBase
+    internal class BikeWebServiceProvider : ServiceProviderBase
     {
         #region internal function
         internal override List<Models.User> GetUsers(Models.User user)

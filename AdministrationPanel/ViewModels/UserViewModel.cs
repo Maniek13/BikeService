@@ -1,7 +1,7 @@
 ﻿using ToDoApp.BaseClasses;
-using ToDoApp.Controller;
 using ToDoApp.HelperClasses;
 using ToDoApp.Models;
+using ToDoApp.Settings;
 
 namespace ToDoApp.ViewModels
 {
@@ -14,7 +14,7 @@ namespace ToDoApp.ViewModels
 
         public UserViewModel() 
         { 
-            _controller = new UserController();
+            _controller = ControllersSettings.userController;
         }
         public User User
         {
@@ -31,17 +31,17 @@ namespace ToDoApp.ViewModels
 
         internal void EditUser()
         {
-            if (User.Id != 0)
+            if (_user.Id != 0)
             {
-                _controller.EditUser(User);
+                _controller.EditUser(_user);
             }
         }
 
         internal void AddUser()
         {
-            if (User.Id == 0)
+            if (_user.Id == 0)
             {
-                _controller.AddUser(User);
+                _controller.AddUser(_user);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using ToDoApp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -10,8 +11,16 @@ namespace ToDoApp.Views
         internal LoginViewModel viewModel { get; set; }
         internal LoginPage()
         {
-            this.InitializeComponent();
-            viewModel= new LoginViewModel();
+            try
+            {
+                this.InitializeComponent();
+                viewModel = new LoginViewModel();
+            }
+            catch(Exception ex)
+            {
+                errorField.Text = ex.Message;
+                errorField.Visibility = Visibility.Visible;
+            }
         }
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
@@ -25,7 +34,15 @@ namespace ToDoApp.Views
                 viewModel.User.Login = loginInput.Text;
                 viewModel.User.Password = paswordInput.Text;
 
-                viewModel.Login(loginInput.Text, paswordInput.Text);
+                if(rememberUser.IsChecked == true)
+                {
+                    var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+                    localSettings.Values["username"] = loginInput.Text;
+                    localSettings.Values["password"] = paswordInput.Text;
+                }
+
+                viewModel.Login();
             }
             catch (Exception ex)
             {

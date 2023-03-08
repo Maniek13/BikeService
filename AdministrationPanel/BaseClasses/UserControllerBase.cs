@@ -10,6 +10,10 @@ namespace ToDoApp.BaseClasses
         protected static ObservableCollection<User> _users = new ObservableCollection<User>();
         #endregion
 
+        #region virtual properties
+        internal virtual User User { get { return _user; } }
+        #endregion
+
         #region abstract functions
         internal abstract ObservableCollection<User> SetList();
         internal abstract ObservableCollection<User> GetUsers();

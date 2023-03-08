@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ToDoApp.BaseClasses;
 using ToDoApp.Models;
+using ToDoApp.Providers;
+using ToDoApp.Settings;
 
 namespace ToDoApp.Controller
 {
     internal class UserController : UserControllerBase
     {
-        private ServiceControllerBase service = new ServiceController();
+        private ServiceProviderBase service = ProvidersSettings.bikeWebServiceProvider;
 
         #region internal function
         internal override ObservableCollection<User> SetList()

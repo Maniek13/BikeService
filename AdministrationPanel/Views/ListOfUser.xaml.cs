@@ -23,9 +23,12 @@ namespace ToDoApp.Views
                 ErrorList.Text = ex.Message;
                 ErrorList.Visibility= Visibility.Visible;
             }
-            
         }
 
+        private void Component_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserPanelUserName.Text = viewModel.GetUserName();
+        }
         private void ShowAddView_Click(object sender, RoutedEventArgs e)
         {
             viewModel.ShowContent(MainContent ,typeof(AddUserView));
@@ -34,6 +37,17 @@ namespace ToDoApp.Views
         private void ShowEditView_Click(object sender, RoutedEventArgs e)
         {
             viewModel.ShowContent(MainContent, typeof(EditUserView), ((Button)sender).Tag as User);
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values.Remove("username");
+            localSettings.Values.Remove("password");
+
+
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(LoginPage));
         }
     }
 }

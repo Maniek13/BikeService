@@ -16,7 +16,6 @@ namespace ToDoApp.Views
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
             User user = new User()
             {
                 Login = loginInput.Text,

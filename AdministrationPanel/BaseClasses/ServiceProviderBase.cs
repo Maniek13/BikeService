@@ -2,7 +2,7 @@
 
 namespace ToDoApp.BaseClasses
 {
-    internal abstract class ServiceControllerBase
+    internal abstract class ServiceProviderBase
     {
         #region internal abstract functions
         internal abstract List<Models.User> GetUsers(Models.User user);

@@ -2,6 +2,7 @@
 using ToDoApp.BaseClasses;
 using ToDoApp.Controller;
 using ToDoApp.Models;
+using ToDoApp.Settings;
 using Windows.UI.Xaml.Controls;
 
 namespace ToDoApp.ViewModels
@@ -15,8 +16,8 @@ namespace ToDoApp.ViewModels
 
         public Frame frame = new Frame();
         public LoginViewModel() 
-        { 
-            _controller = new UserController();
+        {
+            _controller = ControllersSettings.userController;
         }
         public User User
         {
@@ -30,11 +31,11 @@ namespace ToDoApp.ViewModels
             }
         }
 
-        internal void Login(string login, string password)
+        internal void Login()
         {
             try
             {
-                _controller.Login(login, password);
+                _controller.Login(_user.Login, _user.Password);
 
                 frame.Navigate(typeof(Views.ListOfUser));
             }
