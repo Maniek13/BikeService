@@ -163,7 +163,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        internal override int EditUser(string login, string password, int id)
+        internal override int EditUser(User user)
         {
             try
             {
@@ -185,19 +185,19 @@ namespace BikeWebService.DbControllers
                         {
                             ParameterName = "@login",
                             SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = login
+                            Value = user.Login
                         });
                         command.Parameters.Add(new SqlParameter()
                         {
                             ParameterName = "@password",
                             SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = password
+                            Value = user.Password
                         });
                         command.Parameters.Add(new SqlParameter()
                         {
                             ParameterName = "@userId",
                             SqlDbType = System.Data.SqlDbType.Int,
-                            Value = id
+                            Value = user.Id
                         });
 
                         connection.Open();

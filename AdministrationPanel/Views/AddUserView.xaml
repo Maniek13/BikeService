@@ -20,6 +20,9 @@
             <Button Click="Add_Click" HorizontalAlignment="Stretch"  Margin="0,10,0,0">
                 Dodaj
             </Button>
+            <StackPanel>
+                <TextBlock Visibility="Collapsed" x:Name="ErrorAdd" TextWrapping="Wrap" TextTrimming="WordEllipsis" LineHeight="20" Foreground="Red" HorizontalAlignment="Center"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

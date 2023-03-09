@@ -1,4 +1,5 @@
-﻿using ToDoApp.Models;
+﻿using System;
+using ToDoApp.Models;
 using ToDoApp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,15 +17,24 @@ namespace ToDoApp.Views
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            User user = new User()
+            try
             {
-                Login = loginInput.Text,
-                Password = paswordInput.Text
+                User user = new User()
+                {
+                    Login = loginInput.Text,
+                    Password = paswordInput.Text
 
-            };
+                };
 
-            viewModel.User = user;
-            viewModel.AddUser();
+                viewModel.User = user;
+                viewModel.AddUser();
+
+                this.Content = new Page();
+            }
+            catch (Exception ex)
+            {
+                ErrorAdd.Text = ex.Message;
+            }
         }
     }
 }

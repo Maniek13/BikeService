@@ -17,12 +17,12 @@ namespace ToDoApp.Controller
         {
             return _users;
         }
-        internal override ObservableCollection<User> GetUsers()
+        internal override ObservableCollection<User> GetUsers(User admin)
         {
             try
             {
                 _users.Clear();
-                List<User> users = service.GetUsers(_user);
+                List<User> users = service.GetUsers(admin);
 
                 for(int i = 0; i < users.Count; i++)
                     _users.Add(users[i]);
@@ -34,30 +34,28 @@ namespace ToDoApp.Controller
                 throw new Exception(ex.Message, ex);
             }
         }
-        internal override void AddUser(User user)
-        {
-            user.Id = _users.Count + 1;
-            _users.Add(user);
-        }
-        internal override void EditUser(User user)
-        {
-            _users.RemoveAt(user.Id - 1);
-            _users.Insert(user.Id - 1, user);
-        }
-        internal override void Login(string login, string password)
+        internal override void AddUser(User adnmin, User user)
         {
             try
             {
-                _user.Login = login;
-                _user.Password = password;
+                service.AddUser(adnmin, user);
 
-                User user = service.LogIn(_user);
+                user.Id = _users.Count + 1;
+                _users.Add(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+        internal override void EditUser(User adnmin, User user)
+        {
+            try
+            {
+                service.EditUser(adnmin, user);
 
-                if (user.Id == 0)
-                    throw new Exception("Błędne dane");
-
-                _user.Id = user.Id;
-                _user.AppId = user.AppId;
+                _users.RemoveAt(user.Id - 1);
+                _users.Insert(user.Id - 1, user);
             }
             catch(Exception ex)
             {

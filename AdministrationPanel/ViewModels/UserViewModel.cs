@@ -1,4 +1,5 @@
-﻿using ToDoApp.BaseClasses;
+﻿using System;
+using ToDoApp.BaseClasses;
 using ToDoApp.HelperClasses;
 using ToDoApp.Models;
 using ToDoApp.Settings;
@@ -9,12 +10,14 @@ namespace ToDoApp.ViewModels
     {
         #region private members
         private User _user = new User();
-        private UserControllerBase _controller;
+        private UserControllerBase _userController;
+        private AdminControllerBase _adminController;
         #endregion
 
         public UserViewModel() 
         { 
-            _controller = ControllersSettings.userController;
+            _userController = ControllersSettings.userController;
+            _adminController = ControllersSettings.adminController;
         }
         public User User
         {
@@ -31,17 +34,31 @@ namespace ToDoApp.ViewModels
 
         internal void EditUser()
         {
-            if (_user.Id != 0)
+            try
             {
-                _controller.EditUser(_user);
+                if (_user.Id != 0)
+                {
+                    _userController.EditUser(_adminController.Admin, _user);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
             }
         }
 
         internal void AddUser()
         {
-            if (_user.Id == 0)
+            try
             {
-                _controller.AddUser(_user);
+                if (_user.Id == 0)
+                {
+                    _userController.AddUser(_adminController.Admin, _user);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
             }
         }
     }

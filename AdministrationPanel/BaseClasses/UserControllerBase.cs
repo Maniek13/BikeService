@@ -16,10 +16,9 @@ namespace ToDoApp.BaseClasses
 
         #region abstract functions
         internal abstract ObservableCollection<User> SetList();
-        internal abstract ObservableCollection<User> GetUsers();
-        internal abstract void AddUser(User user);
-        internal abstract void EditUser(User user);
-        internal abstract void Login(string login, string password);
+        internal abstract ObservableCollection<User> GetUsers(User admin);
+        internal abstract void AddUser(User admin, User userToAdd);
+        internal abstract void EditUser(User adnmin, User userToEdit);
         #endregion
     }
 }

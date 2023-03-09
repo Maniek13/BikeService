@@ -74,6 +74,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AddUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="admin" type="tns:User" />
+            <s:element minOccurs="0" maxOccurs="1" name="newUser" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUserResult" type="tns:ResponseModelOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetUsers">
         <s:complexType>
           <s:sequence>
@@ -237,6 +252,12 @@
   <wsdl:message name="EditUserSoapOut">
     <wsdl:part name="parameters" element="tns:EditUserResponse" />
   </wsdl:message>
+  <wsdl:message name="AddUserSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="AddUserSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
   <wsdl:message name="GetUsersSoapIn">
     <wsdl:part name="parameters" element="tns:GetUsers" />
   </wsdl:message>
@@ -289,6 +310,10 @@
     <wsdl:operation name="EditUser">
       <wsdl:input message="tns:EditUserSoapIn" />
       <wsdl:output message="tns:EditUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input message="tns:AddUserSoapIn" />
+      <wsdl:output message="tns:AddUserSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetUsers">
       <wsdl:input message="tns:GetUsersSoapIn" />
@@ -346,6 +371,15 @@
     </wsdl:operation>
     <wsdl:operation name="EditUser">
       <soap:operation soapAction="http://tempuri.org/EditUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/AddUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -439,6 +473,15 @@
     </wsdl:operation>
     <wsdl:operation name="EditUser">
       <soap12:operation soapAction="http://tempuri.org/EditUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap12:operation soapAction="http://tempuri.org/AddUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

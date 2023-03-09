@@ -112,14 +112,49 @@ namespace BikeWebService
         {
             try
             {
+                //check curent user is in database
                 _usersController.CheckIsUser(user);
+
+                //edit user
                 _usersController.EditUser(newUser);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
                     message = "OK",
                     resultCode = 1,
-                    Data = user
+                    Data = newUser
+                };
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<User>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
+
+        [WebMethod]
+        public ResponseModel<User> AddUser(User admin, User newUser)
+        {
+            try
+            {
+                //check curent user is in database
+                _usersController.CheckIsUser(admin);
+
+                //edit user
+                _usersController.AddUser(newUser);
+
+                ResponseModel<User> response = new ResponseModel<User>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = newUser
                 };
 
                 return response;

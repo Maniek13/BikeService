@@ -1,4 +1,5 @@
-﻿using ToDoApp.Models;
+﻿using System;
+using ToDoApp.Models;
 using ToDoApp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,15 +23,25 @@ namespace ToDoApp.Views
 
         private void EditUser_Click(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(loginInput.Text))
+            try
             {
-                viewModel.User.Login = loginInput.Text;
+                if (!string.IsNullOrEmpty(loginInput.Text))
+                {
+                    viewModel.User.Login = loginInput.Text;
+                }
+                if (!string.IsNullOrEmpty(paswordInput.Text))
+                {
+                    viewModel.User.Password = paswordInput.Text;
+                }
+                viewModel.EditUser();
+
+                this.Content = new Page();
             }
-            if(!string.IsNullOrEmpty(paswordInput.Text))
-            {
-                viewModel.User.Password = paswordInput.Text;
+            catch(Exception ex)
+            { 
+                ErrorEdit.Text = ex.Message;
             }
-            viewModel.EditUser();
+           
         }
     }
 }

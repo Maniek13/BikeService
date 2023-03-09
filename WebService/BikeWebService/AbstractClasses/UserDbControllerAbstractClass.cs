@@ -12,7 +12,7 @@ namespace BikeWebService.AbstractClasses
         internal abstract void CheckIsUser(User user);
         internal abstract void CheckIsAministratorUser(User user);
         internal abstract void AddUser(User user);
-        internal abstract int EditUser(string login, string password, int id);
+        internal abstract int EditUser(User user);
         internal abstract List<User> GetAllUser(User user);
     }
 }

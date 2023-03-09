@@ -98,7 +98,7 @@ namespace BikeWebService.Controllers
 
                 lock (lockUser)
                 {
-                    id = _userDbController.EditUser(user.Login, user.Password, user.Id);
+                    id = _userDbController.EditUser(user);
                 }
 
                 if ( id == 0)

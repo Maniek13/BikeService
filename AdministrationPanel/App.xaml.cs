@@ -65,8 +65,8 @@ namespace ToDoApp
 
                     if (!String.IsNullOrEmpty(login) && !String.IsNullOrEmpty(password))
                     {
-                        UserControllerBase userController = ControllersSettings.userController;
-                        userController.Login(login, password);
+                        AdminControllerBase adminController = ControllersSettings.adminController;
+                        adminController.Login(login, password);
 
                         rootFrame.Navigate(typeof(Views.ListOfUser));
                     }

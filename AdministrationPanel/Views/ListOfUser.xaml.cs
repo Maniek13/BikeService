@@ -41,10 +41,7 @@ namespace ToDoApp.Views
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            localSettings.Values.Remove("username");
-            localSettings.Values.Remove("password");
-
+            viewModel.LogOut();
 
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(LoginPage));

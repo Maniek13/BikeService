@@ -125,6 +125,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\AdminControllerBase.cs" />
     <Compile Include="BaseClasses\ServiceProviderBase.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -134,6 +135,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controller\AdminController.cs" />
     <Compile Include="Providers\BikeWebServiceProvider.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="HelperClasses\PropertyChange.cs" />
@@ -182,6 +184,9 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.AddOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.AddUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.DeleteOrderResponse.datasource">

@@ -72,6 +72,70 @@ namespace ToDoApp.Providers
                 throw new Exception(ex.Message, ex);
             }
         }
+
+        internal override Models.User EditUser(Models.User admin, Models.User userToEdit)
+        {
+            try
+            {
+                User adminEdit= convertToServiceUser(admin);
+                User userEdit = convertToServiceUser(userToEdit);
+
+                using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
+                {
+                    var service = client.EditUserAsync(adminEdit, userEdit);
+                    service.Wait();
+                    var res = service.Result.Body.EditUserResult;
+
+                    if (res.resultCode != 1)
+                        throw new Exception(res.message);
+
+                    return new Models.User
+                    {
+                        Id = res.Data.Id,
+                        Login = res.Data.Login,
+                        Password = res.Data.Password,
+                        AppId = res.Data.AppId
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        internal override Models.User AddUser(Models.User admin, Models.User userToAdd)
+        {
+            try
+            {
+                User adminAdd = convertToServiceUser(admin);
+                User userAdd = convertToServiceUser(userToAdd);
+
+                using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
+                {
+                    var service = client.AddUserAsync(adminAdd, userAdd);
+                    service.Wait();
+                    var res = service.Result.Body.AddUserResult;
+
+                    if (res.resultCode != 1)
+                        throw new Exception(res.message);
+
+                    return new Models.User
+                    {
+                        Id = res.Data.Id,
+                        Login = res.Data.Login,
+                        Password = res.Data.Password,
+                        AppId = res.Data.AppId
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+
         #endregion
 
         #region private function

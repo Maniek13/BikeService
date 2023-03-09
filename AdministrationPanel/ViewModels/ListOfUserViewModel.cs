@@ -11,21 +11,23 @@ namespace ToDoApp.ViewModels
     {
         #region private members
         private ObservableCollection<User> _users { get; set; }
-        private UserControllerBase _controler;
+        private UserControllerBase _userControler;
+        private AdminControllerBase _adminController;
         #endregion
 
         public ObservableCollection<User> Users { get { return _users; } }
         public ListOfUserViewModel()
         {
-            _controler = ControllersSettings.userController;
-            _users = _controler.SetList();
+            _userControler = ControllersSettings.userController;
+            _adminController = ControllersSettings.adminController;
+            _users = _userControler.SetList();
         }
 
         internal void GetUsers()
         {
             try
             {
-                _users = _controler.GetUsers();
+                _users = _userControler.GetUsers(_adminController.Admin);
             }
             catch(Exception ex) 
             {
@@ -37,7 +39,7 @@ namespace ToDoApp.ViewModels
         {
             try
             {
-                return _controler.User.Login;
+                return _adminController.Admin.Login;
             }
             catch(Exception ex)
             {
@@ -47,6 +49,15 @@ namespace ToDoApp.ViewModels
         internal void ShowContent(Frame frame, Type typeOf, User user = null)
         {
             frame.Navigate(typeOf, user);
+        }
+
+        internal void LogOut()
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values.Remove("username");
+            localSettings.Values.Remove("password");
+
+            _adminController.Admin = new User();
         }
     }
 }
