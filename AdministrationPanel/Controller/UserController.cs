@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using ToDoApp.BaseClasses;
 using ToDoApp.Models;
 using ToDoApp.Settings;
@@ -50,8 +51,9 @@ namespace ToDoApp.Controller
             try
             {
                 user = service.EditUser(adnmin, user);
-                _users.RemoveAt(user.Id - 1);
-                _users.Insert(user.Id - 1, user);
+                int id = _users.IndexOf(user);
+                _users.RemoveAt(id);
+                _users.Insert(id, user);
             }
             catch(Exception ex)
             {
