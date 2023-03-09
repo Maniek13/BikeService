@@ -88,6 +88,23 @@ namespace BikeWebService.Controllers
             }
         }
 
+        internal void Register(User user, string appKey)
+        {
+            try
+            {
+                validateUser(user);
+                _userDbController.AddUser(user, appKey);
+
+                if (user.Id.Equals(0))
+                    throw new Exception("Niepoprawne dane");
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         internal void EditUser(User user)
         {
 
@@ -115,8 +132,19 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                CheckIsAdministratorUser(user);
-                return _userDbController.GetAllUser(user);
+                return _userDbController.GetAllUsers(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal void DeleteUser(int id)
+        {
+            try
+            {
+                _userDbController.DeleteUser(id);
             }
             catch (Exception ex)
             {

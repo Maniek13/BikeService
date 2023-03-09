@@ -163,6 +163,50 @@ namespace BikeWebService.DbControllers
             }
         }
 
+        internal override void AddUser(User user, string appKey)
+        {
+            try
+            {
+                string query = @"
+                    SELECT appID FROM app 
+                    WHERE appKey = @appKey";
+                int appId = 0;
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@appKey",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = user.Login
+                        });
+                        
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                                int.TryParse(reader["appID"].ToString(), out appId);
+                        }
+                    }
+                }
+
+                if (appId == 0)
+                    throw new Exception("Błędny klucz aplikacji");
+
+                user.AppId = appId;
+
+                AddUser(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         internal override int EditUser(User user)
         {
             try
@@ -217,9 +261,42 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        internal override List<User> GetAllUser(User user)
+
+        internal override void DeleteUser(int id)
         {
-            string query = @"SELECT * FROM users";
+            try
+            {
+                string query = @"
+                    DELETE FROM users
+                    WHERE userID = @userID";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@userID",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = id
+                        });
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal override List<User> GetAllUsers(User user)
+        {
+            string query = @"SELECT * FROM users
+                            WHERE appID = @appID";
 
             List<User> users = new List<User>();
             try
@@ -228,6 +305,13 @@ namespace BikeWebService.DbControllers
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@userID",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = user.AppId
+                        });
+
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {

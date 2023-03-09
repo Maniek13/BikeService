@@ -23,7 +23,6 @@ namespace ToDoApp.Views
                 {
                     Login = loginInput.Text,
                     Password = paswordInput.Text
-
                 };
 
                 viewModel.User = user;

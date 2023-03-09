@@ -108,6 +108,7 @@ namespace ToDoApp.Providers
         {
             try
             {
+                userToAdd.AppId = admin.AppId;
                 User adminAdd = convertToServiceUser(admin);
                 User userAdd = convertToServiceUser(userToAdd);
 

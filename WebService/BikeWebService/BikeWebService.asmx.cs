@@ -21,35 +21,7 @@ namespace BikeWebService
             _usersController = new UsersController(new UserDbController());
         }
 
-        #region methods for user
-
-        [WebMethod]
-        public ResponseModel<User> LogIn(User user)
-        {
-            try
-            {
-                _usersController.CheckIsUser(user);
-
-                ResponseModel<User> response = new ResponseModel<User>
-                {
-                    message = "OK",
-                    resultCode = 1,
-                    Data = user
-                };
-
-                return response;
-
-            }
-            catch (Exception ex)
-            {
-                return new ResponseModel<User>()
-                {
-                    message = ex.Message,
-                    resultCode = -1,
-                    Data = null
-                };
-            }
-        }
+        #region method for admin
 
         [WebMethod]
         public ResponseModel<User> LogInAsAdministrator(User user)
@@ -80,11 +52,128 @@ namespace BikeWebService
         }
 
         [WebMethod]
-        public ResponseModel<User> Register(User user)
+        public ResponseModel<User> AddUser(User admin, User newUser)
         {
             try
             {
-                _usersController.AddUser(user);
+                _usersController.CheckIsAdministratorUser(admin);
+                _usersController.AddUser(newUser);
+
+                ResponseModel<User> response = new ResponseModel<User>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = newUser
+                };
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<User>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
+
+        [WebMethod]
+        public ResponseModel<List<User>> GetUsers(User user)
+        {
+            try
+            {
+                _usersController.CheckIsAdministratorUser(user);
+                ResponseModel<List<User>> response = new ResponseModel<List<User>>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = _usersController.GetAllUsers(user)
+                };
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<List<User>>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
+
+        [WebMethod]
+        public ResponseModel<int> DeleteUser(User user, int id)
+        {
+            try
+            {
+                _usersController.CheckIsAdministratorUser(user);
+                _usersController.DeleteUser(id);
+
+                return new ResponseModel<int>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = id
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<int>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = -1
+                };
+            }
+        }
+
+        #endregion
+
+        #region methods for user
+
+        [WebMethod]
+        public ResponseModel<User> LogIn(User user)
+        {
+            try
+            {
+                _usersController.CheckIsUser(user);
+
+                ResponseModel<User> response = new ResponseModel<User>
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = user
+                };
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<User>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
+
+        
+
+        [WebMethod]
+        public ResponseModel<User> Register(User user, string appKey)
+        {
+            try
+            {
+                _usersController.Register(user, appKey);
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
@@ -131,64 +220,6 @@ namespace BikeWebService
             catch (Exception ex)
             {
                 return new ResponseModel<User>()
-                {
-                    message = ex.Message,
-                    resultCode = -1,
-                    Data = null
-                };
-            }
-        }
-
-        [WebMethod]
-        public ResponseModel<User> AddUser(User admin, User newUser)
-        {
-            try
-            {
-                //check curent user is in database
-                _usersController.CheckIsUser(admin);
-
-                //edit user
-                _usersController.AddUser(newUser);
-
-                ResponseModel<User> response = new ResponseModel<User>
-                {
-                    message = "OK",
-                    resultCode = 1,
-                    Data = newUser
-                };
-
-                return response;
-
-            }
-            catch (Exception ex)
-            {
-                return new ResponseModel<User>()
-                {
-                    message = ex.Message,
-                    resultCode = -1,
-                    Data = null
-                };
-            }
-        }
-
-        [WebMethod]
-        public ResponseModel<List<User>> GetUsers(User user) 
-        {
-            try
-            {
-                ResponseModel<List<User>> response = new ResponseModel<List<User>>
-                {
-                    message = "OK",
-                    resultCode = 1,
-                    Data = _usersController.GetAllUsers(user)
-                };
-
-                return response;
-
-            }
-            catch (Exception ex)
-            {
-                return new ResponseModel<List<User>>()
                 {
                     message = ex.Message,
                     resultCode = -1,
