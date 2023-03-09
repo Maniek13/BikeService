@@ -1,6 +1,4 @@
 ﻿using BikeWebService.Classes;
-using Microsoft.Data.SqlClient;
-using System;
 
 namespace BikeWebService.AbstractClasses
 {

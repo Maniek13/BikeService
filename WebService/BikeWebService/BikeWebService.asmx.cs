@@ -13,8 +13,8 @@ namespace BikeWebService
     [System.ComponentModel.ToolboxItem(false)]
     public class BikeWebService : System.Web.Services.WebService
     {
-        private static readonly TasksController _tasksController;
-        private static readonly UsersController _usersController;
+        private static readonly TasksControllerAbstractClass _tasksController;
+        private static readonly UsersControllerAbstractClass _usersController;
         static BikeWebService()
         {
             _tasksController = new TasksController(new TaskDbController());
@@ -201,10 +201,7 @@ namespace BikeWebService
         {
             try
             {
-                //check curent user is in database
                 _usersController.CheckIsUser(user);
-
-                //edit user
                 _usersController.EditUser(newUser);
 
                 ResponseModel<User> response = new ResponseModel<User>

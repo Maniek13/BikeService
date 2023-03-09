@@ -192,6 +192,9 @@
     <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.DeleteOrderResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.DeleteUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.EditOrderResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -472,7 +472,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractClasses\TasksControllerAbstractClass.cs" />
     <Compile Include="AbstractClasses\UserDbControllerAbstractClass.cs" />
+    <Compile Include="AbstractClasses\UsersControllerAbstractClass.cs" />
     <Compile Include="BikeWebService.asmx.cs">
       <DependentUpon>BikeWebService.asmx</DependentUpon>
       <SubType>Component</SubType>

@@ -2,11 +2,10 @@
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace BikeWebService.Controllers
 {
-    internal class TasksController
+    internal class TasksController : TasksControllerAbstractClass
     {
         readonly object lockTask  = new Lazy<object>(() =>
         {
@@ -49,7 +48,7 @@ namespace BikeWebService.Controllers
 
         #region internal functions
 
-        internal Order FindTask(string taskIDKey)
+        internal override Order FindTask(string taskIDKey)
         {
             if (String.IsNullOrEmpty(taskIDKey))
                 throw new Exception("Brak identyfikatora zlecenia");
@@ -72,7 +71,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-        internal List<Order> GetTasks(User user)
+        internal override List<Order> GetTasks(User user)
         {
             try
             {
@@ -85,7 +84,7 @@ namespace BikeWebService.Controllers
 
         }
 
-        internal bool IsSame(Order oldOrder)
+        internal override bool IsSame(Order oldOrder)
         {
             try
             {
@@ -98,7 +97,7 @@ namespace BikeWebService.Controllers
 
         }
 
-        internal void AddTask(int appId, Order order)
+        internal override void AddTask(int appId, Order order)
         {
             
             try
@@ -123,7 +122,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-        internal void EditTask(Order order)
+        internal override void EditTask(Order order)
         {
             try
             {
@@ -144,7 +143,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-        internal void DeleteTask(int id)
+        internal override void DeleteTask(int id)
         {
             try
             {

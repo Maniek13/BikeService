@@ -212,6 +212,66 @@ namespace ToDoApp.BikeWebService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResponseModelOfInt32", Namespace="http://tempuri.org/")]
+    public partial class ResponseModelOfInt32 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int DataField;
+        
+        private int resultCodeField;
+        
+        private string messageField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int Data {
+            get {
+                return this.DataField;
+            }
+            set {
+                if ((this.DataField.Equals(value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int resultCode {
+            get {
+                return this.resultCodeField;
+            }
+            set {
+                if ((this.resultCodeField.Equals(value) != true)) {
+                    this.resultCodeField = value;
+                    this.RaisePropertyChanged("resultCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string message {
+            get {
+                return this.messageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.messageField, value) != true)) {
+                    this.messageField = value;
+                    this.RaisePropertyChanged("message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseModelOfOrder", Namespace="http://tempuri.org/")]
     public partial class ResponseModelOfOrder : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -450,87 +510,30 @@ namespace ToDoApp.BikeWebService {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ResponseModelOfInt32", Namespace="http://tempuri.org/")]
-    public partial class ResponseModelOfInt32 : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private int DataField;
-        
-        private int resultCodeField;
-        
-        private string messageField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public int Data {
-            get {
-                return this.DataField;
-            }
-            set {
-                if ((this.DataField.Equals(value) != true)) {
-                    this.DataField = value;
-                    this.RaisePropertyChanged("Data");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public int resultCode {
-            get {
-                return this.resultCodeField;
-            }
-            set {
-                if ((this.resultCodeField.Equals(value) != true)) {
-                    this.resultCodeField = value;
-                    this.RaisePropertyChanged("resultCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string message {
-            get {
-                return this.messageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.messageField, value) != true)) {
-                    this.messageField = value;
-                    this.RaisePropertyChanged("message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BikeWebService.BikeWebServiceSoap")]
     public interface BikeWebServiceSoap {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LogIn", ReplyAction="*")]
-        System.Threading.Tasks.Task<ToDoApp.BikeWebService.LogInResponse> LogInAsync(ToDoApp.BikeWebService.LogInRequest request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LogInAsAdministrator", ReplyAction="*")]
         System.Threading.Tasks.Task<ToDoApp.BikeWebService.LogInAsAdministratorResponse> LogInAsAdministratorAsync(ToDoApp.BikeWebService.LogInAsAdministratorRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Register", ReplyAction="*")]
-        System.Threading.Tasks.Task<ToDoApp.BikeWebService.RegisterResponse> RegisterAsync(ToDoApp.BikeWebService.RegisterRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EditUser", ReplyAction="*")]
-        System.Threading.Tasks.Task<ToDoApp.BikeWebService.EditUserResponse> EditUserAsync(ToDoApp.BikeWebService.EditUserRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddUser", ReplyAction="*")]
         System.Threading.Tasks.Task<ToDoApp.BikeWebService.AddUserResponse> AddUserAsync(ToDoApp.BikeWebService.AddUserRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUsers", ReplyAction="*")]
         System.Threading.Tasks.Task<ToDoApp.BikeWebService.GetUsersResponse> GetUsersAsync(ToDoApp.BikeWebService.GetUsersRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteUser", ReplyAction="*")]
+        System.Threading.Tasks.Task<ToDoApp.BikeWebService.DeleteUserResponse> DeleteUserAsync(ToDoApp.BikeWebService.DeleteUserRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LogIn", ReplyAction="*")]
+        System.Threading.Tasks.Task<ToDoApp.BikeWebService.LogInResponse> LogInAsync(ToDoApp.BikeWebService.LogInRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Register", ReplyAction="*")]
+        System.Threading.Tasks.Task<ToDoApp.BikeWebService.RegisterResponse> RegisterAsync(ToDoApp.BikeWebService.RegisterRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EditUser", ReplyAction="*")]
+        System.Threading.Tasks.Task<ToDoApp.BikeWebService.EditUserResponse> EditUserAsync(ToDoApp.BikeWebService.EditUserRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTask", ReplyAction="*")]
         System.Threading.Tasks.Task<ToDoApp.BikeWebService.GetTaskResponse> GetTaskAsync(ToDoApp.BikeWebService.GetTaskRequest request);
@@ -546,74 +549,6 @@ namespace ToDoApp.BikeWebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteOrder", ReplyAction="*")]
         System.Threading.Tasks.Task<ToDoApp.BikeWebService.DeleteOrderResponse> DeleteOrderAsync(ToDoApp.BikeWebService.DeleteOrderRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class LogInRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="LogIn", Namespace="http://tempuri.org/", Order=0)]
-        public ToDoApp.BikeWebService.LogInRequestBody Body;
-        
-        public LogInRequest() {
-        }
-        
-        public LogInRequest(ToDoApp.BikeWebService.LogInRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class LogInRequestBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ToDoApp.BikeWebService.User user;
-        
-        public LogInRequestBody() {
-        }
-        
-        public LogInRequestBody(ToDoApp.BikeWebService.User user) {
-            this.user = user;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class LogInResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="LogInResponse", Namespace="http://tempuri.org/", Order=0)]
-        public ToDoApp.BikeWebService.LogInResponseBody Body;
-        
-        public LogInResponse() {
-        }
-        
-        public LogInResponse(ToDoApp.BikeWebService.LogInResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class LogInResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ToDoApp.BikeWebService.ResponseModelOfUser LogInResult;
-        
-        public LogInResponseBody() {
-        }
-        
-        public LogInResponseBody(ToDoApp.BikeWebService.ResponseModelOfUser LogInResult) {
-            this.LogInResult = LogInResult;
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -681,146 +616,6 @@ namespace ToDoApp.BikeWebService {
         
         public LogInAsAdministratorResponseBody(ToDoApp.BikeWebService.ResponseModelOfUser LogInAsAdministratorResult) {
             this.LogInAsAdministratorResult = LogInAsAdministratorResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class RegisterRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="Register", Namespace="http://tempuri.org/", Order=0)]
-        public ToDoApp.BikeWebService.RegisterRequestBody Body;
-        
-        public RegisterRequest() {
-        }
-        
-        public RegisterRequest(ToDoApp.BikeWebService.RegisterRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class RegisterRequestBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ToDoApp.BikeWebService.User user;
-        
-        public RegisterRequestBody() {
-        }
-        
-        public RegisterRequestBody(ToDoApp.BikeWebService.User user) {
-            this.user = user;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class RegisterResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="RegisterResponse", Namespace="http://tempuri.org/", Order=0)]
-        public ToDoApp.BikeWebService.RegisterResponseBody Body;
-        
-        public RegisterResponse() {
-        }
-        
-        public RegisterResponse(ToDoApp.BikeWebService.RegisterResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class RegisterResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ToDoApp.BikeWebService.ResponseModelOfUser RegisterResult;
-        
-        public RegisterResponseBody() {
-        }
-        
-        public RegisterResponseBody(ToDoApp.BikeWebService.ResponseModelOfUser RegisterResult) {
-            this.RegisterResult = RegisterResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class EditUserRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="EditUser", Namespace="http://tempuri.org/", Order=0)]
-        public ToDoApp.BikeWebService.EditUserRequestBody Body;
-        
-        public EditUserRequest() {
-        }
-        
-        public EditUserRequest(ToDoApp.BikeWebService.EditUserRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class EditUserRequestBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ToDoApp.BikeWebService.User user;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public ToDoApp.BikeWebService.User newUser;
-        
-        public EditUserRequestBody() {
-        }
-        
-        public EditUserRequestBody(ToDoApp.BikeWebService.User user, ToDoApp.BikeWebService.User newUser) {
-            this.user = user;
-            this.newUser = newUser;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class EditUserResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="EditUserResponse", Namespace="http://tempuri.org/", Order=0)]
-        public ToDoApp.BikeWebService.EditUserResponseBody Body;
-        
-        public EditUserResponse() {
-        }
-        
-        public EditUserResponse(ToDoApp.BikeWebService.EditUserResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class EditUserResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ToDoApp.BikeWebService.ResponseModelOfUser EditUserResult;
-        
-        public EditUserResponseBody() {
-        }
-        
-        public EditUserResponseBody(ToDoApp.BikeWebService.ResponseModelOfUser EditUserResult) {
-            this.EditUserResult = EditUserResult;
         }
     }
     
@@ -961,6 +756,290 @@ namespace ToDoApp.BikeWebService {
         
         public GetUsersResponseBody(ToDoApp.BikeWebService.ResponseModelOfListOfUser GetUsersResult) {
             this.GetUsersResult = GetUsersResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class DeleteUserRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="DeleteUser", Namespace="http://tempuri.org/", Order=0)]
+        public ToDoApp.BikeWebService.DeleteUserRequestBody Body;
+        
+        public DeleteUserRequest() {
+        }
+        
+        public DeleteUserRequest(ToDoApp.BikeWebService.DeleteUserRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class DeleteUserRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ToDoApp.BikeWebService.User user;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int id;
+        
+        public DeleteUserRequestBody() {
+        }
+        
+        public DeleteUserRequestBody(ToDoApp.BikeWebService.User user, int id) {
+            this.user = user;
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class DeleteUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="DeleteUserResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ToDoApp.BikeWebService.DeleteUserResponseBody Body;
+        
+        public DeleteUserResponse() {
+        }
+        
+        public DeleteUserResponse(ToDoApp.BikeWebService.DeleteUserResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class DeleteUserResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ToDoApp.BikeWebService.ResponseModelOfInt32 DeleteUserResult;
+        
+        public DeleteUserResponseBody() {
+        }
+        
+        public DeleteUserResponseBody(ToDoApp.BikeWebService.ResponseModelOfInt32 DeleteUserResult) {
+            this.DeleteUserResult = DeleteUserResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class LogInRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="LogIn", Namespace="http://tempuri.org/", Order=0)]
+        public ToDoApp.BikeWebService.LogInRequestBody Body;
+        
+        public LogInRequest() {
+        }
+        
+        public LogInRequest(ToDoApp.BikeWebService.LogInRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class LogInRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ToDoApp.BikeWebService.User user;
+        
+        public LogInRequestBody() {
+        }
+        
+        public LogInRequestBody(ToDoApp.BikeWebService.User user) {
+            this.user = user;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class LogInResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="LogInResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ToDoApp.BikeWebService.LogInResponseBody Body;
+        
+        public LogInResponse() {
+        }
+        
+        public LogInResponse(ToDoApp.BikeWebService.LogInResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class LogInResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ToDoApp.BikeWebService.ResponseModelOfUser LogInResult;
+        
+        public LogInResponseBody() {
+        }
+        
+        public LogInResponseBody(ToDoApp.BikeWebService.ResponseModelOfUser LogInResult) {
+            this.LogInResult = LogInResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RegisterRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="Register", Namespace="http://tempuri.org/", Order=0)]
+        public ToDoApp.BikeWebService.RegisterRequestBody Body;
+        
+        public RegisterRequest() {
+        }
+        
+        public RegisterRequest(ToDoApp.BikeWebService.RegisterRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class RegisterRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ToDoApp.BikeWebService.User user;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string appKey;
+        
+        public RegisterRequestBody() {
+        }
+        
+        public RegisterRequestBody(ToDoApp.BikeWebService.User user, string appKey) {
+            this.user = user;
+            this.appKey = appKey;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class RegisterResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RegisterResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ToDoApp.BikeWebService.RegisterResponseBody Body;
+        
+        public RegisterResponse() {
+        }
+        
+        public RegisterResponse(ToDoApp.BikeWebService.RegisterResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class RegisterResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ToDoApp.BikeWebService.ResponseModelOfUser RegisterResult;
+        
+        public RegisterResponseBody() {
+        }
+        
+        public RegisterResponseBody(ToDoApp.BikeWebService.ResponseModelOfUser RegisterResult) {
+            this.RegisterResult = RegisterResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class EditUserRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="EditUser", Namespace="http://tempuri.org/", Order=0)]
+        public ToDoApp.BikeWebService.EditUserRequestBody Body;
+        
+        public EditUserRequest() {
+        }
+        
+        public EditUserRequest(ToDoApp.BikeWebService.EditUserRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class EditUserRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ToDoApp.BikeWebService.User user;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public ToDoApp.BikeWebService.User newUser;
+        
+        public EditUserRequestBody() {
+        }
+        
+        public EditUserRequestBody(ToDoApp.BikeWebService.User user, ToDoApp.BikeWebService.User newUser) {
+            this.user = user;
+            this.newUser = newUser;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class EditUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="EditUserResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ToDoApp.BikeWebService.EditUserResponseBody Body;
+        
+        public EditUserResponse() {
+        }
+        
+        public EditUserResponse(ToDoApp.BikeWebService.EditUserResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class EditUserResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ToDoApp.BikeWebService.ResponseModelOfUser EditUserResult;
+        
+        public EditUserResponseBody() {
+        }
+        
+        public EditUserResponseBody(ToDoApp.BikeWebService.ResponseModelOfUser EditUserResult) {
+            this.EditUserResult = EditUserResult;
         }
     }
     
@@ -1364,18 +1443,6 @@ namespace ToDoApp.BikeWebService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ToDoApp.BikeWebService.LogInResponse> ToDoApp.BikeWebService.BikeWebServiceSoap.LogInAsync(ToDoApp.BikeWebService.LogInRequest request) {
-            return base.Channel.LogInAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ToDoApp.BikeWebService.LogInResponse> LogInAsync(ToDoApp.BikeWebService.User user) {
-            ToDoApp.BikeWebService.LogInRequest inValue = new ToDoApp.BikeWebService.LogInRequest();
-            inValue.Body = new ToDoApp.BikeWebService.LogInRequestBody();
-            inValue.Body.user = user;
-            return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).LogInAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<ToDoApp.BikeWebService.LogInAsAdministratorResponse> ToDoApp.BikeWebService.BikeWebServiceSoap.LogInAsAdministratorAsync(ToDoApp.BikeWebService.LogInAsAdministratorRequest request) {
             return base.Channel.LogInAsAdministratorAsync(request);
         }
@@ -1385,31 +1452,6 @@ namespace ToDoApp.BikeWebService {
             inValue.Body = new ToDoApp.BikeWebService.LogInAsAdministratorRequestBody();
             inValue.Body.user = user;
             return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).LogInAsAdministratorAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ToDoApp.BikeWebService.RegisterResponse> ToDoApp.BikeWebService.BikeWebServiceSoap.RegisterAsync(ToDoApp.BikeWebService.RegisterRequest request) {
-            return base.Channel.RegisterAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ToDoApp.BikeWebService.RegisterResponse> RegisterAsync(ToDoApp.BikeWebService.User user) {
-            ToDoApp.BikeWebService.RegisterRequest inValue = new ToDoApp.BikeWebService.RegisterRequest();
-            inValue.Body = new ToDoApp.BikeWebService.RegisterRequestBody();
-            inValue.Body.user = user;
-            return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).RegisterAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ToDoApp.BikeWebService.EditUserResponse> ToDoApp.BikeWebService.BikeWebServiceSoap.EditUserAsync(ToDoApp.BikeWebService.EditUserRequest request) {
-            return base.Channel.EditUserAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ToDoApp.BikeWebService.EditUserResponse> EditUserAsync(ToDoApp.BikeWebService.User user, ToDoApp.BikeWebService.User newUser) {
-            ToDoApp.BikeWebService.EditUserRequest inValue = new ToDoApp.BikeWebService.EditUserRequest();
-            inValue.Body = new ToDoApp.BikeWebService.EditUserRequestBody();
-            inValue.Body.user = user;
-            inValue.Body.newUser = newUser;
-            return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).EditUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1435,6 +1477,57 @@ namespace ToDoApp.BikeWebService {
             inValue.Body = new ToDoApp.BikeWebService.GetUsersRequestBody();
             inValue.Body.user = user;
             return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).GetUsersAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ToDoApp.BikeWebService.DeleteUserResponse> ToDoApp.BikeWebService.BikeWebServiceSoap.DeleteUserAsync(ToDoApp.BikeWebService.DeleteUserRequest request) {
+            return base.Channel.DeleteUserAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ToDoApp.BikeWebService.DeleteUserResponse> DeleteUserAsync(ToDoApp.BikeWebService.User user, int id) {
+            ToDoApp.BikeWebService.DeleteUserRequest inValue = new ToDoApp.BikeWebService.DeleteUserRequest();
+            inValue.Body = new ToDoApp.BikeWebService.DeleteUserRequestBody();
+            inValue.Body.user = user;
+            inValue.Body.id = id;
+            return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).DeleteUserAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ToDoApp.BikeWebService.LogInResponse> ToDoApp.BikeWebService.BikeWebServiceSoap.LogInAsync(ToDoApp.BikeWebService.LogInRequest request) {
+            return base.Channel.LogInAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ToDoApp.BikeWebService.LogInResponse> LogInAsync(ToDoApp.BikeWebService.User user) {
+            ToDoApp.BikeWebService.LogInRequest inValue = new ToDoApp.BikeWebService.LogInRequest();
+            inValue.Body = new ToDoApp.BikeWebService.LogInRequestBody();
+            inValue.Body.user = user;
+            return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).LogInAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ToDoApp.BikeWebService.RegisterResponse> ToDoApp.BikeWebService.BikeWebServiceSoap.RegisterAsync(ToDoApp.BikeWebService.RegisterRequest request) {
+            return base.Channel.RegisterAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ToDoApp.BikeWebService.RegisterResponse> RegisterAsync(ToDoApp.BikeWebService.User user, string appKey) {
+            ToDoApp.BikeWebService.RegisterRequest inValue = new ToDoApp.BikeWebService.RegisterRequest();
+            inValue.Body = new ToDoApp.BikeWebService.RegisterRequestBody();
+            inValue.Body.user = user;
+            inValue.Body.appKey = appKey;
+            return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).RegisterAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ToDoApp.BikeWebService.EditUserResponse> ToDoApp.BikeWebService.BikeWebServiceSoap.EditUserAsync(ToDoApp.BikeWebService.EditUserRequest request) {
+            return base.Channel.EditUserAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ToDoApp.BikeWebService.EditUserResponse> EditUserAsync(ToDoApp.BikeWebService.User user, ToDoApp.BikeWebService.User newUser) {
+            ToDoApp.BikeWebService.EditUserRequest inValue = new ToDoApp.BikeWebService.EditUserRequest();
+            inValue.Body = new ToDoApp.BikeWebService.EditUserRequestBody();
+            inValue.Body.user = user;
+            inValue.Body.newUser = newUser;
+            return ((ToDoApp.BikeWebService.BikeWebServiceSoap)(this)).EditUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

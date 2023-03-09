@@ -307,7 +307,7 @@ namespace BikeWebService.DbControllers
                     {
                         command.Parameters.Add(new SqlParameter()
                         {
-                            ParameterName = "@userID",
+                            ParameterName = "@appID",
                             SqlDbType = System.Data.SqlDbType.NVarChar,
                             Value = user.AppId
                         });

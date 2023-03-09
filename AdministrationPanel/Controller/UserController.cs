@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ToDoApp.BaseClasses;
 using ToDoApp.Models;
-using ToDoApp.Providers;
 using ToDoApp.Settings;
 
 namespace ToDoApp.Controller
 {
     internal class UserController : UserControllerBase
     {
-        private ServiceProviderBase service = ProvidersSettings.bikeWebServiceProvider;
+        private readonly ServiceProviderBase service = ProvidersSettings.bikeWebServiceProvider;
 
         #region internal function
         internal override ObservableCollection<User> SetList()
@@ -38,9 +37,7 @@ namespace ToDoApp.Controller
         {
             try
             {
-                service.AddUser(adnmin, user);
-
-                user.Id = _users.Count + 1;
+                user = service.AddUser(adnmin, user);
                 _users.Add(user);
             }
             catch (Exception ex)
@@ -52,8 +49,7 @@ namespace ToDoApp.Controller
         {
             try
             {
-                service.EditUser(adnmin, user);
-
+                user = service.EditUser(adnmin, user);
                 _users.RemoveAt(user.Id - 1);
                 _users.Insert(user.Id - 1, user);
             }

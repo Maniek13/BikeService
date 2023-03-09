@@ -9,7 +9,6 @@ namespace BikeWebService.DbControllers
     internal class TaskDbController : TaskDbControllerAbstractClass
     {
         #region internal function
-
         internal override Order GetTask(string taskKey)
         {
             try

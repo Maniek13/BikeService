@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BikeWebService.Controllers
 {
-    internal class UsersController
+    internal class UsersController : UsersControllerAbstractClass
     {
         private readonly object lockUser = new Lazy<object>(() =>
         {
@@ -40,7 +40,7 @@ namespace BikeWebService.Controllers
         #endregion
 
         #region internal functions
-        internal void CheckIsUser(User user)
+        internal override void CheckIsUser(User user)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace BikeWebService.Controllers
                 throw new Exception(ex.Message);
             }  
         }
-        internal void CheckIsAdministratorUser(User user)
+        internal override void CheckIsAdministratorUser(User user)
         {
             try
             {
@@ -71,12 +71,16 @@ namespace BikeWebService.Controllers
             }
         }
 
-        internal void AddUser(User user)
+        internal override void AddUser(User user)
         {
             try
             {
                 validateUser(user);
-                _userDbController.AddUser(user);
+
+                lock (lockUser)
+                {
+                    _userDbController.AddUser(user);
+                }
 
                 if (user.Id.Equals(0))
                     throw new Exception("Niepoprawne dane");
@@ -88,12 +92,16 @@ namespace BikeWebService.Controllers
             }
         }
 
-        internal void Register(User user, string appKey)
+        internal override void Register(User user, string appKey)
         {
             try
             {
                 validateUser(user);
-                _userDbController.AddUser(user, appKey);
+
+                lock (lockUser)
+                {
+                    _userDbController.AddUser(user, appKey);
+                }
 
                 if (user.Id.Equals(0))
                     throw new Exception("Niepoprawne dane");
@@ -105,7 +113,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-        internal void EditUser(User user)
+        internal override void EditUser(User user)
         {
 
             try
@@ -128,7 +136,7 @@ namespace BikeWebService.Controllers
             }
         }
 
-        internal List<User> GetAllUsers(User user)
+        internal override List<User> GetAllUsers(User user)
         {
             try
             {
@@ -140,11 +148,14 @@ namespace BikeWebService.Controllers
             }
         }
 
-        internal void DeleteUser(int id)
+        internal override void DeleteUser(int id)
         {
             try
             {
-                _userDbController.DeleteUser(id);
+                lock(lockUser)
+                {
+                    _userDbController.DeleteUser(id);
+                }
             }
             catch (Exception ex)
             {
