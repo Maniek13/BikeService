@@ -19,6 +19,7 @@ namespace ToDoApp.BaseClasses
         internal abstract ObservableCollection<User> GetUsers(User admin);
         internal abstract void AddUser(User admin, User userToAdd);
         internal abstract void EditUser(User adnmin, User userToEdit);
+        internal abstract void DeleteUser(User adnmin, User user);
         #endregion
     }
 }

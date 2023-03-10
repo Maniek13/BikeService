@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="ToDoApp.Views.DeleteUserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoApp.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" UseLayoutRounding="False" Width="400" Height="300">
+    <Page.DataContext>
+        <local:UserViewModel/>
+    </Page.DataContext>
+    <Grid BorderBrush="#FF127516" BorderThickness="2">
+        
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,20,0,0">Usuwanie użytkownika</TextBlock>
+            <TextBlock Text="{x:Bind Path=viewModel.User.Login}"  Width="NaN" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0"/>
+        </StackPanel>
+   
+        <StackPanel Orientation="Horizontal" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Click="OK_Click" HorizontalAlignment="Left" Width="180" BorderBrush="Black">OK</Button>
+            <Button Click="Cancel_Click" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="180" BorderBrush="#FF0B0404">Anuluj</Button>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
+            <TextBlock Visibility="Collapsed" x:Name="ErrorDelete" TextWrapping="Wrap" TextTrimming="WordEllipsis" LineHeight="20" Foreground="Red" Height="85"/>
+        </StackPanel>
+    </Grid>
+</Page>

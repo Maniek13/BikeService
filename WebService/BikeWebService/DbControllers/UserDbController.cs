@@ -109,6 +109,50 @@ namespace BikeWebService.DbControllers
             user.AppId = appId;
         }
 
+        internal override bool IsSameUser(User userOld)
+        {
+
+            try
+            {
+                string query = @"
+                SELECT * FROM users 
+                WHERE userID = @userID;";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@userID",
+                            SqlDbType = System.Data.SqlDbType.Int,
+                            Value = userOld.Id
+                        });
+
+                        connection.Open();
+
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Object[] values = new Object[reader.FieldCount];
+                                reader.GetValues(values);
+                                return userOld.Equals(convertToUser(values));
+                            }
+
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         internal override void AddUser(User user)
         {
             try
@@ -319,7 +363,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                users.Add(convertToTask(values));
+                                users.Add(convertToUser(values));
                             }
                         }
                     }
@@ -335,7 +379,7 @@ namespace BikeWebService.DbControllers
         }
 
         #region private functions
-        private User convertToTask(Object[] obj)
+        private User convertToUser(Object[] obj)
         {
             if (obj == null || obj.Length == 0)
                 return null;

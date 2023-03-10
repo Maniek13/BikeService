@@ -9,7 +9,7 @@
     <Page.DataContext>
         <local:UserViewModel/>
     </Page.DataContext>
-    <Grid UseLayoutRounding="False" Height="300">
+    <Grid UseLayoutRounding="False" Height="300" BorderBrush="#FF127516" BorderThickness="2">
         <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBox 
             x:Name="loginInput"

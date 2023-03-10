@@ -137,6 +137,32 @@ namespace ToDoApp.Providers
         }
 
 
+        internal override int DeleteUser(Models.User admin, int id)
+        {
+            try
+            {
+                User adminAdd = convertToServiceUser(admin);
+
+                using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
+                {
+                    var service = client.DeleteUserAsync(adminAdd, id);
+                    service.Wait();
+                    var res = service.Result.Body.DeleteUserResult;
+
+                    if (res.resultCode != 1)
+                        throw new Exception(res.message);
+
+                    return res.Data;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+
+
         #endregion
 
         #region private function

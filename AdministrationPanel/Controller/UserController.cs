@@ -60,6 +60,24 @@ namespace ToDoApp.Controller
                 throw new Exception(ex.Message, ex);
             }
         }
+
+        internal override void DeleteUser(User adnmin, User user)
+        {
+            try
+            {
+                int resId = service.DeleteUser(adnmin, user.Id);
+
+                int index = _users.IndexOf(user);
+                _users.RemoveAt(index);
+
+                if (resId == 0)
+                    throw new Exception($"Użytkownik o id: {user.Id} nie istnieje");
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
         #endregion
     }
 }

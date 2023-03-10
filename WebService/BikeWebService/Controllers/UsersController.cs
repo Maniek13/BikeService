@@ -1,5 +1,6 @@
 ﻿using BikeWebService.AbstractClasses;
 using BikeWebService.Classes;
+using BikeWebService.DbControllers;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
@@ -161,6 +162,20 @@ namespace BikeWebService.Controllers
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        internal override bool IsSame(User userOld)
+        {
+            try
+            {
+                validateUser(userOld);
+                return _userDbController.IsSameUser(userOld);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
         #endregion
     }

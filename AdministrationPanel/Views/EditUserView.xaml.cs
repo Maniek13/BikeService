@@ -35,11 +35,12 @@ namespace ToDoApp.Views
                 }
                 viewModel.EditUser();
 
-                this.Content = new Page();
+                this.Content = null;
             }
             catch(Exception ex)
             { 
                 ErrorEdit.Text = ex.Message;
+                ErrorEdit.Visibility = Visibility.Visible;
             }
            
         }

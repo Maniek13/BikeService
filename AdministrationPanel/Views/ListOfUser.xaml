@@ -42,11 +42,14 @@
                     <DataTemplate>
                         <Border BorderBrush="#FF127516"
                         BorderThickness="2" Height="60" Margin="0,0,0,10">
-                            <Button Tag="{Binding }" Click="ShowEditView_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <StackPanel>
-                                    <TextBlock x:Name="LoginField" Text="{Binding Login}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </Button>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Tag="{Binding }" Click="ShowEditView_Click" VerticalAlignment="Stretch" HorizontalAlignment="Left" BorderBrush="Black" Width="140">
+                                    <StackPanel>
+                                        <TextBlock x:Name="LoginField" Text="{Binding Login}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Tag="{Binding}" Click="Delete_Click" BorderBrush="Black" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="32">X</Button>
+                            </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -59,7 +62,7 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" UseLayoutRounding="False" >
-            <Frame x:Name="MainContent"/>
+            <Frame x:Name="MainContent" Margin="0,100,0,0"/>
         </StackPanel>
 
 

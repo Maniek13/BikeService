@@ -39,6 +39,11 @@ namespace ToDoApp.Views
             viewModel.ShowContent(MainContent, typeof(EditUserView), ((Button)sender).Tag as User);
         }
 
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.ShowContent(MainContent, typeof(DeleteUserView), ((Button)sender).Tag as User);
+        }
+
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             viewModel.LogOut();

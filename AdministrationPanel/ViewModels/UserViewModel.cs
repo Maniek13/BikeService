@@ -61,5 +61,20 @@ namespace ToDoApp.ViewModels
                 throw new Exception(ex.Message, ex);
             }
         }
+
+        internal void DeleteUser()
+        {
+            try
+            {
+                if (_user.Id != 0)
+                {
+                    _userController.DeleteUser(_adminController.Admin, _user);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
     }
 }

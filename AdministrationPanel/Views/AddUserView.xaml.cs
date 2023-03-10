@@ -28,11 +28,12 @@ namespace ToDoApp.Views
                 viewModel.User = user;
                 viewModel.AddUser();
 
-                this.Content = new Page();
+                this.Content = null;
             }
             catch (Exception ex)
             {
                 ErrorAdd.Text = ex.Message;
+                ErrorAdd.Visibility = Visibility.Visible;
             }
         }
     }

@@ -166,8 +166,6 @@ namespace BikeWebService
             }
         }
 
-        
-
         [WebMethod]
         public ResponseModel<User> Register(User user, string appKey)
         {
@@ -197,11 +195,15 @@ namespace BikeWebService
         }
 
         [WebMethod]
-        public ResponseModel<User> EditUser(User user, User newUser)
+        public ResponseModel<User> EditUser(User user, User newUser, User userOld = null)
         {
             try
             {
                 _usersController.CheckIsUser(user);
+
+                if (userOld != null && !_usersController.IsSame(userOld))
+                    throw new Exception("Uzytkownik został zmieniony. Odświerz dane");
+
                 _usersController.EditUser(newUser);
 
                 ResponseModel<User> response = new ResponseModel<User>

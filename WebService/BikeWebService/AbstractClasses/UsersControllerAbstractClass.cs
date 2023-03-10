@@ -12,5 +12,6 @@ namespace BikeWebService.AbstractClasses
         internal abstract void EditUser(User user);
         internal abstract List<User> GetAllUsers(User user);
         internal abstract void DeleteUser(int id);
+        internal abstract bool IsSame(User oldUser);
     }
 }
