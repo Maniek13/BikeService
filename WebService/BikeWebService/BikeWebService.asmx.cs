@@ -13,6 +13,16 @@ namespace BikeWebService
     [System.ComponentModel.ToolboxItem(false)]
     public class BikeWebService : System.Web.Services.WebService
     {
+        private readonly object _editUserLocker = new Lazy<object>(() =>
+        {
+            return  new object ();
+        });
+        private readonly object _editTaskLocker = new Lazy<object>(() =>
+        {
+            return new object();
+        });
+
+
         private static readonly TasksControllerAbstractClass _tasksController;
         private static readonly UsersControllerAbstractClass _usersController;
         static BikeWebService()
@@ -199,12 +209,16 @@ namespace BikeWebService
         {
             try
             {
-                _usersController.CheckIsUser(user);
 
-                if (userOld != null && !_usersController.IsSame(userOld))
-                    throw new Exception("Uzytkownik został zmieniony. Odświerz dane");
+                lock(_editUserLocker)
+                {
+                    _usersController.CheckIsUser(user);
 
-                _usersController.EditUser(newUser);
+                    if (userOld != null && !_usersController.IsSame(userOld))
+                        throw new Exception("Uzytkownik został zmieniony. Odświerz dane");
+
+                    _usersController.EditUser(newUser);
+                }
 
                 ResponseModel<User> response = new ResponseModel<User>
                 {
@@ -316,12 +330,15 @@ namespace BikeWebService
         {
             try
             {
-                _usersController.CheckIsUser(user);
+                lock(_editTaskLocker)
+                {
+                    _usersController.CheckIsUser(user);
 
-                if(orderOld != null && !_tasksController.IsSame(orderOld))
-                    throw new Exception("Zamowienie zostało zmienione. Odświerz dane");
+                    if (orderOld != null && !_tasksController.IsSame(orderOld))
+                        throw new Exception("Zamowienie zostało zmienione. Odświerz dane");
 
-                _tasksController.EditTask(order);
+                    _tasksController.EditTask(order);
+                }
 
                 return new ResponseModel<Order>()
                 {

@@ -7,11 +7,6 @@ namespace BikeWebService.Controllers
 {
     internal class TasksController : TasksControllerAbstractClass
     {
-        readonly object lockTask  = new Lazy<object>(() =>
-        {
-            return  new object ();
-        });
-
         private readonly TaskDbControllerAbstractClass _taskDbController;
         public TasksController(TaskDbControllerAbstractClass service)
         {
@@ -128,11 +123,8 @@ namespace BikeWebService.Controllers
             {
                 int id = 0;
                 validateTask(order);
-
-                lock (lockTask)
-                {
-                    id = _taskDbController.EditOrder(order);
-                }
+                
+                id = _taskDbController.EditOrder(order);
 
                 if (id  == 0)
                     throw new Exception("Błąd edycji zlecenia");

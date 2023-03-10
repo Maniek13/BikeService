@@ -9,10 +9,6 @@ namespace BikeWebService.Controllers
 {
     internal class UsersController : UsersControllerAbstractClass
     {
-        private readonly object lockUser = new Lazy<object>(() =>
-        {
-            return new object();
-        });
 
         private readonly UserDbControllerAbstractClass _userDbController;
         public UsersController(UserDbControllerAbstractClass service)
@@ -77,11 +73,7 @@ namespace BikeWebService.Controllers
             try
             {
                 validateUser(user);
-
-                lock (lockUser)
-                {
-                    _userDbController.AddUser(user);
-                }
+                _userDbController.AddUser(user);
 
                 if (user.Id.Equals(0))
                     throw new Exception("Niepoprawne dane");
@@ -99,10 +91,7 @@ namespace BikeWebService.Controllers
             {
                 validateUser(user);
 
-                lock (lockUser)
-                {
-                    _userDbController.AddUser(user, appKey);
-                }
+                _userDbController.AddUser(user, appKey);
 
                 if (user.Id.Equals(0))
                     throw new Exception("Niepoprawne dane");
@@ -122,10 +111,7 @@ namespace BikeWebService.Controllers
                 int id = 0;
                 validateUser(user);
 
-                lock (lockUser)
-                {
-                    id = _userDbController.EditUser(user);
-                }
+                id = _userDbController.EditUser(user);
 
                 if ( id == 0)
                     throw new Exception("Błąd edycji");
@@ -153,10 +139,8 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                lock(lockUser)
-                {
-                    _userDbController.DeleteUser(id);
-                }
+                _userDbController.DeleteUser(id);
+
             }
             catch (Exception ex)
             {
