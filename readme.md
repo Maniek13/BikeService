@@ -28,7 +28,8 @@ Android app:
 ______________________________________
 class Settings{
     static SOAPAdress = 'serwer.asmx'
-}z`
+    static SchemaStyle  = 0;
+}
 
 export default Settings;
 _______________________________________
