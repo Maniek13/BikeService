@@ -36,5 +36,9 @@ namespace ToDoApp.Views
                 ErrorAdd.Visibility = Visibility.Visible;
             }
         }
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = null;
+        }
     }
 }

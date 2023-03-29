@@ -5,23 +5,24 @@
     xmlns:local="using:ToDoApp.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" UseLayoutRounding="False" Width="400" Height="300">
+    mc:Ignorable="d" UseLayoutRounding="False" Width="400" Height="220">
     <Page.DataContext>
         <local:UserViewModel/>
     </Page.DataContext>
-    <Grid BorderBrush="#FF127516" BorderThickness="2">
-        
+    <Grid BorderBrush="#FF127516" BorderThickness="2" Height="220">
+
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,20,0,0">Usuwanie użytkownika</TextBlock>
-            <TextBlock Text="{x:Bind Path=viewModel.User.Login}"  Width="NaN" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0"/>
+            <TextBlock Text="{x:Bind Path=viewModel.User.Login}"  Width="NaN" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
         </StackPanel>
-   
-        <StackPanel Orientation="Horizontal" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Click="OK_Click" HorizontalAlignment="Left" Width="180" BorderBrush="Black">OK</Button>
-            <Button Click="Cancel_Click" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="180" BorderBrush="#FF0B0404">Anuluj</Button>
+
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0" Width="300">
+            <Button Click="OK_Click" HorizontalAlignment="Left" Margin="0,0,1,0" Width="150" >OK</Button>
+            <Button Click="Cancel_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="1,0,0,0" Width="150">Anuluj</Button>
         </StackPanel>
-        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
-            <TextBlock Visibility="Collapsed" x:Name="ErrorDelete" TextWrapping="Wrap" TextTrimming="WordEllipsis" LineHeight="20" Foreground="Red" Height="85"/>
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,158,0,0" Height="58">
+            <TextBlock Visibility="Collapsed" x:Name="ErrorDelete" TextTrimming="CharacterEllipsis" LineHeight="12" Foreground="Red" Height="58" Width="384" FontSize="9" TextWrapping="Wrap" TextAlignment="Justify" Margin="5,0,5,5"/>
         </StackPanel>
     </Grid>
 </Page>
