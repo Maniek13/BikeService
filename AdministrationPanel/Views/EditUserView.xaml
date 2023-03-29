@@ -14,9 +14,9 @@
             <TextBox 
         x:Name="loginInput"
                     Header="Wpisz login:" PlaceholderText="{x:Bind Path=viewModel.User.Login, Mode=TwoWay}"  Width="NaN" Height="60"/>
-            <TextBox 
+            <PasswordBox 
         x:Name="paswordInput"
-                    Header="Wpisz hasło:" PlaceholderText="{x:Bind Path=viewModel.User.Password, Mode=TwoWay}" Width="NaN" Height="60" Margin="0,10,0,0"/>
+                    Header="Wpisz hasło:" PlaceholderText="{x:Bind Path=viewModel.User.Password, Mode=TwoWay}" Width="NaN" Height="60" Margin="0,10,0,0" PasswordChar="*"/>
             <Button Click="EditUser_Click" HorizontalAlignment="Stretch" Margin="0,10,0,0">
                 Edytuj
             </Button>

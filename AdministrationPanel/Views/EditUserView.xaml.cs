@@ -29,9 +29,9 @@ namespace ToDoApp.Views
                 {
                     viewModel.User.Login = loginInput.Text;
                 }
-                if (!string.IsNullOrEmpty(paswordInput.Text))
+                if (!string.IsNullOrEmpty(paswordInput.Password))
                 {
-                    viewModel.User.Password = paswordInput.Text;
+                    viewModel.User.Password = paswordInput.Password;
                 }
                 viewModel.EditUser();
 
