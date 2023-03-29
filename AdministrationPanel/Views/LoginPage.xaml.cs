@@ -23,6 +23,8 @@ namespace ToDoApp.Views
             }
         }
 
+
+
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -32,14 +34,14 @@ namespace ToDoApp.Views
 
                 viewModel.frame = Frame;
                 viewModel.User.Login = loginInput.Text;
-                viewModel.User.Password = paswordInput.Text;
+                viewModel.User.Password = paswordInput.Password;
 
                 if(rememberUser.IsChecked == true)
                 {
                     var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
                     localSettings.Values["username"] = loginInput.Text;
-                    localSettings.Values["password"] = paswordInput.Text;
+                    localSettings.Values["password"] = paswordInput.Password;
                 }
 
                 viewModel.Login();
