@@ -28,7 +28,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                companies.Add(convertToFirm(values));
+                                companies.Add(convertToCompany(values));
                             }
 
                             return companies;
@@ -42,7 +42,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        private Company convertToFirm(Object[] data)
+        private Company convertToCompany(Object[] data)
         {
             if (data == null || data.Length == 0)
                 return null;
