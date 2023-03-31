@@ -472,6 +472,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractClasses\CompaniesControllerAbstractClass.cs" />
+    <Compile Include="AbstractClasses\CompaniesDbControllerAbstractClass.cs" />
     <Compile Include="AbstractClasses\TasksControllerAbstractClass.cs" />
     <Compile Include="AbstractClasses\UserDbControllerAbstractClass.cs" />
     <Compile Include="AbstractClasses\UsersControllerAbstractClass.cs" />
@@ -482,13 +484,17 @@
     <Compile Include="Classes\Crypto.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="AbstractClasses\BaseDbController.cs" />
+    <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="DbControllers\CompaniesDbController.cs" />
     <Compile Include="DbControllers\TaskDbController.cs" />
     <Compile Include="DbControllers\UserDbController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Interfaces\ICompany.cs" />
     <Compile Include="Interfaces\IOrder.cs" />
     <Compile Include="AbstractClasses\TaskDbControllerAbstractClass.cs" />
     <Compile Include="Interfaces\IUser.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\HttpContextResponse.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\ResponseModel.cs" />

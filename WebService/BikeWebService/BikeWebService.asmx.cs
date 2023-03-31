@@ -25,10 +25,12 @@ namespace BikeWebService
 
         private static readonly TasksControllerAbstractClass _tasksController;
         private static readonly UsersControllerAbstractClass _usersController;
+        private static readonly CompaniesControllerAbstractClass _companiesDbController;
         static BikeWebService()
         {
             _tasksController = new TasksController(new TaskDbController());
             _usersController = new UsersController(new UserDbController());
+            _companiesDbController = new CompaniesController(new  CompaniesDbController());
         }
 
         #region method for admin
@@ -384,6 +386,33 @@ namespace BikeWebService
             }
         }
 
+        #endregion
+
+        #region methods for companies
+        [WebMethod]
+        public ResponseModel<List<Company>> GetCompanies()
+        {
+            try
+            {
+                List<Company> result = _companiesDbController.GetCompanies();
+
+                return new ResponseModel<List<Company>>()
+                {
+                    message = "OK",
+                    resultCode = 1,
+                    Data = result
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<List<Company>>()
+                {
+                    message = ex.Message,
+                    resultCode = -1,
+                    Data = null
+                };
+            }
+        }
         #endregion
     }
 }
