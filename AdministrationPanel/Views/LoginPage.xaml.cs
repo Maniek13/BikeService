@@ -3,18 +3,19 @@ using System;
 using ToDoApp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace ToDoApp.Views
 {
     internal sealed partial class LoginPage : Page
     {
-        internal LoginViewModel viewModel { get; set; }
+        internal LoginViewModel ViewModel { get; set; }
         internal LoginPage()
         {
             try
             {
                 this.InitializeComponent();
-                viewModel = new LoginViewModel();
+                ViewModel = new LoginViewModel();
             }
             catch(Exception ex)
             {
@@ -22,9 +23,6 @@ namespace ToDoApp.Views
                 errorField.Visibility = Visibility.Visible;
             }
         }
-
-
-
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -32,9 +30,9 @@ namespace ToDoApp.Views
                 errorField.Text = "";
                 errorField.Visibility = Visibility.Collapsed;
 
-                viewModel.frame = Frame;
-                viewModel.User.Login = loginInput.Text;
-                viewModel.User.Password = paswordInput.Password;
+                ViewModel.frame = Frame;
+                ViewModel.User.Login = loginInput.Text;
+                ViewModel.User.Password = paswordInput.Password;
 
                 if(rememberUser.IsChecked == true)
                 {
@@ -44,7 +42,7 @@ namespace ToDoApp.Views
                     localSettings.Values["password"] = paswordInput.Password;
                 }
 
-                viewModel.Login();
+                ViewModel.Login();
             }
             catch (Exception ex)
             {

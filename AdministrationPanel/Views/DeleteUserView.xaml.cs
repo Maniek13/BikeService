@@ -9,23 +9,21 @@ namespace ToDoApp.Views
 {
     internal sealed partial class DeleteUserView : Page
     {
-        internal UserViewModel viewModel { get; set; }
+        internal UserViewModel ViewModel { get; set; }
         internal DeleteUserView()
         {
             InitializeComponent();
-            viewModel = new UserViewModel();
+            ViewModel = new UserViewModel();
         }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            viewModel.User = e.Parameter as User;
+            ViewModel.User = e.Parameter as User;
         }
-
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                viewModel.DeleteUser();
+                ViewModel.DeleteUser();
                 this.Content = null;
             }
             catch(Exception ex)
@@ -34,7 +32,6 @@ namespace ToDoApp.Views
                 ErrorDelete.Visibility = Visibility.Visible;
             }
         }
-
         private void Cancel_Click(object sender, RoutedEventArgs e) 
         { 
             this.Content = null;

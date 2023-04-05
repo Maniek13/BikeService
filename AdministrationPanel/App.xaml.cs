@@ -62,17 +62,24 @@ namespace ToDoApp
                     string login = localSettings.Values["username"]?.ToString() ?? "";
                     string password = localSettings.Values["password"]?.ToString() ?? "";
 
-
-                    if (!String.IsNullOrEmpty(login) && !String.IsNullOrEmpty(password))
+                    try
                     {
-                        AdminControllerBase adminController = ControllersSettings.adminController;
-                        adminController.Login(login, password);
-
-                        rootFrame.Navigate(typeof(Views.ListOfUser));
+                        if (!String.IsNullOrEmpty(login) && !String.IsNullOrEmpty(password))
+                        {
+                            AdminControllerBase adminController = ControllersSettings.adminController;
+                            adminController.Login(login, password);
+                        
+                            rootFrame.Navigate(typeof(Views.ListOfUser));
+                        }
+                        else
+                        {
+                            rootFrame.Navigate(typeof(LoginPage), e.Arguments);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        rootFrame.Navigate(typeof(LoginPage), e.Arguments);
+
+                        rootFrame.Navigate(typeof(LoginPage));
                     }
                 }
                 Window.Current.Activate();

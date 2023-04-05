@@ -11,8 +11,8 @@ namespace ToDoApp.ViewModels
     {
         #region private members
         private ObservableCollection<User> _users { get; set; }
-        private UserControllerBase _userControler;
-        private AdminControllerBase _adminController;
+        private readonly UserControllerBase _userControler;
+        private readonly AdminControllerBase _adminController;
         #endregion
 
         public ObservableCollection<User> Users { get { return _users; } }

@@ -7,7 +7,7 @@ namespace ToDoApp.Controller
 {
     internal class AdminController : AdminControllerBase
     {
-        private ServiceProviderBase service = ProvidersSettings.bikeWebServiceProvider;
+        private readonly ServiceProviderBase service = ProvidersSettings.bikeWebServiceProvider;
 
         internal override User Login(string login, string password)
         {

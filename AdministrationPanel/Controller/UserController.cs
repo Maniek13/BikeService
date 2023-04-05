@@ -50,8 +50,10 @@ namespace ToDoApp.Controller
         {
             try
             {
-                user = service.EditUser(adnmin, user);
                 int id = _users.IndexOf(user);
+
+                user = service.EditUser(adnmin, user);
+
                 _users.RemoveAt(id);
                 _users.Insert(id, user);
             }
@@ -60,14 +62,14 @@ namespace ToDoApp.Controller
                 throw new Exception(ex.Message, ex);
             }
         }
-
         internal override void DeleteUser(User adnmin, User user)
         {
             try
             {
+                int index = _users.IndexOf(user);
                 int resId = service.DeleteUser(adnmin, user.Id);
 
-                int index = _users.IndexOf(user);
+                
                 _users.RemoveAt(index);
 
                 if (resId == 0)

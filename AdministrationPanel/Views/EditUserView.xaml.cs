@@ -9,31 +9,29 @@ namespace ToDoApp.Views
 {
     internal sealed partial class EditUserView : Page
     {
-        internal UserViewModel viewModel { get; set; }
+        internal UserViewModel ViewModel { get; set; }
         internal EditUserView()
         {
             InitializeComponent();
-            viewModel = new UserViewModel();
+            ViewModel = new UserViewModel();
         }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            viewModel.User = e.Parameter as User;
+            ViewModel.User = e.Parameter as User;
         }
-
         private void EditUser_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (!string.IsNullOrEmpty(loginInput.Text))
                 {
-                    viewModel.User.Login = loginInput.Text;
+                    ViewModel.User.Login = loginInput.Text;
                 }
                 if (!string.IsNullOrEmpty(paswordInput.Password))
                 {
-                    viewModel.User.Password = paswordInput.Password;
+                    ViewModel.User.Password = paswordInput.Password;
                 }
-                viewModel.EditUser();
+                ViewModel.EditUser();
 
                 this.Content = null;
             }
@@ -42,9 +40,7 @@ namespace ToDoApp.Views
                 ErrorEdit.Text = ex.Message;
                 ErrorEdit.Visibility = Visibility.Visible;
             }
-           
         }
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Content = null;

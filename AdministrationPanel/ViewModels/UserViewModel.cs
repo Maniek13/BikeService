@@ -6,12 +6,12 @@ using ToDoApp.Settings;
 
 namespace ToDoApp.ViewModels
 {
-    public class UserViewModel : PropertyChange
+    public class UserViewModel //: PropertyChange
     {
         #region private members
         private User _user = new User();
-        private UserControllerBase _userController;
-        private AdminControllerBase _adminController;
+        private readonly UserControllerBase _userController;
+        private readonly AdminControllerBase _adminController;
         #endregion
 
         public UserViewModel() 
@@ -28,7 +28,7 @@ namespace ToDoApp.ViewModels
             set
             {
                 _user = value;
-                OnPropertyChanged(nameof(User));
+                //OnPropertyChanged(nameof(User));
             }
         }
 

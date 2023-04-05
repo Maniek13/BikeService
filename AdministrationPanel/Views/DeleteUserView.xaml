@@ -13,7 +13,7 @@
 
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,20,0,0">Usuwanie użytkownika</TextBlock>
-            <TextBlock Text="{x:Bind Path=viewModel.User.Login}"  Width="NaN" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
+            <TextBlock Text="{x:Bind Path=ViewModel.User.Login}"  Width="NaN" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
         </StackPanel>
 
 

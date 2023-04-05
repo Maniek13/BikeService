@@ -10,7 +10,7 @@ namespace ToDoApp.ViewModels
     {
         #region private members
         private User _user = new User();
-        private AdminControllerBase _adminController;
+        private readonly AdminControllerBase _adminController;
         #endregion
 
         public Frame frame = new Frame();

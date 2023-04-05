@@ -8,13 +8,12 @@ namespace ToDoApp.Views
 {
     internal sealed partial class AddUserView : Page
     {
-        internal UserViewModel viewModel { get; set; }
+        internal UserViewModel ViewModel { get; set; }
         internal AddUserView()
         {
             InitializeComponent();
-            viewModel = new UserViewModel();
+            ViewModel = new UserViewModel();
         }
-
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -25,8 +24,8 @@ namespace ToDoApp.Views
                     Password = paswordInput.Text
                 };
 
-                viewModel.User = user;
-                viewModel.AddUser();
+                ViewModel.User = user;
+                ViewModel.AddUser();
 
                 this.Content = null;
             }

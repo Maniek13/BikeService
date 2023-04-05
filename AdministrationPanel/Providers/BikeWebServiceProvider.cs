@@ -42,7 +42,6 @@ namespace ToDoApp.Providers
                 throw new Exception(ex.Message, ex);
             }
         }
-
         internal override Models.User LogIn(Models.User user)
         {
             try
@@ -72,7 +71,6 @@ namespace ToDoApp.Providers
                 throw new Exception(ex.Message, ex);
             }
         }
-
         internal override Models.User EditUser(Models.User admin, Models.User userToEdit)
         {
             try
@@ -93,7 +91,7 @@ namespace ToDoApp.Providers
                     {
                         Id = res.Data.Id,
                         Login = res.Data.Login,
-                        Password = res.Data.Password,
+                        Password = "",
                         AppId = res.Data.AppId
                     };
                 }
@@ -103,7 +101,6 @@ namespace ToDoApp.Providers
                 throw new Exception(ex.Message, ex);
             }
         }
-
         internal override Models.User AddUser(Models.User admin, Models.User userToAdd)
         {
             try
@@ -125,7 +122,7 @@ namespace ToDoApp.Providers
                     {
                         Id = res.Data.Id,
                         Login = res.Data.Login,
-                        Password = res.Data.Password,
+                        Password = "",
                         AppId = res.Data.AppId
                     };
                 }
@@ -135,8 +132,6 @@ namespace ToDoApp.Providers
                 throw new Exception(ex.Message, ex);
             }
         }
-
-
         internal override int DeleteUser(Models.User admin, int id)
         {
             try
@@ -160,9 +155,6 @@ namespace ToDoApp.Providers
                 throw new Exception(ex.Message, ex);
             }
         }
-
-
-
         #endregion
 
         #region private function
@@ -176,7 +168,6 @@ namespace ToDoApp.Providers
                 AppId = user.AppId
             };
         }
-
         private Models.User convertToUser(User user)
         {
             return new Models.User
