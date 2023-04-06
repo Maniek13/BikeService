@@ -13,7 +13,7 @@ namespace ToDoApp.Views
         internal DeleteUserView()
         {
             InitializeComponent();
-            ViewModel = new UserViewModel();
+            DataContext = ViewModel = new UserViewModel();
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

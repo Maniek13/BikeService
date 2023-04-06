@@ -13,7 +13,7 @@ namespace ToDoApp.Views
         internal EditUserView()
         {
             InitializeComponent();
-            ViewModel = new UserViewModel();
+            DataContext = ViewModel = new UserViewModel();
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -31,8 +31,9 @@ namespace ToDoApp.Views
                 {
                     ViewModel.User.Password = paswordInput.Password;
                 }
-                ViewModel.EditUser();
 
+                ViewModel.EditUser();
+                
                 this.Content = null;
             }
             catch(Exception ex)

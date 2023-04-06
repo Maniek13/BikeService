@@ -6,14 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" UseLayoutRounding="False" Width="400" Height="220">
-    <Page.DataContext>
-        <local:UserViewModel/>
-    </Page.DataContext>
+
     <Grid BorderBrush="#FF127516" BorderThickness="2" Height="220">
 
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,20,0,0">Usuwanie użytkownika</TextBlock>
-            <TextBlock Text="{x:Bind Path=ViewModel.User.Login}"  Width="NaN" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
+            <TextBlock Text="{Binding User.Login}"  Width="NaN" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
         </StackPanel>
 
 

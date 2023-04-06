@@ -15,7 +15,7 @@ namespace ToDoApp.Views
 
             try 
             {
-                ViewModel = new ListOfUserViewModel();
+                DataContext = ViewModel = new ListOfUserViewModel();
                 ViewModel.GetUsers();
             }
             catch(Exception ex)

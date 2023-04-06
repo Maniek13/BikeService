@@ -15,7 +15,7 @@ namespace ToDoApp.Views
             try
             {
                 this.InitializeComponent();
-                ViewModel = new LoginViewModel();
+                DataContext = ViewModel = new LoginViewModel();
             }
             catch(Exception ex)
             {

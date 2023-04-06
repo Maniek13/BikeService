@@ -12,7 +12,7 @@ namespace ToDoApp.Views
         internal AddUserView()
         {
             InitializeComponent();
-            ViewModel = new UserViewModel();
+            DataContext = ViewModel = new UserViewModel();
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
