@@ -1,6 +1,6 @@
 ﻿namespace ToDoApp.Models
 {
-    public class User
+    public sealed class User
     {
         public int Id { get; set; } = 0;
         public string Login { get; set; } 

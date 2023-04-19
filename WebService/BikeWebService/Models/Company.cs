@@ -2,7 +2,7 @@
 
 namespace BikeWebService.Models
 {
-    public class Company : ICompany
+    public sealed class Company : ICompany
     {
         public int appID { get; set; }
         public string name { get; set; }

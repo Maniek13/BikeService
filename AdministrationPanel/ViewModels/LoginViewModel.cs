@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace ToDoApp.ViewModels
 {
-    public class LoginViewModel
+    public sealed class LoginViewModel
     {
         #region private members
         private User _user = new User();

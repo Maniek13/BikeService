@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BikeWebService.Controllers
 {
-    internal class UsersController : UsersControllerAbstractClass
+    internal sealed class UsersController : UsersControllerAbstractClass
     {
 
         private readonly UserDbControllerAbstractClass _userDbController;
@@ -17,7 +17,7 @@ namespace BikeWebService.Controllers
         }
 
         #region private functions
-        private void validateUser(User user)
+        private void ValidateUser(User user)
         {
             if (Object.Equals(user, null))
             {
@@ -41,7 +41,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                validateUser(user);
+                ValidateUser(user);
                 _userDbController.CheckIsUser(user);
 
                 if (user.Id.Equals(0))
@@ -56,7 +56,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                validateUser(user);
+                ValidateUser(user);
                 _userDbController.CheckIsAministratorUser(user);
 
                 if (user.Id.Equals(0))
@@ -72,7 +72,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                validateUser(user);
+                ValidateUser(user);
                 _userDbController.AddUser(user);
 
                 if (user.Id.Equals(0))
@@ -89,7 +89,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                validateUser(user);
+                ValidateUser(user);
 
                 _userDbController.AddUser(user, appKey);
 
@@ -109,7 +109,7 @@ namespace BikeWebService.Controllers
             try
             {
                 int id = 0;
-                validateUser(user);
+                ValidateUser(user);
 
                 id = _userDbController.EditUser(user);
 
@@ -152,7 +152,7 @@ namespace BikeWebService.Controllers
         {
             try
             {
-                validateUser(userOld);
+                ValidateUser(userOld);
                 return _userDbController.IsSameUser(userOld);
             }
             catch (Exception ex)

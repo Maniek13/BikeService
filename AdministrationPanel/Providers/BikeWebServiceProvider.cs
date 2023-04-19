@@ -6,14 +6,14 @@ using ToDoApp.BikeWebService;
 
 namespace ToDoApp.Providers
 {
-    internal class BikeWebServiceProvider : ServiceProviderBase
+    internal sealed class BikeWebServiceProvider : ServiceProviderBase
     {
         #region internal function
         internal override List<Models.User> GetUsers(Models.User user)
         {
             try
             {
-                User serviceUser = convertToServiceUser(user);
+                User serviceUser = ConvertToServiceUser(user);
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
@@ -31,7 +31,7 @@ namespace ToDoApp.Providers
                     for(int i = 0; i< serviceUsers.Count; i++)
                     {
                         User tempUser = serviceUsers.ElementAt(i);
-                        users.Add(convertToUser(tempUser));
+                        users.Add(ConvertToUser(tempUser));
                     }
 
                     return users;
@@ -46,7 +46,7 @@ namespace ToDoApp.Providers
         {
             try
             {
-                User serviceUser = convertToServiceUser(user);
+                User serviceUser = ConvertToServiceUser(user);
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
@@ -75,8 +75,8 @@ namespace ToDoApp.Providers
         {
             try
             {
-                User adminEdit= convertToServiceUser(admin);
-                User userEdit = convertToServiceUser(userToEdit);
+                User adminEdit= ConvertToServiceUser(admin);
+                User userEdit = ConvertToServiceUser(userToEdit);
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
@@ -106,8 +106,8 @@ namespace ToDoApp.Providers
             try
             {
                 userToAdd.AppId = admin.AppId;
-                User adminAdd = convertToServiceUser(admin);
-                User userAdd = convertToServiceUser(userToAdd);
+                User adminAdd = ConvertToServiceUser(admin);
+                User userAdd = ConvertToServiceUser(userToAdd);
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
@@ -136,7 +136,7 @@ namespace ToDoApp.Providers
         {
             try
             {
-                User adminAdd = convertToServiceUser(admin);
+                User adminAdd = ConvertToServiceUser(admin);
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
@@ -158,7 +158,7 @@ namespace ToDoApp.Providers
         #endregion
 
         #region private function
-        private User convertToServiceUser(Models.User user)
+        private User ConvertToServiceUser(Models.User user)
         {
             return new User
             {
@@ -168,7 +168,7 @@ namespace ToDoApp.Providers
                 AppId = user.AppId
             };
         }
-        private Models.User convertToUser(User user)
+        private Models.User ConvertToUser(User user)
         {
             return new Models.User
             {

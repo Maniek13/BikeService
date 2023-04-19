@@ -3,7 +3,7 @@ using System;
 
 namespace BikeWebService.Models
 {
-    public class Order : IOrder
+    public sealed class Order : IOrder
     {
         public int TaskId { get; set; } = 0;
         public int AppId { get; set; } = 0;

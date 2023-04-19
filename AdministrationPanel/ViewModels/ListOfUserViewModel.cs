@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace ToDoApp.ViewModels
 {
-    public class ListOfUserViewModel
+    public sealed class ListOfUserViewModel
     {
         #region private members
         private ObservableCollection<User> _users { get; set; }

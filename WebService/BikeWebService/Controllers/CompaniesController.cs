@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BikeWebService.Controllers
 {
-    internal class CompaniesController : CompaniesControllerAbstractClass
+    internal sealed class CompaniesController : CompaniesControllerAbstractClass
     {
         private readonly CompaniesDbControllerAbstractClass _companiesController;
         public CompaniesController(CompaniesDbControllerAbstractClass service)

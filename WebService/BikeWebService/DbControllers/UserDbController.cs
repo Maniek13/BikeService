@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace BikeWebService.DbControllers
 {
-    internal class UserDbController : UserDbControllerAbstractClass
+    internal sealed class UserDbController : UserDbControllerAbstractClass
     {
         #region internal functions
 
@@ -139,7 +139,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                return userOld.Equals(convertToUser(values));
+                                return userOld.Equals(ConvertToUser(values));
                             }
 
                             return false;
@@ -363,7 +363,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                users.Add(convertToUser(values));
+                                users.Add(ConvertToUser(values));
                             }
                         }
                     }
@@ -379,7 +379,7 @@ namespace BikeWebService.DbControllers
         }
 
         #region private functions
-        private User convertToUser(Object[] obj)
+        private User ConvertToUser(Object[] obj)
         {
             if (obj == null || obj.Length == 0)
                 return null;

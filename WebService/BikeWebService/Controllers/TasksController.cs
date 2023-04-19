@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BikeWebService.Controllers
 {
-    internal class TasksController : TasksControllerAbstractClass
+    internal sealed class TasksController : TasksControllerAbstractClass
     {
         private readonly TaskDbControllerAbstractClass _taskDbController;
         public TasksController(TaskDbControllerAbstractClass service)
@@ -15,7 +15,7 @@ namespace BikeWebService.Controllers
 
         #region private functions
 
-        static private void validateTask(Order task)
+        static private void ValidateTask(Order task)
         {
             if (Object.Equals(task, null))
             {
@@ -50,11 +50,7 @@ namespace BikeWebService.Controllers
 
             try
             {
-                Order task = _taskDbController.GetTask(taskIDKey);
-
-                if (task == null)
-                    throw new Exception("Niepoprawny identyfikator zlecenia");
-
+                Order task = _taskDbController.GetTask(taskIDKey) ?? throw new Exception("Niepoprawny identyfikator zlecenia");
                 if (task.State == 0)
                     throw new Exception("Zlecenie nie zostało dodane");
 
@@ -104,7 +100,7 @@ namespace BikeWebService.Controllers
                     order.State = 1;
                 }
 
-                validateTask(order);
+                ValidateTask(order);
 
                 _taskDbController.AddOrder(order);
 
@@ -122,7 +118,7 @@ namespace BikeWebService.Controllers
             try
             {
                 int id = 0;
-                validateTask(order);
+                ValidateTask(order);
                 
                 id = _taskDbController.EditOrder(order);
 

@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace BikeWebService.DbControllers
 {
-    internal class TaskDbController : TaskDbControllerAbstractClass
+    internal sealed class TaskDbController : TaskDbControllerAbstractClass
     {
         #region internal function
         internal override Order GetTask(string taskKey)
@@ -37,7 +37,7 @@ namespace BikeWebService.DbControllers
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
 
-                                return convertToTask(values);
+                                return ConvertToTask(values);
                             }
 
                             return null;
@@ -90,7 +90,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                tasks.Add(convertToTask(values));
+                                tasks.Add(ConvertToTask(values));
                             }
                         }
                     }
@@ -169,7 +169,7 @@ namespace BikeWebService.DbControllers
                 order.TaskId = taskId;
 
                 
-                setOrderKeyAndData(taskId, ref taskIdKey, ref initDate);
+                SetOrderKeyAndData(taskId, ref taskIdKey, ref initDate);
                 order.TaskIdKey = taskIdKey;
                 order.InitDate= initDate;
                 
@@ -314,7 +314,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                return order.Equals(convertToTask(values));
+                                return order.Equals(ConvertToTask(values));
                             }
 
                             return false;
@@ -372,7 +372,7 @@ namespace BikeWebService.DbControllers
 
         #region private functions
 
-        private void setOrderKeyAndData(int id, ref string taskIdKey, ref DateTime initDate)
+        private void SetOrderKeyAndData(int id, ref string taskIdKey, ref DateTime initDate)
         {
             try
             {
@@ -412,7 +412,7 @@ namespace BikeWebService.DbControllers
         }
 
         [Obsolete("Is created in the insert triger, please don't use", true)]
-        private void setOrderKey(string orderKey, int id)
+        private void SetOrderKey(string orderKey, int id)
         {
             try
             {
@@ -452,11 +452,11 @@ namespace BikeWebService.DbControllers
         }
 
         [Obsolete("Key is generate in database")]
-        private string generateOrderKey(int appId, int taskId)
+        private string GenerateOrderKey(int appId, int taskId)
         {
             try
             {
-                string appKey = getAppKey(appId);
+                string appKey = GetAppKey(appId);
 
                 if (String.IsNullOrEmpty(appKey))
                     return "";
@@ -474,7 +474,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        private string getAppKey(int appId)
+        private string GetAppKey(int appId)
         {
             string appKey = "";
 
@@ -515,13 +515,12 @@ namespace BikeWebService.DbControllers
             return appKey;
         }
 
-        private Order convertToTask(Object[] obj)
+        private Order ConvertToTask(Object[] obj)
         {
             if (obj == null || obj.Length == 0)
                 return null;
 
-            DateTime date = new DateTime();
-            DateTime.TryParse(obj[6].ToString(), out date);
+            DateTime.TryParse(obj[6].ToString(), out DateTime date);
             return new Order()
             {
                 TaskId = Convert.ToInt32(obj[0].ToString()),

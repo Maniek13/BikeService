@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace BikeWebService.Classes
 {
-    public class Settings
+    public sealed class Settings
     {
         public static string GetConnectionString()
         {

@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace BikeWebService.DbControllers
 {
-    internal class CompaniesDbController : CompaniesDbControllerAbstractClass
+    internal sealed class CompaniesDbController : CompaniesDbControllerAbstractClass
     {
         internal override List<Company> GetCompanies()
         {
@@ -28,7 +28,7 @@ namespace BikeWebService.DbControllers
                             {
                                 Object[] values = new Object[reader.FieldCount];
                                 reader.GetValues(values);
-                                companies.Add(convertToCompany(values));
+                                companies.Add(ConvertToCompany(values));
                             }
 
                             return companies;
@@ -42,7 +42,7 @@ namespace BikeWebService.DbControllers
             }
         }
 
-        private Company convertToCompany(Object[] data)
+        private Company ConvertToCompany(Object[] data)
         {
             if (data == null || data.Length == 0)
                 return null;

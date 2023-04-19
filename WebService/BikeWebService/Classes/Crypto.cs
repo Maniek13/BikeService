@@ -3,7 +3,7 @@ using System.Text;
 
 namespace BikeWebService.Classes
 {
-    public class Crypto
+    public sealed class Crypto
     {
         public static string EncryptSha256(string stringToEncrypt)
         {

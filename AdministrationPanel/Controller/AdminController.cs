@@ -5,7 +5,7 @@ using ToDoApp.Settings;
 
 namespace ToDoApp.Controller
 {
-    internal class AdminController : AdminControllerBase
+    internal sealed class AdminController : AdminControllerBase
     {
         private readonly ServiceProviderBase service = ProvidersSettings.bikeWebServiceProvider;
 

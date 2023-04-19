@@ -6,7 +6,7 @@ using ToDoApp.Settings;
 
 namespace ToDoApp.ViewModels
 {
-    public class UserViewModel : PropertyChange
+    public sealed class UserViewModel : PropertyChange
     {
         #region private members
         private User _user = new User();
