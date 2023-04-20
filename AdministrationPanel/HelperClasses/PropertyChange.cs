@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace ToDoApp.HelperClasses
 {
     public class PropertyChange : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = "")
         {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null)
+            if (propertyName != string.Empty)
             {
-                var e = new PropertyChangedEventArgs(propertyName);
-                handler(this, e);
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

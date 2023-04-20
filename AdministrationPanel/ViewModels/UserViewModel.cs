@@ -28,7 +28,7 @@ namespace ToDoApp.ViewModels
             set
             {
                 _user = value;
-                OnPropertyChanged(nameof(User));
+                OnPropertyChanged();
             }
         }
 
