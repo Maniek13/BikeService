@@ -80,7 +80,7 @@ namespace ToDoApp.Providers
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
-                    var service = client.EditUserAsync(adminEdit, userEdit);
+                    var service = client.EditUserAsync(adminEdit, userEdit, null);
                     service.Wait();
                     var res = service.Result.Body.EditUserResult;
 
