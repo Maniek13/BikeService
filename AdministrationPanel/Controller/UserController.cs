@@ -46,13 +46,13 @@ namespace ToDoApp.Controller
                 throw new Exception(ex.Message, ex);
             }
         }
-        internal override void EditUser(User adnmin, User user)
+        internal override void EditUser(User adnmin, User user, User oldUser)
         {
             try
             {
                 int id = _users.IndexOf(user);
-
-                user = service.EditUser(adnmin, user);
+            
+                user = service.EditUser(adnmin, user, oldUser);
 
                 _users.RemoveAt(id);
                 _users.Insert(id, user);

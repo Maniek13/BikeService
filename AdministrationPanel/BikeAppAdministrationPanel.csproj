@@ -204,6 +204,9 @@
     <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.EditUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.GetCompaniesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\BikeWebService\ToDoApp.BikeWebService.GetTaskResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

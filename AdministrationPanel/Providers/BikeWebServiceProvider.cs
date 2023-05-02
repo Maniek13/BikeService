@@ -71,16 +71,17 @@ namespace ToDoApp.Providers
                 throw new Exception(ex.Message, ex);
             }
         }
-        internal override Models.User EditUser(Models.User admin, Models.User userToEdit)
+        internal override Models.User EditUser(Models.User admin, Models.User userToEdit, Models.User oldUserToEdit)
         {
             try
             {
                 User adminEdit= ConvertToServiceUser(admin);
                 User userEdit = ConvertToServiceUser(userToEdit);
+                User oldUser = ConvertToServiceUser(oldUserToEdit);
 
                 using (BikeWebServiceSoapClient client = new BikeWebServiceSoapClient(new BikeWebServiceSoapClient.EndpointConfiguration()))
                 {
-                    var service = client.EditUserAsync(adminEdit, userEdit);
+                    var service = client.EditUserAsync(adminEdit, userEdit, oldUser);
                     service.Wait();
                     var res = service.Result.Body.EditUserResult;
 

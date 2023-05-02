@@ -9,7 +9,6 @@ namespace BikeWebService.DbControllers
     internal sealed class UserDbController : UserDbControllerAbstractClass
     {
         #region internal functions
-
         internal override void CheckIsUser(User user)
         {
             string query = @"  
@@ -305,7 +304,6 @@ namespace BikeWebService.DbControllers
             }
         }
 
-
         internal override void DeleteUser(int id)
         {
             try
@@ -375,9 +373,9 @@ namespace BikeWebService.DbControllers
             }
 
             return users;
-            #endregion
+            
         }
-
+        #endregion
         #region private functions
         private User ConvertToUser(Object[] obj)
         {

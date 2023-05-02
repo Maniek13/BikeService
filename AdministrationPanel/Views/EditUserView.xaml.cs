@@ -18,6 +18,7 @@ namespace ToDoApp.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             ViewModel.User = e.Parameter as User;
+            ViewModel.OldUser = e.Parameter as User;
         }
         private void EditUser_Click(object sender, RoutedEventArgs e)
         {

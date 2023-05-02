@@ -10,6 +10,7 @@ namespace ToDoApp.ViewModels
     {
         #region private members
         private User _user = new User();
+        private User _oldUser = new User();
         private readonly UserControllerBase _userController;
         private readonly AdminControllerBase _adminController;
         #endregion
@@ -32,13 +33,26 @@ namespace ToDoApp.ViewModels
             }
         }
 
+        public User OldUser
+        {
+            get
+            {
+                return _oldUser;
+            }
+            set
+            {
+                _oldUser = value;
+                OnPropertyChanged();
+            }
+        }
         internal void EditUser()
         {
             try
             {
                 if (_user.Id != 0)
                 {
-                    _userController.EditUser(_adminController.Admin, _user);
+                    
+                    _userController.EditUser(_adminController.Admin, _user, _oldUser);
                 }
             }
             catch(Exception ex)
