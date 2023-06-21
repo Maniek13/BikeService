@@ -1,4 +1,4 @@
-﻿using BikeWebService.AbstractClasses;
+﻿using BikeWebService.AbstractClasses.DbControllers;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using BikeWebService.AbstractClasses;
+﻿using BikeWebService.AbstractClasses.DbControllers;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,6 @@ namespace BikeWebService.DbControllers
     internal sealed class UserDbController : UserDbControllerAbstractClass
     {
         #region internal functions
-
         internal override void CheckIsUser(User user)
         {
             string query = @"  
@@ -257,13 +256,13 @@ namespace BikeWebService.DbControllers
             {
                 int result = 0;
                 string query = @"
-                    UPDATE users 
-                    SET
-                        login = @login, 
-                        password = @password
-                    OUTPUT INSERTED.userID
-                    WHERE
-                         userID = @userId";
+                UPDATE users 
+                SET
+                    login = @login, 
+                    password = @password
+                OUTPUT INSERTED.userID
+                WHERE
+                        userID = @userId";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
@@ -305,7 +304,6 @@ namespace BikeWebService.DbControllers
             }
         }
 
-
         internal override void DeleteUser(int id)
         {
             try
@@ -327,7 +325,9 @@ namespace BikeWebService.DbControllers
 
                         connection.Open();
 
+                        #pragma warning disable CS0642
                         using (SqlDataReader reader = command.ExecuteReader());
+                        #pragma warning restore CS0642
                     }
                 }
             }

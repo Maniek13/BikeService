@@ -1,7 +1,7 @@
 ﻿using BikeWebService.Models;
 using System.Collections.Generic;
 
-namespace BikeWebService.AbstractClasses
+namespace BikeWebService.AbstractClasses.DbControllers
 {
     internal abstract class UserDbControllerAbstractClass : BaseDbController
     {

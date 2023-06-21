@@ -2,6 +2,7 @@
 
 namespace BikeWebService.Models
 {
+    #pragma warning disable CS0659
     public sealed class User : IUser
     {
         public int Id { get; set; } = 0;
@@ -37,4 +38,5 @@ namespace BikeWebService.Models
             return true;
         }
     }
+    #pragma warning restore CS0659
 }

@@ -1,11 +1,13 @@
-﻿using BikeWebService.AbstractClasses;
+﻿using BikeWebService.AbstractClasses.Controllers;
 using BikeWebService.Controllers;
 using BikeWebService.DbControllers;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Web.Services;
 
+[assembly: InternalsVisibleTo("BikeWebServiceTests")]
 namespace BikeWebService
 {
     [WebService(Namespace = "http://tempuri.org/")]
@@ -15,13 +17,13 @@ namespace BikeWebService
     {
         private readonly object _editUserLocker = new Lazy<object>(() =>
         {
-            return  new object ();
+            return new object();
         });
+
         private readonly object _editTaskLocker = new Lazy<object>(() =>
         {
             return new object();
         });
-
 
         private static readonly TasksControllerAbstractClass _tasksController;
         private static readonly UsersControllerAbstractClass _usersController;
@@ -211,8 +213,7 @@ namespace BikeWebService
         {
             try
             {
-
-                lock(_editUserLocker)
+                lock (_editUserLocker)
                 {
                     _usersController.CheckIsUser(user);
 
@@ -230,7 +231,7 @@ namespace BikeWebService
                 };
 
                 return response;
-
+                
             }
             catch (Exception ex)
             {
@@ -332,7 +333,7 @@ namespace BikeWebService
         {
             try
             {
-                lock(_editTaskLocker)
+                lock (_editTaskLocker)
                 {
                     _usersController.CheckIsUser(user);
 

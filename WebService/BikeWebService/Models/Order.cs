@@ -3,6 +3,7 @@ using System;
 
 namespace BikeWebService.Models
 {
+    #pragma warning disable CS0659
     public sealed class Order : IOrder
     {
         public int TaskId { get; set; } = 0;
@@ -53,4 +54,5 @@ namespace BikeWebService.Models
             return true;
         }
     }
+    #pragma warning restore CS0659
 }

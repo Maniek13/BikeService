@@ -1,4 +1,4 @@
-﻿using BikeWebService.AbstractClasses;
+﻿using BikeWebService.AbstractClasses.DbControllers;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
@@ -191,10 +191,10 @@ namespace BikeWebService.DbControllers
             {
                 int result = 0;
                 string query = @"
-                    UPDATE tasks 
-                    SET header = @header, description = @description, state = @state
-                    OUTPUT INSERTED.taskID
-                    WHERE taskID = @taskID";
+                UPDATE tasks 
+                SET header = @header, description = @description, state = @state
+                OUTPUT INSERTED.taskID
+                WHERE taskID = @taskID";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
@@ -371,7 +371,6 @@ namespace BikeWebService.DbControllers
         #endregion
 
         #region private functions
-
         private void SetOrderKeyAndData(int id, ref string taskIdKey, ref DateTime initDate)
         {
             try
@@ -404,69 +403,6 @@ namespace BikeWebService.DbControllers
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        [Obsolete("Is created in the insert triger, please don't use", true)]
-        private void SetOrderKey(string orderKey, int id)
-        {
-            try
-            {
-                string query = @"
-                UPDATE tasks SET
-                    taskIDKey = @taskIDKey
-                WHERE 
-                    taskID = @taskID";
-
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@taskIDKey",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = orderKey
-                        });
-                        command.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = "@taskID",
-                            SqlDbType = System.Data.SqlDbType.NVarChar,
-                            Value = id
-                        });
-
-                        connection.Open(); command.ExecuteReader();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
-        }
-
-        [Obsolete("Key is generate in database")]
-        private string GenerateOrderKey(int appId, int taskId)
-        {
-            try
-            {
-                string appKey = GetAppKey(appId);
-
-                if (String.IsNullOrEmpty(appKey))
-                    return "";
-
-                Random random = new Random();
-
-                int number = random.Next(1, 1000000);
-
-                string orderKey = $"{taskId}{appKey}{number}";
-                return orderKey;
             }
             catch (Exception ex)
             {
@@ -533,6 +469,72 @@ namespace BikeWebService.DbControllers
             };
         }
 
+        #region obsolete 
+        #pragma warning disable IDE0051
+        [Obsolete("Is created in the insert triger, please don't use", true)]
+        private void SetOrderKey(string orderKey, int id)
+        {
+            try
+            {
+                string query = @"
+                UPDATE tasks SET
+                    taskIDKey = @taskIDKey
+                WHERE 
+                    taskID = @taskID";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@taskIDKey",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = orderKey
+                        });
+                        command.Parameters.Add(new SqlParameter()
+                        {
+                            ParameterName = "@taskID",
+                            SqlDbType = System.Data.SqlDbType.NVarChar,
+                            Value = id
+                        });
+
+                        connection.Open(); command.ExecuteReader();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        [Obsolete("Key is generate in database")]
+        private string GenerateOrderKey(int appId, int taskId)
+        {
+            try
+            {
+                string appKey = GetAppKey(appId);
+
+                if (String.IsNullOrEmpty(appKey))
+                    return "";
+
+                Random random = new Random();
+
+                int number = random.Next(1, 1000000);
+
+                string orderKey = $"{taskId}{appKey}{number}";
+                return orderKey;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        #pragma warning restore IDE0051
+        #endregion 
         #endregion
     }
 }

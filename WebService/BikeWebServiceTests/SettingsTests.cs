@@ -1,7 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using BikeWebService.Classes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BikeWebServiceTests
 {
+
     [TestClass]
     public class SettingsTests
     {
@@ -9,7 +11,7 @@ namespace BikeWebServiceTests
         [TestMethod]
         public void GetConectionString()
         {
-            Assert.AreEqual("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"G:\\Programowanie\\Serwis rowerowy\\WebService\\BikeWebServiceTests\\TestDataBase.mdf\"; trusted_connection=true;encrypt=false", BikeWebService.Classes.Settings.GetConnectionString());
+            Assert.AreEqual("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"G:\\Programowanie\\Serwis rowerowy\\WebService\\BikeWebServiceTests\\TestDataBase.mdf\"; trusted_connection=true;encrypt=false", Settings.GetConnectionString());
         }
     }
 }

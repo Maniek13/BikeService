@@ -1,11 +1,11 @@
 ﻿using BikeWebService.Classes;
 
-namespace BikeWebService.AbstractClasses
+namespace BikeWebService.AbstractClasses.DbControllers
 {
     internal abstract class BaseDbController
     {
-        internal readonly string _connectionString;
-        internal BaseDbController() 
+        protected readonly string _connectionString;
+        protected BaseDbController() 
         {
             _connectionString = Settings.GetConnectionString();
         }

@@ -1,4 +1,5 @@
-﻿using BikeWebService.AbstractClasses;
+﻿using BikeWebService.AbstractClasses.Controllers;
+using BikeWebService.AbstractClasses.DbControllers;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,12 @@ namespace BikeWebService.Controllers
     internal sealed class CompaniesController : CompaniesControllerAbstractClass
     {
         private readonly CompaniesDbControllerAbstractClass _companiesController;
-        public CompaniesController(CompaniesDbControllerAbstractClass service)
+        internal CompaniesController(CompaniesDbControllerAbstractClass service)
         {
             _companiesController = service;
+            
         }
+
         internal override List<Company> GetCompanies()
         {
             try

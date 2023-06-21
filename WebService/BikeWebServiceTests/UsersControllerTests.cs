@@ -1,12 +1,23 @@
-﻿using BikeWebService.Controllers;
+﻿using BikeWebService.AbstractClasses.DbControllers;
+using BikeWebService.Controllers;
+using BikeWebService.DbControllers;
 using BikeWebService.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Net.PeerToPeer.Collaboration;
+using System.Web.Configuration;
+using System.Windows.Forms;
+using static System.Windows.Forms.AxHost;
 
 namespace BikeWebServiceTests
 {
+    #pragma warning disable CS0219
+    #pragma warning disable IDE0059
     [TestClass]
     public class UsersControllerTests
     {
+        //UsersController usersController = new UsersController(new UserDbController());
         [TestMethod]
         public void ValidateNoUser()
         {

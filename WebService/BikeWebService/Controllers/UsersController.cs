@@ -1,6 +1,6 @@
-﻿using BikeWebService.AbstractClasses;
+﻿using BikeWebService.AbstractClasses.Controllers;
+using BikeWebService.AbstractClasses.DbControllers;
 using BikeWebService.Classes;
-using BikeWebService.DbControllers;
 using BikeWebService.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace BikeWebService.Controllers
     {
 
         private readonly UserDbControllerAbstractClass _userDbController;
-        public UsersController(UserDbControllerAbstractClass service)
+        internal UsersController(UserDbControllerAbstractClass service)
         {
             _userDbController = service;
         }

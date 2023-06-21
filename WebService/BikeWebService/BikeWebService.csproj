@@ -472,18 +472,18 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractClasses\CompaniesControllerAbstractClass.cs" />
-    <Compile Include="AbstractClasses\CompaniesDbControllerAbstractClass.cs" />
-    <Compile Include="AbstractClasses\TasksControllerAbstractClass.cs" />
-    <Compile Include="AbstractClasses\UserDbControllerAbstractClass.cs" />
-    <Compile Include="AbstractClasses\UsersControllerAbstractClass.cs" />
+    <Compile Include="AbstractClasses\Controllers\CompaniesControllerAbstractClass.cs" />
+    <Compile Include="AbstractClasses\DbControllers\CompaniesDbControllerAbstractClass.cs" />
+    <Compile Include="AbstractClasses\Controllers\TasksControllerAbstractClass.cs" />
+    <Compile Include="AbstractClasses\DbControllers\UserDbControllerAbstractClass.cs" />
+    <Compile Include="AbstractClasses\Controllers\UsersControllerAbstractClass.cs" />
     <Compile Include="BikeWebService.asmx.cs">
       <DependentUpon>BikeWebService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Crypto.cs" />
     <Compile Include="Classes\Settings.cs" />
-    <Compile Include="AbstractClasses\BaseDbController.cs" />
+    <Compile Include="AbstractClasses\DbControllers\BaseDbController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="DbControllers\CompaniesDbController.cs" />
     <Compile Include="DbControllers\TaskDbController.cs" />
@@ -492,7 +492,7 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Interfaces\ICompany.cs" />
     <Compile Include="Interfaces\IOrder.cs" />
-    <Compile Include="AbstractClasses\TaskDbControllerAbstractClass.cs" />
+    <Compile Include="AbstractClasses\DbControllers\TaskDbControllerAbstractClass.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\HttpContextResponse.cs" />
