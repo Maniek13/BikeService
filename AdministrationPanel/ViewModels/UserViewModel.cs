@@ -3,6 +3,8 @@ using ToDoApp.BaseClasses;
 using ToDoApp.HelperClasses;
 using ToDoApp.Models;
 using ToDoApp.Settings;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace ToDoApp.ViewModels
 {
@@ -19,6 +21,8 @@ namespace ToDoApp.ViewModels
             _userController = ControllersSettings.userController;
             _adminController = ControllersSettings.adminController;
         }
+
+
         public User User
         {
             get

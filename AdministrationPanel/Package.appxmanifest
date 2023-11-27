@@ -9,7 +9,7 @@
   <Identity
     Name="d071ddf7-7dd4-4b38-a617-9be013208dba"
     Publisher="CN=maniek"
-    Version="0.6.21.0" />
+    Version="0.6.212.0" />
 
   <mp:PhoneIdentity PhoneProductId="d071ddf7-7dd4-4b38-a617-9be013208dba" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

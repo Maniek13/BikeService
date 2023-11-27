@@ -15,6 +15,8 @@ namespace ToDoApp.Views
             InitializeComponent();
             DataContext = ViewModel = new UserViewModel();
         }
+
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             ViewModel.User = e.Parameter as User;
