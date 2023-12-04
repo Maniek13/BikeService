@@ -7,8 +7,10 @@ GO
 
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
 ALTER TRIGGER [dbo].[add_task]
 ON [dbo].[tasks]
 FOR INSERT
