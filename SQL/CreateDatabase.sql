@@ -26,7 +26,6 @@ CREATE TABLE tasks(
 	taskIDKey NVARCHAR(MAX),
 	initDate DATETIME
 )
-
 GO
 
 CREATE TRIGGER add_task
@@ -46,5 +45,4 @@ AS
 		SET taskIDKey = CAST(@taskID as nvarchar) + @appKey + CAST(@nr as nvarchar), initDate = GETDATE()
 		WHERE taskID = @taskID
 	END
-
 GO
