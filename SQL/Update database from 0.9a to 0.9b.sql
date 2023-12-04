@@ -1,8 +1,6 @@
 USE bikeServiceDB
 GO
 
-
-
 ALTER TABLE tasks
 ADD	initDate DATETIME;
 GO
