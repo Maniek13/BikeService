@@ -7,7 +7,7 @@ login data
 login: test
 password: 12345
 
-Search tasks(In database are two order numbers: 11BS112345 and 21BS112345)
+Search tasks(In database are two order numbers: 1BS292202)
 
 2. Control panel (UWP) open from AppPackages folder 
 login: test
@@ -15,13 +15,17 @@ password: 12345
 
 -------------------------------------------------------------------------------------------------------------
 Server:
-1. To use please compile apk with created settings file and configure IIS and DataBase
-2. Run sql to create database (Or update you upgrade server from 0.9a to 0.9b)
-3. Run sql CreateIndex to set indexes 
-4. Run sql CreateAdministrationDB
-5. Create user in database
-6. Add ConectionString to database on settings.xml file
-7. Publish web service to ISS or ect
+1.  To use please compile apk with created settings file and configure IIS and DataBase
+2.  Run sql to create database (Or update you upgrade server from 0.9a to 0.9b)
+3.  Run sql CreateIndex to set indexes 
+4.  Run sql CreateAdministrationDB
+5.  Create user in database (create passworsd in console app CreateUserPassword)
+    Add user to Users tbl
+    Add user id to Administrators tbl
+    Set data in app tbl
+
+6.  Add ConectionString to database on settings.xml file
+7.  Publish web service to ISS or ect
 
 Android app:
 1. Add file Settings.js in src/objects with path to WebService like this:

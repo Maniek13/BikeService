@@ -1,6 +1,3 @@
-CREATE DATABASE bikeServiceDB
-GO
-
 USE bikeServiceDB
 GO
 
